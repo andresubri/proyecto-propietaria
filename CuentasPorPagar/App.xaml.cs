@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Parse;
 
 namespace CuentasPorPagar
 {
@@ -13,5 +14,6 @@ namespace CuentasPorPagar
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

@@ -10,19 +10,19 @@ namespace CuentasPorPagar.Models
     {
         public Supplier(int identification, int balance, string id, string name, string type, bool state)
         {
-            this.identification = identification;
-            this.balance = balance;
-            this.id = id;
-            this.name = name;
-            this.type = type;
-            this.state = state;
+            Identification = identification;
+            Balance = balance;
+            Id = id;
+            Name = name;
+            Type = type;
+            State = state;
         }
 
-        public int identification { get; set; }
-        public int balance { get; set; }
-        public string id { get; set; }
-        public string name { get; set; }
-        public string type { get; set; }
-        public bool state{ get; set; }
+        public int Identification { get; set; }
+        public int Balance { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public bool State{ get; set; }
     }
 }

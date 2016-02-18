@@ -23,6 +23,11 @@ namespace CuentasPorPagar
     {
         public MainWindow()
         {
+            ParseClient.Initialize(new ParseClient.Configuration
+            {
+                ApplicationId= "yMVc5a3J9DSgpGdHDqB2kxKIiO72RVovr4Bxs5Iv",
+                WindowsKey= "f1FpJWDQu6tBknQP5uOnr0kA4FMnUdHId1mSP3qM"
+            });
             InitializeComponent();
         }
     }

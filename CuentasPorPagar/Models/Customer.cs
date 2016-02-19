@@ -8,11 +8,10 @@ namespace CuentasPorPagar.Models
 {
     class Customer : ParseObject
     {
-        [ParseFieldName("id")]
+        [ParseFieldName("objectId")]
         public string Id { get; set; }
         [ParseFieldName("name")]
         public string Name { get; set; }
-
         [ParseFieldName("balance")]
         public int Balance { get; set; }
     }

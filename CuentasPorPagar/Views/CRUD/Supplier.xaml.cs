@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CuentasPorPagar.Models;
+using Parse;
+
 namespace CuentasPorPagar.Views.CRUD
 {
     /// <summary>
@@ -21,8 +23,13 @@ namespace CuentasPorPagar.Views.CRUD
     {
         public Supplier()
         {
+            
             InitializeComponent();
-            var query = from Models.Supplier in Parse.ParseQuery<Models.Supplier>;
+            var supplier = new Models.Supplier();
+            supplier = ParseObject.CreateWithoutData<Models.Supplier>(supplier.Id);
+            var query = new ParseQuery<Models.Supplier>();
+            IEnumerable<Models.Supplier> result = await query.FindAsync();
+
         }
     }
 }

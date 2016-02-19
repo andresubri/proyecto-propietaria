@@ -12,7 +12,8 @@ namespace CuentasPorPagar.Models
         public string Id { get; set; }
         [ParseFieldName("name")]
         public string Name { get; set; }
+
         [ParseFieldName("balance")]
-        public int Balance { get; set; 
+        public int Balance { get; set; }
     }
 }

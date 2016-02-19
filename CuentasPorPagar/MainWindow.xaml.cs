@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CuentasPorPagar;
+using CuentasPorPagar.Views.CRUD;
+using CuentasPorPagar.Views;
 
 namespace CuentasPorPagar
 {
@@ -23,12 +26,19 @@ namespace CuentasPorPagar
     {
         public MainWindow()
         {
-            ParseClient.Initialize(new ParseClient.Configuration
-            {
-                ApplicationId= "yMVc5a3J9DSgpGdHDqB2kxKIiO72RVovr4Bxs5Iv",
-                WindowsKey= "f1FpJWDQu6tBknQP5uOnr0kA4FMnUdHId1mSP3qM"
-            });
             InitializeComponent();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Customer customer = new Customer();
+            customer.Show();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }

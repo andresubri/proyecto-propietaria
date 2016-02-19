@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Parse;
 
 namespace CuentasPorPagar.Models
 {
-    class Supplier : Parse.ParseObject
+    [ParseClassName("Supplier")]
+    class Supplier : ParseObject
     {
-        public Supplier(int identification, int balance, string id, string name, string type, bool state)
-        {
-            Identification = identification;
-            Balance = balance;
-            Id = id;
-            Name = name;
-            Type = type;
-            State = state;
-        }
-
+        [ParseFieldName("identification")]
         public int Identification { get; set; }
+        [ParseFieldName("balance")]
         public int Balance { get; set; }
+        [ParseFieldName("id")]
         public string Id { get; set; }
+        [ParseFieldName("name")]
         public string Name { get; set; }
+        [ParseFieldName("type")]
         public string Type { get; set; }
+        [ParseFieldName("state")]
         public bool State{ get; set; }
     }
 }

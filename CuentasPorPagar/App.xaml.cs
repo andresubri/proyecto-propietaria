@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Parse;
-
+using CuentasPorPagar.Models;
 namespace CuentasPorPagar
 {
     /// <summary>
@@ -14,6 +14,15 @@ namespace CuentasPorPagar
     /// </summary>
     public partial class App : Application
     {
-
+        public App()
+        {
+            ParseObject.RegisterSubclass<Supplier>();
+            ParseClient.Initialize(new ParseClient.Configuration
+                {
+                ApplicationId = "yMVc5a3J9DSgpGdHDqB2kxKIiO72RVovr4Bxs5Iv",
+                WindowsKey = "f1FpJWDQu6tBknQP5uOnr0kA4FMnUdHId1mSP3qM"
+                 });
+        }
+        
     }
 }

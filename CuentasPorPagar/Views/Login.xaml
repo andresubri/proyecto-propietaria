@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar.Views"
         mc:Ignorable="d"
-        Title="Iniciar sesióne" Height="350" Width="300">
+        Title="Iniciar sesión" Height="350" Width="300">
 
 
     <Grid>
         <Label x:Name="label" Content="Usuario" HorizontalAlignment="Left" Margin="36,184,0,0" VerticalAlignment="Top" Width="56"/>
-        <TextBox x:Name="userTxt" HorizontalAlignment="Left" Height="23" Margin="124,186,0,0" TextWrapping="Wrap" Text="Ingrese el usuario" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="userTxt" HorizontalAlignment="Left" Height="23" Margin="124,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
         <Label x:Name="Label" Content="Contrasena" HorizontalAlignment="Left" Margin="36,222,0,0" VerticalAlignment="Top" Width="56"/>
-        <TextBox x:Name="passwordTxt" HorizontalAlignment="Left" Height="23" Margin="124,224,0,0" TextWrapping="Wrap" Text="Ingrese la contrasena" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="passwordTxt" HorizontalAlignment="Left" Height="23" Margin="124,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
         <Button x:Name="loginButton" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="18,264,0,0" VerticalAlignment="Top" Width="256" Height="40"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="122" Margin="54,26,0,0" VerticalAlignment="Top" Width="192" Source="/CuentasPorPagar;component/Resources/Logo.png" />
     </Grid>

@@ -5,21 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Inicio" Height="350" Width="525" ResizeMode="NoResize">
     <Grid Height="319" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="234*"/>
+            <ColumnDefinition Width="283*"/>
         </Grid.ColumnDefinitions>
-        <Menu x:Name="menu" Height="20" VerticalAlignment="Top" Margin="0,0,0,0">
+        <Menu x:Name="menu" VerticalAlignment="Top" Margin="1,8,-1,0" Grid.ColumnSpan="2">
             <MenuItem Header="Archivo">
                 <MenuItem Header="Parámetros"/>
-                <MenuItem Header="Cerrar sesión"/>
+                <MenuItem Header="Cerrar sesión" Click="MenuItem_Click_1"/>
                 <MenuItem Header="Salir"/>
             </MenuItem>
             <MenuItem Header="Gestión">
-                <MenuItem Header="Clientes"/>
-                <MenuItem Header="Provedores"/>
-                <MenuItem Header="Usuarios"/>
+                <MenuItem Name="customerCrudItem" Header="Clientes" Click="MenuItem_Click"/>
+                <MenuItem Name="supplierCrudItem" Header="Provedores"/>
+                <MenuItem Name="userCrudItem" Header="Usuarios"/>
             </MenuItem>
             <MenuItem Header="Documentos">
                 <MenuItem Header="Crear Entrada"/>

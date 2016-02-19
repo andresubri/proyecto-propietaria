@@ -11,16 +11,15 @@
             <ColumnDefinition Width="234*"/>
             <ColumnDefinition Width="283*"/>
         </Grid.ColumnDefinitions>
-        <Menu x:Name="menu" VerticalAlignment="Top" Margin="1,8,-1,0" Grid.ColumnSpan="2">
+        <Menu x:Name="Menu" VerticalAlignment="Top" Margin="1,8,-1,0" Grid.ColumnSpan="2">
             <MenuItem Header="Archivo">
                 <MenuItem Header="Parámetros"/>
                 <MenuItem Header="Cerrar sesión" Click="MenuItem_Click_1"/>
                 <MenuItem Header="Salir"/>
             </MenuItem>
             <MenuItem Header="Gestión">
-                <MenuItem Name="customerCrudItem" Header="Clientes" Click="MenuItem_Click"/>
-                <MenuItem Name="supplierCrudItem" Header="Provedores"/>
-                <MenuItem Name="userCrudItem" Header="Usuarios"/>
+                <MenuItem Name="SupplierCrudItem" Header="Provedores"/>
+                <MenuItem Name="UserCrudItem" Header="Usuarios"/>
             </MenuItem>
             <MenuItem Header="Documentos">
                 <MenuItem Header="Crear Entrada"/>

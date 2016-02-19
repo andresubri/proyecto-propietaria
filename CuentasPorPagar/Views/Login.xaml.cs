@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Parse;
 
 namespace CuentasPorPagar.Views
 {
@@ -22,6 +23,21 @@ namespace CuentasPorPagar.Views
         public Login()
         {
             InitializeComponent();
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            var userName = UserField.Text;
+            var password = PasswordField.Text;
+            try
+            {
+                var user = await ParseUser.LogInAsync(userName, password);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
     }
 }

@@ -29,12 +29,6 @@ namespace CuentasPorPagar
             InitializeComponent();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Customer customer = new Customer();
-            customer.Show();
-        }
-
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             Login login = new Login();

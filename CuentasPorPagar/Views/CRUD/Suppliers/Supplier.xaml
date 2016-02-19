@@ -8,9 +8,9 @@
         Title="Suplidor" Height="300" Width="490">
     <Grid>
         <DataGrid x:Name="SupplierDgv" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" Height="212" Width="440"/>
-        <Button x:Name="editSupplierBtn" Content="Editar" HorizontalAlignment="Left" Margin="111,238,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="deleteSupplierBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="198,238,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="createSupplierBtn" Content="Crear" HorizontalAlignment="Left" Margin="24,238,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="exitSupplierBtn" Content="Salir" HorizontalAlignment="Left" Margin="378,237,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="EditSupplierBtn" Content="Editar" HorizontalAlignment="Left" Margin="111,238,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="DeleteSupplierBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="198,238,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="CreateSupplierBtn" Content="Crear" HorizontalAlignment="Left" Margin="24,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="ExitSupplierBtn" Content="Salir" HorizontalAlignment="Left" Margin="378,237,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

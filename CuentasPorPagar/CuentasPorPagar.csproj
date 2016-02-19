@@ -63,13 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\CRUD\Customer.xaml.cs">
-      <DependentUpon>Customer.xaml</DependentUpon>
+    <Compile Include="Views\CRUD\Payments\Payment.xaml.cs">
+      <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CRUD\PaymentConcept.xaml.cs">
-      <DependentUpon>PaymentConcept.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CRUD\Supplier.xaml.cs">
+    <Compile Include="Views\CRUD\Suppliers\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CRUD\User.xaml.cs">
@@ -90,15 +87,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CRUD\Customer.xaml">
+    <Page Include="Views\CRUD\Payments\Payment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CRUD\PaymentConcept.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CRUD\Supplier.xaml">
+    <Page Include="Views\CRUD\Suppliers\Supplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,11 +105,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DocumentEntry.cs" />
     <Compile Include="Models\Parameter.cs" />
     <Compile Include="Models\Supplier.cs" />
-    <Compile Include="Models\PaymentConcept.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -148,6 +140,7 @@
   <ItemGroup>
     <Resource Include="Resources\Logo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

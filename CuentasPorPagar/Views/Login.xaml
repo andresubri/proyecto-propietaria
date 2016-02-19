@@ -10,10 +10,10 @@
 
     <Grid>
         <Label x:Name="label" Content="Usuario" HorizontalAlignment="Left" Margin="36,184,0,0" VerticalAlignment="Top" Width="56"/>
-        <TextBox x:Name="userTxt" HorizontalAlignment="Left" Height="23" Margin="124,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
-        <Label x:Name="Label" Content="Contrasena" HorizontalAlignment="Left" Margin="36,222,0,0" VerticalAlignment="Top" Width="56"/>
-        <TextBox x:Name="passwordTxt" HorizontalAlignment="Left" Height="23" Margin="124,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
-        <Button x:Name="loginButton" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="18,264,0,0" VerticalAlignment="Top" Width="256" Height="40"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="122" Margin="54,26,0,0" VerticalAlignment="Top" Width="192" Source="/CuentasPorPagar;component/Resources/Logo.png" />
+        <TextBox x:Name="UserField" HorizontalAlignment="Left" Height="23" Margin="124,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <Label x:Name="Label" Content="Contraseña" HorizontalAlignment="Left" Margin="36,222,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="PasswordField" HorizontalAlignment="Left" Height="23" Margin="124,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <Button x:Name="LoginButton" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="18,264,0,0" VerticalAlignment="Top" Width="256" Height="40" Click="LoginButton_Click"/>
+        <Image x:Name="Image" HorizontalAlignment="Left" Height="122" Margin="54,26,0,0" VerticalAlignment="Top" Width="192" Source="/CuentasPorPagar;component/Resources/Logo.png" />
     </Grid>
 </Window>

@@ -8,9 +8,9 @@
         Title="Usuarios" Height="300" Width="490">
     <Grid>
         <DataGrid x:Name="UserDgv" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" Height="212" Width="440"/>
-        <Button x:Name="editUserBtn" Content="Editar" HorizontalAlignment="Left" Margin="111,238,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="deleteUserBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="198,238,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="createUserBtn" Content="Crear" HorizontalAlignment="Left" Margin="24,238,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="exitUserBtn" Content="Salir" HorizontalAlignment="Left" Margin="378,237,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="EditUserBtn" Content="Editar" HorizontalAlignment="Left" Margin="111,238,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="DeleteUserBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="198,238,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="CreateUserBtn" Content="Crear" HorizontalAlignment="Left" Margin="24,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="ExitUserBtn" Content="Salir" HorizontalAlignment="Left" Margin="378,237,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

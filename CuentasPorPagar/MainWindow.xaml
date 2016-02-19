@@ -6,10 +6,34 @@
         xmlns:local="clr-namespace:CuentasPorPagar"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <Grid Height="319" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Menu x:Name="menu" Height="20" VerticalAlignment="Top" Margin="0,0,0,0">
+            <MenuItem Header="Archivo">
+                <MenuItem Header="Parámetros"/>
+                <MenuItem Header="Cerrar sesión"/>
+                <MenuItem Header="Salir"/>
+            </MenuItem>
+            <MenuItem Header="Gestión">
+                <MenuItem Header="Clientes"/>
+                <MenuItem Header="Provedores"/>
+                <MenuItem Header="Usuarios"/>
+            </MenuItem>
+            <MenuItem Header="Documentos">
+                <MenuItem Header="Crear Entrada"/>
+                <MenuItem Header="Pendientes"/>
+            </MenuItem>
+            <MenuItem Header="Operaciones">
+                <MenuItem Header="Generar Pago"/>
+                <MenuItem Header="Cierre"/>
+            </MenuItem>
+            <MenuItem Header="Consultas">
+                <MenuItem Header="Estado Cliente"/>
+                <MenuItem Header="Estado Proveedor"/>
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>

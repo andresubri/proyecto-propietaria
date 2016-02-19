@@ -32,10 +32,13 @@ namespace CuentasPorPagar.Views
             try
             {
                 var user = await ParseUser.LogInAsync(userName, password);
+                MainWindow mw = new MainWindow();
+                mw.Show();
+    
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Datos Incorrectos");
             }
 
         }

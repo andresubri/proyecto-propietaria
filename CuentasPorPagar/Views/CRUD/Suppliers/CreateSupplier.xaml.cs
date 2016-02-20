@@ -34,7 +34,11 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 supplier.Balance = int.Parse(SupplierBalance.Text);
                 supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
                 await supplier.SaveAsync();
+                MessageBox.Show("Agregado satisfactoriamente");
+                
                 this.Close();
+                var back = new Views.CRUD.Supplier();
+                back.Show();
             }
             catch (Exception ex)
             {

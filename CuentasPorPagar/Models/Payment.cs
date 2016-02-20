@@ -4,7 +4,7 @@ namespace CuentasPorPagar.Models
     [ParseClassName("Payment")]
     class Payment : ParseObject
     {
-        [ParseFieldName("objectIt")]
+        [ParseFieldName("objectId")]
         public string Id
         {
             get { return GetProperty<string>(); }

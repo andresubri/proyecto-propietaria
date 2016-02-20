@@ -1,30 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Parse;
 
 namespace CuentasPorPagar.Models
 {
-    class DocumentEntry : Parse.ParseObject
+    [ParseClassName("DocumentEntry")]
+    class DocumentEntry : ParseObject
     {
-        public DocumentEntry(int documentNumber, int receiptNumber, string documentDate, int amount, string registerDate, string supplier, bool state)
+        [ParseFieldName("objectId")]
+        public string DocumentNumber
         {
-            DocumentNumber = documentNumber;
-            ReceiptNumber = receiptNumber;
-            DocumentDate = documentDate;
-            Amount = amount;
-            RegisterDate = registerDate;
-            Supplier = supplier;
-            this.state = state;
+            get { return GetProperty<string>(); }
         }
-
-        public int DocumentNumber { get; set; }
-        public int ReceiptNumber { get; set; }
-        public string DocumentDate { get; set; }
-        public int Amount { get; set; }
-        public string RegisterDate { get; set; }
-        public string Supplier { get; set; }
-        public bool state { get; set; }
+        [ParseFieldName("receiptNum")]
+        public int ReceiptNumber
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
+        [ParseFieldName("documentDate")]
+        public string DocumentDate
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+        [ParseFieldName("amount")]
+        public int Amount
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
+        [ParseFieldName("registerDate")]
+        public string RegisterDate
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+        [ParseFieldName("supplier")]
+        public string Supplier
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+        [ParseFieldName("state")]
+        public string state
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
     }
 }

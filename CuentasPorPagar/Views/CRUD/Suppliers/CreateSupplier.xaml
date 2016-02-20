@@ -81,8 +81,8 @@
                 TODO: No sé a ciencia cierta si son los correctos. Cambiar si no son, si son
                 Entonces remover signos de interrogación
             -->
-            <ComboBoxItem Content="Pendiente?" />
-            <ComboBoxItem Content="Pagado?" />
+            <ComboBoxItem Content="Pendiente" />
+            <ComboBoxItem Content="Saldado" />
         </ComboBox>
         <TextBox x:Name="SupplierBalance"
                  Grid.Column="1"

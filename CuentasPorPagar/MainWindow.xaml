@@ -18,7 +18,7 @@
                 <MenuItem Header="Salir"/>
             </MenuItem>
             <MenuItem Header="Gestión">
-                <MenuItem Name="SupplierCrudItem" Header="Provedores"/>
+                <MenuItem Name="SupplierCrudItem" Header="Provedores" Click="SupplierCrudItem_Click"/>
                 <MenuItem Name="UserCrudItem" Header="Usuarios"/>
             </MenuItem>
             <MenuItem Header="Documentos">

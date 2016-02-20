@@ -28,17 +28,18 @@ namespace CuentasPorPagar.Views
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             var userName = UserField.Text;
-            var password = PasswordField.Text;
+            var password = PasswordField.Password;
             try
             {
                 var user = await ParseUser.LogInAsync(userName, password);
                 MainWindow mw = new MainWindow();
                 mw.Show();
+                this.Close();
     
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Datos Incorrectos");
+                MessageBox.Show("Usuario o contraseña son erroneos");
             }
 
         }

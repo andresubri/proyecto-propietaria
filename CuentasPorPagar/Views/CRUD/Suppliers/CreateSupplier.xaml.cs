@@ -27,24 +27,26 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
         {
             try
             {
-                Models.Supplier supplier = new Models.Supplier();
-                supplier.Name = SupplierName.Text;
-                supplier.Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString();
-                supplier.Identification = Identification.Text;
-                supplier.Balance = int.Parse(SupplierBalance.Text);
-                supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
+                var supplier = new Models.Supplier
+                {
+                    Name = SupplierName.Text,
+                    Type = ((ComboBoxItem) PersonType.SelectedItem).Content.ToString(),
+                    Identification = Identification.Text,
+                    Balance = int.Parse(SupplierBalance.Text),
+                    State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString()
+                };
+
                 await supplier.SaveAsync();
                 MessageBox.Show("Agregado satisfactoriamente");
-              
-                
+
                 this.Close();
-                var back = new Views.CRUD.Supplier();
+                var back = new Supplier();
                 back.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar suplidor" + ex);
-                throw;
+                MessageBox.Show($"Error al agregar suplidor \n{ex}");
+               
             }
 
         }

@@ -32,7 +32,7 @@
                 Margin="24,238,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Crear" />
+                Content="Crear" Click="CreateSupplierBtn_Click" />
         <Button x:Name="ExitSupplierBtn"
                 Width="75"
                 Margin="378,237,0,0"

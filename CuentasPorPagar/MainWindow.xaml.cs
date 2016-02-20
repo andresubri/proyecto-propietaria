@@ -38,7 +38,7 @@ namespace CuentasPorPagar
 
         private void SupplierCrudItem_Click(object sender, RoutedEventArgs e)
         {
-            CreateSupplier window = new CreateSupplier();
+           var window = new Supplier();
             window.Show();
         }
     }

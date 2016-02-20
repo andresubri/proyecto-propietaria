@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CuentasPorPagar.Models;
+using CuentasPorPagar.Views.CRUD.Suppliers;
 
 namespace CuentasPorPagar.Views.CRUD
 {
@@ -24,6 +25,12 @@ namespace CuentasPorPagar.Views.CRUD
         {
             InitializeComponent();
             //var query = from Models.Supplier in Parse.ParseQuery<Models.Supplier>;
+        }
+
+        private void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new CreateSupplier();
+            window.Show();
         }
     }
 }

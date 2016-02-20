@@ -39,5 +39,6 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="Salir" />
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="200,-60,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

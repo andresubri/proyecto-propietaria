@@ -43,7 +43,7 @@ namespace CuentasPorPagar.Views.CRUD
                 IEnumerable<Models.Supplier> result = await query.FindAsync();
                 List<Models.Supplier> list = result.ToList();
 
-                
+                    
             }
             catch (Exception ex)
             {

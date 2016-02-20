@@ -42,8 +42,18 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 var query = new ParseQuery<Models.Supplier>();
                 var result = await query.FindAsync();
-                var list = result.ToList();
-               
+                var list = from p in result
+                    select new
+                    {
+                        Id = p.ObjectId,
+                        Nombre = p.Name,
+                        Identificacion = p.Identification,
+                        p.Balance,
+                        Creado = p.CreatedAt
+                        
+                    };
+
+
                 SupplierDgv.ItemsSource = list;
 
             }

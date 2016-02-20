@@ -33,6 +33,7 @@ namespace CuentasPorPagar.Views.CRUD
         {
             var window = new CreateSupplier();
             window.Show();
+            this.Close();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)

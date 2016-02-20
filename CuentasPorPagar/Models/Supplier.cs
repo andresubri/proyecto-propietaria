@@ -6,16 +6,39 @@ namespace CuentasPorPagar.Models
     class Supplier : ParseObject
     {
         [ParseFieldName("identification")]
-        public int Identification { get; set; }
+        public string Identification
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("balance")]
-        public int Balance { get; set; }
+        public int Balance
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("objectId")]
-        public string Id { get; }
+        public string Id
+        {
+            get { return GetProperty<string>(); }
+        }
         [ParseFieldName("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("type")]
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("state")]
-        public string State{ get; set; }
+        public string State
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
     }
 }

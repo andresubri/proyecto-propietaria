@@ -33,13 +33,11 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
             Identification.Text = "";
         }
 
-        private async void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
+        private  void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-
-
-
+                
                 Models.Supplier supplier = new Models.Supplier();
                 supplier.Name = SupplierName.Text;
                 supplier.Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString();

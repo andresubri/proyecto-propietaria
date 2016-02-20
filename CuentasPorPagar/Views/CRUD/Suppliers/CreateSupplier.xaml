@@ -115,6 +115,7 @@
                   VerticalAlignment="Top">
             <ComboBoxItem Content="Fisica" />
             <ComboBoxItem Content="Juridica" />
+
         </ComboBox>
 
     </Grid>

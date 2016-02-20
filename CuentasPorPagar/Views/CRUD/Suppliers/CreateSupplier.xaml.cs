@@ -48,10 +48,10 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
 
                 await supplier.SaveAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 
-                throw;
+                MessageBox.Show(ex.ToString());
             }
         }
     }

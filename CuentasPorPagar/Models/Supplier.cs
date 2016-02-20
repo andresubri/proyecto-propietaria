@@ -16,6 +16,6 @@ namespace CuentasPorPagar.Models
         [ParseFieldName("type")]
         public string Type { get; set; }
         [ParseFieldName("state")]
-        public bool State{ get; set; }
+        public string State{ get; set; }
     }
 }

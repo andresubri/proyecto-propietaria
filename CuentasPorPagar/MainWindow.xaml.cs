@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using CuentasPorPagar;
 using CuentasPorPagar.Views.CRUD;
 using CuentasPorPagar.Views;
+using CuentasPorPagar.Views.CRUD.Suppliers;
 
 namespace CuentasPorPagar
 {
@@ -33,6 +34,12 @@ namespace CuentasPorPagar
         {
             Login login = new Login();
             login.Show();
+        }
+
+        private void SupplierCrudItem_Click(object sender, RoutedEventArgs e)
+        {
+            CreateSupplier window = new CreateSupplier();
+            window.Show();
         }
     }
 }

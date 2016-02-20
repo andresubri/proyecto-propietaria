@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Parse;
+﻿using Parse;
 namespace CuentasPorPagar.Models
 {
     [ParseClassName("User")]
     class User : ParseObject
     {
         [ParseFieldName("username")]
-        public string Username { get; set; }
+        public ParseUser Username
+        {
+            get { return GetProperty<ParseUser>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("password")]
-        public string Password { get; set; }
+        public string Password
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("permission")]
-        public string Permission { get; set; }
+        public string Permission
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
     }
 }

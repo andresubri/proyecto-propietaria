@@ -4,24 +4,34 @@ namespace CuentasPorPagar.Models
     [ParseClassName("Payment")]
     class Payment : ParseObject
     {
-        public Payment(string id, string concept, int amount, string supplier, bool state)
-        {
-            Id = id;
-            Concept = concept;
-            Amount = amount;
-            Supplier = supplier;
-            State = state;
-        }
-
         [ParseFieldName("objectIt")]
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return GetProperty<string>(); }
+        }
         [ParseFieldName("concept")]
-        public string Concept { get; set; }
+        public string Concept
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("amount")]
-        public int Amount { get; set; }
+        public int Amount
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("supplier")]
-        public string Supplier { get; set; }
+        public string Supplier
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("state")]
-        public bool State { get; set; }
+        public string State
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
     }
 }

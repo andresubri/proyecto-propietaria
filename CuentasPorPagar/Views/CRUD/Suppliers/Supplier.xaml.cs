@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CuentasPorPagar.Models;
 using CuentasPorPagar.Views.CRUD.Suppliers;
+using Parse;
 
 namespace CuentasPorPagar.Views.CRUD
 {
@@ -31,6 +33,23 @@ namespace CuentasPorPagar.Views.CRUD
         {
             var window = new CreateSupplier();
             window.Show();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var query = new ParseQuery<Models.Supplier>();
+                IEnumerable<Models.Supplier> result = await query.FindAsync();
+                List<Models.Supplier> list = result.ToList();
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
     }
 }

@@ -35,6 +35,7 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
                 await supplier.SaveAsync();
                 MessageBox.Show("Agregado satisfactoriamente");
+              
                 
                 this.Close();
                 var back = new Views.CRUD.Supplier();
@@ -42,7 +43,7 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar suplidor");
+                MessageBox.Show("Error al agregar suplidor" + ex);
                 throw;
             }
 

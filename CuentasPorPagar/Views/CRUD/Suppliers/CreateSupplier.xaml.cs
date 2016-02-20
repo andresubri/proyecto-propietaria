@@ -33,7 +33,7 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 supplier.Identification = int.Parse(Identification.Text);
                 supplier.Balance = int.Parse(SupplierBalance.Text);
                 supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
-                supplier.SaveAsync().Wait();
+                await supplier.SaveAsync();
                 this.Close();
             }
             catch (Exception ex)

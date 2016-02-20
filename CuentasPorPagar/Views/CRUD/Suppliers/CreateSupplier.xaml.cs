@@ -30,7 +30,7 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 Models.Supplier supplier = new Models.Supplier();
                 supplier.Name = SupplierName.Text;
                 supplier.Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString();
-                supplier.Identification = int.Parse(Identification.Text);
+                supplier.Identification = Identification.Text;
                 supplier.Balance = int.Parse(SupplierBalance.Text);
                 supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
                 await supplier.SaveAsync();

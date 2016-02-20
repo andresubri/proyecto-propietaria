@@ -2,15 +2,42 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar.Views.CRUD"
-        mc:Ignorable="d"
-        Title="Usuarios" Height="300" Width="490">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Usuarios"
+        Width="490"
+        Height="300"
+        mc:Ignorable="d">
     <Grid>
-        <DataGrid x:Name="UserDgv" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" Height="212" Width="440"/>
-        <Button x:Name="EditUserBtn" Content="Editar" HorizontalAlignment="Left" Margin="111,238,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="DeleteUserBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="198,238,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="CreateUserBtn" Content="Crear" HorizontalAlignment="Left" Margin="24,238,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="ExitUserBtn" Content="Salir" HorizontalAlignment="Left" Margin="378,237,0,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid x:Name="UserDgv"
+                  Width="440"
+                  Height="212"
+                  Margin="20,14,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top" />
+        <Button x:Name="EditUserBtn"
+                Width="76"
+                Margin="111,238,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Editar" />
+        <Button x:Name="DeleteUserBtn"
+                Width="76"
+                Margin="198,238,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Eliminar" />
+        <Button x:Name="CreateUserBtn"
+                Width="75"
+                Margin="24,238,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Crear" />
+        <Button x:Name="ExitUserBtn"
+                Width="75"
+                Margin="378,237,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Salir" />
     </Grid>
 </Window>

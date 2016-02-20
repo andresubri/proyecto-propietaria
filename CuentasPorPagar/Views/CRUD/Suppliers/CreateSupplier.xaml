@@ -10,97 +10,112 @@
         mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="65*"/>
-            <ColumnDefinition Width="316*"/>
+            <ColumnDefinition Width="65*" />
+            <ColumnDefinition Width="316*" />
         </Grid.ColumnDefinitions>
+        <Label x:Name="label"
+               Grid.ColumnSpan="2"
+               Margin="15,20,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Nombre" />
+        <Label x:Name="label_Copy"
+               Grid.ColumnSpan="2"
+               Width="84"
+               Margin="15,49,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Tipo persona" />
+        <Label x:Name="label_Copy1"
+               Grid.ColumnSpan="2"
+               Width="84"
+               Margin="15,80,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Cédula/RNC" />
+        <Label x:Name="label_Copy2"
+               Grid.ColumnSpan="2"
+               Width="84"
+               Margin="16,110,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Balance" />
+        <Label x:Name="label_Copy3"
+               Grid.ColumnSpan="2"
+               Width="84"
+               Margin="15,144,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Estado" />
+        <Button x:Name="CreateSupplierBtn"
+                Grid.ColumnSpan="2"
+                Width="75"
+                Margin="30,195,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="CreateSupplierBtn_Click"
+                Content="Crear" />
         <TextBox x:Name="SupplierName"
+                 Grid.Column="1"
                  Width="120"
                  Height="23"
                  Margin="35,22,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
-                 TextWrapping="Wrap" Grid.Column="1" />
+                 TextWrapping="Wrap" />
         <TextBox x:Name="Identification"
+                 Grid.Column="1"
                  Width="120"
                  Height="23"
                  Margin="35,80,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
-                 TextWrapping="Wrap" Grid.Column="1" />
+                 TextWrapping="Wrap" />
         <ComboBox x:Name="StateCbx"
+                  Grid.Column="1"
                   Width="120"
                   Margin="35,143,0,0"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top" Grid.Column="1" >
-            <!--TODO: No sé a ciencia cierta si son los correctos. Cambiar si no son, si son
-            Entonces remover signos de interrogación-->
-            <ComboBoxItem Content="Pendiente?" /> 
-            <ComboBoxItem Content="Pagado?"/>
+                  VerticalAlignment="Top">
+            <!--
+                TODO: No sé a ciencia cierta si son los correctos. Cambiar si no son, si son
+                Entonces remover signos de interrogación
+            -->
+            <ComboBoxItem Content="Pendiente?" />
+            <ComboBoxItem Content="Pagado?" />
         </ComboBox>
-        <RadioButton x:Name="PersonTypeLegal"
-                     Margin="90,55,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Content="Juridica" Grid.Column="1" />
-        <RadioButton x:Name="PersonTypePhysical"
-                     Margin="35,55,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Content="Fisica" Grid.Column="1" />
-        <Label x:Name="label"
-               Margin="15,20,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="Nombre" Grid.ColumnSpan="2" />
-        <Label x:Name="label_Copy"
-               Width="84"
-               Margin="15,49,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="Tipo persona" Grid.ColumnSpan="2" />
-        <Label x:Name="label_Copy1"
-               Width="84"
-               Margin="15,80,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="Cédula/RNC" Grid.ColumnSpan="2" />
         <TextBox x:Name="SupplierBalance"
+                 Grid.Column="1"
                  Width="120"
                  Height="23"
                  Margin="35,112,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
-                 TextWrapping="Wrap" Grid.Column="1" />
-        <Label x:Name="label_Copy2"
-               Width="84"
-               Margin="16,110,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="Balance" Grid.ColumnSpan="2" />
-        <Label x:Name="label_Copy3"
-               Width="84"
-               Margin="15,144,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="Estado" Grid.ColumnSpan="2" />
-        <Button x:Name="CreateSupplierBtn"
-                Width="75"
-                Margin="30,195,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Crear" Grid.ColumnSpan="2" />
+                 TextWrapping="Wrap" />
         <Button x:Name="CancelBtn"
+                Grid.Column="1"
                 Width="75"
                 Margin="55,195,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Cancelar" Grid.Column="1" />
+                Content="Cancelar" />
         <Button x:Name="CleanValuesBtn"
+                Grid.Column="1"
                 Width="75"
                 Margin="145,195,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Limpiar" Grid.Column="1" Click="CleanValuesBtn_Click" />
+                Click="CleanValuesBtn_Click"
+                Content="Limpiar" />
+        <ComboBox x:Name="PersonType"
+                  Grid.Column="1"
+                  Width="120"
+                  Margin="35,53,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+            <ComboBoxItem Content="Fisica" />
+            <ComboBoxItem Content="Juridica" />
+        </ComboBox>
 
     </Grid>
 </Window>

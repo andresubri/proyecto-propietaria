@@ -32,13 +32,13 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 supplier.Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString();
                 supplier.Identification = int.Parse(Identification.Text);
                 supplier.Balance = int.Parse(SupplierBalance.Text);
-                supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();
+                supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
                 supplier.SaveAsync().Wait();
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error agregando suplidor");
+                MessageBox.Show("Error al agregar suplidor");
                 throw;
             }
 

@@ -37,16 +37,16 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
         {
             try
             {
-               
 
-                var supplier = new ParseObject("Supplier");
-                supplier["name"] = SupplierName.Text;
-                supplier["type"] = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString();
-                supplier["identification"] = Identification.Text;
-                supplier["balance"] = SupplierBalance.Text;
-                supplier["state"] = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();
 
-                await supplier.SaveAsync();
+
+                Models.Supplier supplier = new Models.Supplier();
+                supplier.Name = SupplierName.Text;
+                supplier.Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString();
+                supplier.Identification = int.Parse(Identification.Text);
+                supplier.Balance = int.Parse(SupplierBalance.Text);
+                supplier.State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString();                
+                supplier.SaveAsync().Wait();
             }
             catch (Exception)
             {

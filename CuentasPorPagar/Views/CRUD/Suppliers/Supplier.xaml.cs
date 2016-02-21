@@ -35,6 +35,7 @@ namespace CuentasPorPagar.Views.CRUD
             window.Show();
             this.Close();
         }
+       
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {

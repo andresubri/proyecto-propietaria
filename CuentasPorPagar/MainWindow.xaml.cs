@@ -50,5 +50,15 @@ namespace CuentasPorPagar
             window.Show();
 
         }
+
+        private void PaymentTypeCrudItem_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

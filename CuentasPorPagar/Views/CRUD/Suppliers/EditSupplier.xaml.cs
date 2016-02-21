@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Parse;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CuentasPorPagar.Views.CRUD.Suppliers
 {
@@ -19,9 +11,86 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
     /// </summary>
     public partial class EditSupplier : Window
     {
+        public string objectId;
+
         public EditSupplier()
         {
             InitializeComponent();
         }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void loadButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var query = from a in new ParseQuery<Models.Supplier>()
+                            where a.Name.Equals(SupplierName.Text)
+                            select a;
+
+                var aux = query.FirstAsync().Result;
+                SupplierName.Text = aux.Name;
+                Identification.Text = aux.Identification.ToString();
+                SupplierBalance.Text = aux.Balance.ToString();
+                if (aux.Type == "Fisica")
+                {
+                    PersonType.SelectedIndex = 0;
+                }
+                else
+                {
+                    PersonType.SelectedIndex = 1;
+                }
+                if (aux.State == "Pendiente")
+                {
+                    StateCbx.SelectedIndex = 0;
+                }
+                else
+                {
+                    StateCbx.SelectedIndex = 1;
+                }
+                objectId = aux.ObjectId;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando datos: Editar Suplidor");
+            }
+        }
+
+        private async void EditSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var supplier = new Models.Supplier
+                {
+                    Name = SupplierName.Text,
+                    Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString(),
+                    Identification = Identification.Text,
+                    Balance = int.Parse(SupplierBalance.Text),
+                    State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString()
+                };
+                   supplier.ObjectId = objectId;
+
+                await supplier.SaveAsync();
+                MessageBox.Show("Editado satisfactoriamente");
+
+                this.Close();
+                var back = new Supplier();
+                back.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Error actualizando datos");
+            }
+            }
     }
 }

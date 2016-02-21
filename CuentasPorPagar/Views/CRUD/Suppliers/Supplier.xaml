@@ -13,20 +13,19 @@
             <RowDefinition Height="115*"/>
             <RowDefinition Height="154*"/>
         </Grid.RowDefinitions>
-       
         <DataGrid x:Name="SupplierDgv"
-                 Width="480"
-                 Height="212"
-                 Margin="20,14,0,0"
-                 HorizontalAlignment="Left"
-                    VerticalAlignment="Top" Grid.RowSpan="2" />
+                  Width="480"
+                  Height="212"
+                  Margin="20,14,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top" Grid.RowSpan="2" />
         <Button x:Name="EditSupplierBtn"
                 Width="76"
                 Margin="111,123,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Editar" Grid.Row="1" />
-        <Button x:Name="DeleteSupplierBtn"  
+                Content="Editar" Grid.Row="1" Click="EditSupplierBtn_Click" />
+        <Button x:Name="DeleteSupplierBtn"
                 Width="76"
                 Margin="198,123,0,0"
                 HorizontalAlignment="Left"

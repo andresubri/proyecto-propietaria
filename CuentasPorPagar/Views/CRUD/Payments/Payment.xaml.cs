@@ -17,9 +17,9 @@ namespace CuentasPorPagar.Views.CRUD
     /// <summary>
     /// Interaction logic for PaymentConcept.xaml
     /// </summary>
-    public partial class PaymentConcept : Window
+    public partial class Payments : Window
     {
-        public PaymentConcept()
+        public Payments()
         {
             InitializeComponent();
         }

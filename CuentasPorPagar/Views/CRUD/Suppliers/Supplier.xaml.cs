@@ -84,12 +84,11 @@ namespace CuentasPorPagar.Views.CRUD
             {
 
                 var element = list.ElementAt(ID);
-                var query2 = from a in new ParseQuery<Models.Supplier>()
+                var getObject = from a in new ParseQuery<Models.Supplier>()
                     where a.Id.Equals(element.Id)
                     select a;
-
-               var aux = query2.FirstAsync().Result;
-               await aux.DeleteAsync();
+                
+               await getObject.FirstAsync().Result.DeleteAsync();
 
 
             }

@@ -27,7 +27,7 @@
             </MenuItem>
             <MenuItem Header="Operaciones">
                 <MenuItem Header="Generar Pago"/>
-                <MenuItem Header="Concepto de Pago"/>
+                <MenuItem x:Name="PaymentTypeCrudItem" Header="Concepto de Pago" Click="PaymentTypeCrudItem_Click"/>
                 <MenuItem Header="Cierre"/>
             </MenuItem>
             <MenuItem Header="Consultas">

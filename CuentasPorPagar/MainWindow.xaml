@@ -27,6 +27,7 @@
             </MenuItem>
             <MenuItem Header="Operaciones">
                 <MenuItem Header="Generar Pago"/>
+                <MenuItem Header="Concepto de Pago"/>
                 <MenuItem Header="Cierre"/>
             </MenuItem>
             <MenuItem Header="Consultas">

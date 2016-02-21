@@ -66,6 +66,9 @@
     <Compile Include="Views\CRUD\Payments\Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CRUD\Payments\PaymetConcept.xaml.cs">
+      <DependentUpon>PaymetConcept.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CRUD\Suppliers\CreateSupplier.xaml.cs">
       <DependentUpon>CreateSupplier.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CRUD\Payments\Payment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CRUD\Payments\PaymetConcept.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

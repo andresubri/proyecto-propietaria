@@ -21,6 +21,7 @@ namespace CuentasPorPagar.Models
         public string Id
         {
             get { return GetProperty<string>(); }
+            set { SetProperty(value); }
         }
         [ParseFieldName("name")]
         public string Name

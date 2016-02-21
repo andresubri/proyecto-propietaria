@@ -26,7 +26,7 @@ namespace CuentasPorPagar.Views.CRUD
         public Supplier()
         {
             InitializeComponent();
-         
+           
         }
 
         private void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
@@ -52,8 +52,7 @@ namespace CuentasPorPagar.Views.CRUD
                         Creado = p.CreatedAt
                         
                     };
-
-
+                
                 SupplierDgv.ItemsSource = list;
 
             }
@@ -64,10 +63,50 @@ namespace CuentasPorPagar.Views.CRUD
 
         }
 
-        private void DeleteSupplierBtn_Click(object sender, RoutedEventArgs e)
+        private async void DeleteSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Just for testing
-            MessageBox.Show(SupplierDgv.SelectedCells.ToString());
+
+            var ID = SupplierDgv.SelectedIndex;
+            var query = new ParseQuery<Models.Supplier>();
+            var result = await query.FindAsync();
+            var list = from p in result
+                       select new
+                       {
+                           Id = p.ObjectId,
+                           Nombre = p.Name,
+                           Identificacion = p.Identification,
+                           p.Balance,
+                           Creado = p.CreatedAt
+
+                       };
+
+            try
+            {
+
+                var element = list.ElementAt(ID);
+                var query2 = from a in new ParseQuery<Models.Supplier>()
+                    where a.Id.Equals(element.Id)
+                    select a;
+
+               var aux = query2.FirstAsync().Result;
+               await aux.DeleteAsync();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+
+
+
+
+        }
+
+        private void ExitSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

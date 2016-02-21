@@ -41,6 +41,6 @@
                 Margin="378,122,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Salir" Grid.Row="1" />
+                Content="Salir" Grid.Row="1" Click="ExitSupplierBtn_Click" />
     </Grid>
 </Window>

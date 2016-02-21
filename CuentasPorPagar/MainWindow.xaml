@@ -21,11 +21,12 @@
                 <MenuItem Name="SupplierCrudItem" Header="Provedores" Click="SupplierCrudItem_Click"/>
                 <MenuItem Name="UserCrudItem" Header="Usuarios"/>
                 <MenuItem Name="PaymentCrudItemm" Header="Pagos" Click="PaymentCrudItemm_Click"/>
+                <MenuItem Header="Documentos" Click="MenuItem_Click_2">
+                    <MenuItem Header="Crear Entrada"/>
+                    <MenuItem Header="Pendientes"/>
+                </MenuItem>
             </MenuItem>
-            <MenuItem Header="Documentos">
-                <MenuItem Header="Crear Entrada"/>
-                <MenuItem Header="Pendientes"/>
-            </MenuItem>
+            
             <MenuItem Header="Operaciones">
                 <MenuItem Header="Generar Pago"/>
                 <MenuItem x:Name="PaymentTypeCrudItem" Header="Concepto de Pago" Click="PaymentTypeCrudItem_Click"/>

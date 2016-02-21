@@ -64,8 +64,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utilities.cs" />
-    <Compile Include="Views\CRUD\Payments\GeneratePayment.xaml.cs">
-      <DependentUpon>GeneratePayment.xaml</DependentUpon>
+    <Compile Include="Views\CRUD\DocumentsEntry\CreateDocument.xaml.cs">
+      <DependentUpon>CreateDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CRUD\DocumentsEntry\DocumentsEntry.xaml.cs">
+      <DependentUpon>DocumentsEntry.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CRUD\Payments\Payments.xaml.cs">
       <DependentUpon>Payments.xaml</DependentUpon>
@@ -78,9 +81,6 @@
     </Compile>
     <Compile Include="Views\CRUD\Suppliers\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CRUD\Users\CreateUser.xaml.cs">
-      <DependentUpon>CreateUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CRUD\Users\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
@@ -100,7 +100,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CRUD\Payments\GeneratePayment.xaml">
+    <Page Include="Views\CRUD\DocumentsEntry\CreateDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CRUD\DocumentsEntry\DocumentsEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,10 +121,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CRUD\Suppliers\Supplier.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CRUD\Users\CreateUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

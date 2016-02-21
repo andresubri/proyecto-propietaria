@@ -103,5 +103,10 @@ namespace CuentasPorPagar.Views.CRUD
 
 
         }
+
+        private void ExitSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -70,14 +70,14 @@
     		VerticalAlignment="Top"
     		TextWrapping="Wrap" />
         <Button x:Name="CancelBtn"
-    		Width="75"
-    		Margin="115,194,0,0"
+    		Width="76"
+    		Margin="110,192,0,0"
     		HorizontalAlignment="Left"
     		VerticalAlignment="Top"
     		Content="Cancelar" />
         <Button x:Name="CleanValuesBtn"
-    		Width="75"
-    		Margin="205,194,0,0"
+    		Width="76"
+    		Margin="200,192,0,0"
     		HorizontalAlignment="Left"
     		VerticalAlignment="Top"
     		Click="CleanValuesBtn_Click"
@@ -91,7 +91,7 @@
             <ComboBoxItem Content="Juridica" />
 
         </ComboBox>
-        <Button x:Name="EditSupplierBtn" Content="Guardar" HorizontalAlignment="Left" Margin="29,194,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="EditSupplierBtn" Content="Guardar" HorizontalAlignment="Left" Margin="24,192,0,0" VerticalAlignment="Top" Width="76"/>
 
     </Grid>
 </Window>

@@ -8,7 +8,7 @@ using System.Windows;
 using Parse;
 using CuentasPorPagar.Models;
 namespace CuentasPorPagar
-{
+{    /// helloworld
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -16,6 +16,7 @@ namespace CuentasPorPagar
     {
         public App()
         {
+            ParseObject.RegisterSubclass<DocumentEntry>();
             ParseObject.RegisterSubclass<Supplier>();
             ParseObject.RegisterSubclass<Payment>();
             ParseClient.Initialize(new ParseClient.Configuration

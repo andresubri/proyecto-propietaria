@@ -16,7 +16,13 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<int>(); }
             set { SetProperty(value); }
         }
-        [ParseFieldName("documentDate")]
+        [ParseFieldName("concept")]
+        public string Concept
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+        [ParseFieldName("createdAt")]
         public string DocumentDate
         {
             get { return GetProperty<string>(); }
@@ -28,12 +34,6 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<int>(); }
             set { SetProperty(value); }
         }
-        [ParseFieldName("registerDate")]
-        public string RegisterDate
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty(value); }
-        }
         [ParseFieldName("supplier")]
         public string Supplier
         {
@@ -41,7 +41,7 @@ namespace CuentasPorPagar.Models
             set { SetProperty(value); }
         }
         [ParseFieldName("state")]
-        public string state
+        public string State
         {
             get { return GetProperty<string>(); }
             set { SetProperty(value); }

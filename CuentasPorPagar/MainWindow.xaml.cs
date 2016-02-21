@@ -41,5 +41,16 @@ namespace CuentasPorPagar
            var window = new Supplier();
             window.Show();
         }
+
+        private void PaymentTypeCrudItem_Click(object sender, RoutedEventArgs e)
+        {
+            var windowConcept = new PaymentConcept();
+            windowConcept.Show();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

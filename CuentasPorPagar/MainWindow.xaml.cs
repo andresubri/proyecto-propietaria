@@ -60,11 +60,5 @@ namespace CuentasPorPagar
         {
 
         }
-
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
-        {
-            var de = new Views.CRUD.DocumentsEntry.DocumentsEntry();
-            de.Show();
-        }
     }
 }

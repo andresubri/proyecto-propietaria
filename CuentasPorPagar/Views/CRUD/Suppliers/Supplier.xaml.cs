@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CuentasPorPagar.Models;
 using CuentasPorPagar.Views.CRUD.Suppliers;
 using Parse;
 
@@ -63,9 +51,22 @@ namespace CuentasPorPagar.Views.CRUD
 
         }
 
-        private async void DeleteSupplierBtn_Click(object sender, RoutedEventArgs e)
+        private void DeleteSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
+            supplierOperations("Delete");
+        }
 
+        private void ExitSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void EditSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            supplierOperations("Edit");
+        }
+        private async void supplierOperations(String option)
+        {
             var ID = SupplierDgv.SelectedIndex;
             var query = new ParseQuery<Models.Supplier>();
             var result = await query.FindAsync();
@@ -79,34 +80,30 @@ namespace CuentasPorPagar.Views.CRUD
                            Creado = p.CreatedAt
 
                        };
+                    
 
-            try
+            switch (option)
             {
-
-                var element = list.ElementAt(ID);
-                var query2 = from a in new ParseQuery<Models.Supplier>()
-                    where a.Id.Equals(element.Id)
-                    select a;
-
-               var aux = query2.FirstAsync().Result;
-               await aux.DeleteAsync();
-
-
+                case "Delete":
+                    try
+                    {
+                    var element = list.ElementAt(ID);
+                    var query2 = from a in new ParseQuery<Models.Supplier>()
+                                                     where a.Id.Equals(element.Id)
+                                                     select a;
+                    var aux = query2.FirstAsync().Result;
+                        await aux.DeleteAsync();
+                    }catch(Exception ex)
+                    {
+                        MessageBox.Show("Error eliminando usuario");
+                    }
+                    
+                    break;
+                case "Edit":
+                    EditSupplier es = new EditSupplier();
+                    es.Show();
+                    break;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-
-
-
-
-        }
-
-        private void ExitSupplierBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

@@ -24,7 +24,7 @@
                 Margin="111,123,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Editar" Grid.Row="1" />
+                Content="Editar" Grid.Row="1" Click="EditSupplierBtn_Click" />
         <Button x:Name="DeleteSupplierBtn"
                 Width="76"
                 Margin="198,123,0,0"

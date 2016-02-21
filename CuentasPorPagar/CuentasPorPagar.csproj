@@ -76,7 +76,7 @@
     <Compile Include="Views\CRUD\Suppliers\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CRUD\User.xaml.cs">
+    <Compile Include="Views\CRUD\Users\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
@@ -110,7 +110,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CRUD\User.xaml">
+    <Page Include="Views\CRUD\Users\User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

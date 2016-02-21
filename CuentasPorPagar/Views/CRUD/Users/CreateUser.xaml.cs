@@ -23,5 +23,20 @@ namespace CuentasPorPagar.Views.CRUD.Users
         {
             InitializeComponent();
         }
+
+        
+        private async void Create_OnClick_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            throw new NotImplementedException();
+        }
     }
 }

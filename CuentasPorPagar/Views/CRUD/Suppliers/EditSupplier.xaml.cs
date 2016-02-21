@@ -62,7 +62,7 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando datos: Editar Suplidor");
+                MessageBox.Show($"Error cargando datos: Editar Suplidor\n{0}", ex.ToString());
             }
         }
 

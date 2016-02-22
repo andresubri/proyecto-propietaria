@@ -24,7 +24,7 @@
                 </MenuItem>
                 <MenuItem Name="PaymentCrudItemm" Header="Pagos" Click="PaymentCrudItemm_Click"/>
                 <MenuItem Header="Documentos">
-                    <MenuItem Header="Crear Entrada"/>
+                    <MenuItem Header="Crear Entrada" Click="MenuItem_Click_2"/>
                     <MenuItem Header="Pendientes"/>
                 </MenuItem>
             </MenuItem>

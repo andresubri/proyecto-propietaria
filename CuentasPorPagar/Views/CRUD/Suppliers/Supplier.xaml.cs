@@ -93,15 +93,16 @@ namespace CuentasPorPagar.Views.CRUD
                                                      select a;
                     var aux = query2.FirstAsync().Result;
                         await aux.DeleteAsync();
-                    }catch(Exception ex)
+                    }
+                    catch(Exception ex)
                     {
-                        MessageBox.Show("Error eliminando usuario");
+                        MessageBox.Show($"Error eliminando usuario\n{ex}");
                     }
                     
                     break;
                 case "Edit":
-                    EditSupplier es = new EditSupplier();
-                    es.Show();
+                    var window = new EditSupplier();
+                    window.Show();
                     break;
             }
         }

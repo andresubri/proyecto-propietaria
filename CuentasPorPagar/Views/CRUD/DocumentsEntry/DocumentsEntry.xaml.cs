@@ -21,12 +21,12 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             documentOperations("Create");
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private  void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            populateGrid();
+            PopulateGrid();
         }
 
-        private async void populateGrid()
+        private async void PopulateGrid()
         {
             try
             {
@@ -36,9 +36,9 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                            select new
                            {
                                Id = p.ObjectId,
-                               Recibo = p.ReceiptNumber.ToString(),
-                               Fecha = p.DocumentDate.ToString(),
-                               Monto= p.Amount.ToString(),
+                               Recibo = p.ReceiptNumber,
+                               Fecha = p.DocumentDate,
+                               Monto= p.Amount,
                                Suplidor = p.Supplier
                            };
 
@@ -89,7 +89,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                         };
                         await document.SaveAsync();
                         MessageBox.Show("Documento creado");
-                        populateGrid();
+                        PopulateGrid();
                         clear();
                     }
                     catch (Exception ex)
@@ -111,7 +111,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error eliminando documento\n{ex}");
+                        MessageBox.Show($"Error eliminando documento\n{0}");
                     }
 
                     break;

@@ -26,7 +26,14 @@ namespace CuentasPorPagar.Views.CRUD.Users
         }
 
 
-        private async void Create_OnClick_Click(object sender, RoutedEventArgs e)
+        
+
+        private void Closebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private async void CreateUserBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -34,14 +41,13 @@ namespace CuentasPorPagar.Views.CRUD.Users
                 {
                     Username = new ParseUser()
                     {
-                        Username =  UserNameTxt.Text,
+                        Username = UserNameTxt.Text,
                         Password = passwordBox.Password,
 
-                    }, 
-
+                    },
                     Name = UserNameTxt.Text,
                     Permission = PermissionsCbx.SelectedValue.ToString(),
-                    
+
                 };
 
                 await user.SaveAsync();
@@ -51,12 +57,7 @@ namespace CuentasPorPagar.Views.CRUD.Users
 
                 MessageBox.Show(ex.ToString());
             }
-           
-        }
 
-        private void Closebtn_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

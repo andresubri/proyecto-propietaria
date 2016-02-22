@@ -111,7 +111,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error eliminando documento");
+                        MessageBox.Show($"Error eliminando documento\n{ex}");
                     }
 
                     break;

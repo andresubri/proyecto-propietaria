@@ -14,7 +14,7 @@
                 Margin="45,215,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Crear" />
+                Content="Crear" Click="CreateUserBtn_Click"  />
         <Button x:Name="Closebtn"
                 Width="75"
                 Margin="145,215,0,0"

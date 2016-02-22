@@ -16,7 +16,12 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
-        
+        [ParseFieldName("password")]
+        public string Password
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
         [ParseFieldName("permission")]
         public string Permission
         {

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Parse;
 
 namespace CuentasPorPagar.Views.CRUD.Users
 {
@@ -24,19 +25,38 @@ namespace CuentasPorPagar.Views.CRUD.Users
             InitializeComponent();
         }
 
-        
+
         private async void Create_OnClick_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                var user = new Models.User
+                {
+                    Username = new ParseUser()
+                    {
+                        Username =  UserNameTxt.Text,
+                        Password = passwordBox.Password,
 
+                    }, 
+
+                    Name = UserNameTxt.Text,
+                    Permission = PermissionsCbx.SelectedValue.ToString(),
+                    
+                };
+
+                await user.SaveAsync();
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
             }
-            throw new NotImplementedException();
+           
+        }
+
+        private void Closebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

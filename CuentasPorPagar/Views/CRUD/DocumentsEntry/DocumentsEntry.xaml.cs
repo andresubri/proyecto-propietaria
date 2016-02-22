@@ -65,7 +65,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             var result = await query.FindAsync();
             var list = from p in result
                      select p.ObjectId;
-            string element;
+            var element = "";
             if (ID < 0)
             {
             }

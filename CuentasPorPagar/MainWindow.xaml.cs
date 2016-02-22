@@ -17,6 +17,7 @@ using CuentasPorPagar.Models;
 using CuentasPorPagar.Views;
 using CuentasPorPagar.Views.CRUD;
 using CuentasPorPagar.Views.CRUD.Suppliers;
+using CuentasPorPagar.Views.CRUD.Users;
 using Supplier = CuentasPorPagar.Views.CRUD.Supplier;
 using Payments = CuentasPorPagar.Views.CRUD.Payments;
 
@@ -59,6 +60,12 @@ namespace CuentasPorPagar
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CreateUser_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new CreateUser();
+            window.Show();
         }
     }
 }

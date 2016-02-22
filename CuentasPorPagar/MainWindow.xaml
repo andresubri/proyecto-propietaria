@@ -19,7 +19,9 @@
             </MenuItem>
             <MenuItem Header="Gestión">
                 <MenuItem Name="SupplierCrudItem" Header="Provedores" Click="SupplierCrudItem_Click"/>
-                <MenuItem Name="UserCrudItem" Header="Usuarios"/>
+                <MenuItem Name="UserCrudItem" Header="Usuarios">
+                    <MenuItem Name="CreateUser" Header="Crear usuario" Click="CreateUser_Click" ></MenuItem>
+                </MenuItem>
                 <MenuItem Name="PaymentCrudItemm" Header="Pagos" Click="PaymentCrudItemm_Click"/>
                 <MenuItem Header="Documentos">
                     <MenuItem Header="Crear Entrada"/>

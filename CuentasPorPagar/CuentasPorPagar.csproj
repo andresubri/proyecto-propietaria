@@ -70,6 +70,9 @@
     <Compile Include="Views\CRUD\DocumentsEntry\DocumentsEntry.xaml.cs">
       <DependentUpon>DocumentsEntry.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CRUD\DocumentsEntry\EditDocument.xaml.cs">
+      <DependentUpon>EditDocument.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CRUD\Payments\Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CRUD\DocumentsEntry\DocumentsEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CRUD\DocumentsEntry\EditDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -62,12 +62,13 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         {
             try
             {
-                var document = new Models.DocumentEntry
+                var document = new Models.DocumentEntry()
                 {
                     Concept = conceptTxt.Text,
                     Amount = int.Parse(amountTxt.Text),
                     Supplier = supplierLst.SelectedItem.ToString(),
-                    ReceiptNumber = int.Parse(numberTxt.ToString())
+                    ReceiptNumber = int.Parse(numberTxt.Text)
+
                 };
                 await document.SaveAsync();
                 MessageBox.Show("Documento creado");
@@ -84,5 +85,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         {
 
         }
+        
     }
 }

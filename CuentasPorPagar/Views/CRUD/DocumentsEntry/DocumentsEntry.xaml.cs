@@ -1,17 +1,8 @@
 ﻿using Parse;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 {
@@ -27,12 +18,15 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            var cd = new CRUD.DocumentsEntry.CreateDocument();
-            cd.Show();
-            this.Close();
+            documentOperations("Create");
         }
 
-        private async void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            populateGrid();
+        }
+
+        private async void populateGrid()
         {
             try
             {
@@ -42,12 +36,10 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                            select new
                            {
                                Id = p.ObjectId,
-                               Nombre = p.ReceiptNumber,
-                               DocumentDate = p.DocumentDate,
-                               Amount = p.Amount,
-                               Supplier = p.Supplier,
-                               State = p.State
-
+                               Recibo = p.ReceiptNumber.ToString(),
+                               Fecha = p.DocumentDate.ToString(),
+                               Monto= p.Amount.ToString(),
+                               Suplidor = p.Supplier
                            };
 
                 DocumentDgv.ItemsSource = list;
@@ -57,6 +49,107 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+        private void clear()
+        {
+            conceptTxt.Text = "";
+            amountTxt.Text = "";
+            supplierTxt.Text = "";
+            numberTxt.Text = "";
+        }
+
+        private async void documentOperations(String option)
+        {
+            var ID = DocumentDgv.SelectedIndex;
+            var query = new ParseQuery<Models.DocumentEntry>();
+            var result = await query.FindAsync();
+            var list = from p in result
+                     select p.ObjectId;
+            string element;
+            if (ID < 0)
+            {
+            }
+            else
+            {
+                 element = list.ElementAt(ID);
+            }
+
+
+            switch (option)
+            {
+                case "Create":
+                    try
+                    {
+                        var document = new Models.DocumentEntry()
+                        {
+                            Concept = conceptTxt.Text,
+                            Amount = int.Parse(amountTxt.Text),
+                            Supplier = supplierTxt.Text,
+                            ReceiptNumber = int.Parse(numberTxt.Text)
+                        };
+                        await document.SaveAsync();
+                        MessageBox.Show("Documento creado");
+                        populateGrid();
+                        clear();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    break;
+                case "Delete":
+                    try
+                    {
+                        var query2 = from a in new ParseQuery<Models.DocumentEntry>()
+                                     where a.ObjectId.Equals(element)
+                                     select a;
+                        var aux = query2.FirstAsync().Result;
+                        await aux.DeleteAsync();
+                        this.Close();
+                        var de = new DocumentsEntry();
+                        de.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error eliminando documento");
+                    }
+
+                    break;
+                case "Edit":
+                    try
+                    {
+
+                        var query2 = from aux in new ParseQuery<Models.DocumentEntry>()
+                                     where aux.ObjectId.Equals(element)
+                                     select aux;
+                        var element1 = await query2.FirstAsync();
+                        conceptTxt.Text = element1.Concept;
+                        amountTxt.Text = element1.Amount.ToString();
+                        numberTxt.Text = element1.ReceiptNumber.ToString();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    break;
+            }
+            
+        }
+
+        private void DeleteDocumentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            documentOperations("Delete");
+        }
+
+        private void EditDocumentBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void typeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

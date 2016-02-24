@@ -2,12 +2,12 @@
 namespace CuentasPorPagar.Models
 {
     [ParseClassName("User")]
-    class User : ParseObject
+    class User : ParseUser
     {
         [ParseFieldName("username")]
-        public ParseUser Username
+        public new string Username
         {
-            get { return GetProperty<ParseUser>(); }
+            get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
         [ParseFieldName("name")]
@@ -17,7 +17,7 @@ namespace CuentasPorPagar.Models
             set { SetProperty(value); }
         }
         [ParseFieldName("password")]
-        public string Password
+        public new string Password
         {
             get { return GetProperty<string>(); }
             set { SetProperty(value); }

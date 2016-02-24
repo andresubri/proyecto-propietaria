@@ -37,20 +37,19 @@ namespace CuentasPorPagar.Views.CRUD.Users
         {
             try
             {
-                var user = new Models.User
-                {
-                    Username = new ParseUser()
-                    {
-                        Username = UserNameTxt.Text,
-                        Password = passwordBox.Password,
 
-                    },
-                    Name = UserNameTxt.Text,
-                    Permission = PermissionsCbx.SelectedValue.ToString(),
+                var user = new ParseUser()
+                {
+                    Username = NicknameTxt.Text,
+                    Password = passwordBox.Password,
 
                 };
+                user["Name"] = UserNameTxt.Text;
+                user["Permission"] = ((ComboBoxItem)PermissionsCbx.SelectedItem).Content.ToString(); ;
 
-                await user.SaveAsync();
+
+
+                await user.SignUpAsync();
             }
             catch (Exception ex)
             {

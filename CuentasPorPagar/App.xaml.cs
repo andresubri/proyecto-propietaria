@@ -19,6 +19,7 @@ namespace CuentasPorPagar
             ParseObject.RegisterSubclass<DocumentEntry>();
             ParseObject.RegisterSubclass<Supplier>();
             ParseObject.RegisterSubclass<Payment>();
+            ParseObject.RegisterSubclass<User>();
             ParseClient.Initialize(new ParseClient.Configuration
                 {
                 ApplicationId = "yMVc5a3J9DSgpGdHDqB2kxKIiO72RVovr4Bxs5Iv",

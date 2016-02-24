@@ -73,6 +73,7 @@
             <ComboBoxItem Content="Administrador"/>
             <ComboBoxItem Content="Limitado"/>
         </ComboBox>
+        <StackPanel HorizontalAlignment="Left" Height="100" Margin="160,370,0,-201" VerticalAlignment="Top" Width="100"/>
 
 
     </Grid>

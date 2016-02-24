@@ -38,15 +38,16 @@ namespace CuentasPorPagar.Views.CRUD.Users
             try
             {
 
-                var user = new ParseUser()
+                var user = new Models.User
                 {
                     Username = NicknameTxt.Text,
                     Password = passwordBox.Password,
-
+                    Name = UserNameTxt.Text,
+                    Permission = ((ComboBoxItem) PermissionsCbx.SelectedItem).Content.ToString(),
                 };
-                user["Name"] = UserNameTxt.Text;
-                user["Permission"] = ((ComboBoxItem)PermissionsCbx.SelectedItem).Content.ToString(); ;
-
+                ;
+                MessageBox.Show("Usuario creado satisfactoriamente");
+                this.Close();
 
 
                 await user.SignUpAsync();

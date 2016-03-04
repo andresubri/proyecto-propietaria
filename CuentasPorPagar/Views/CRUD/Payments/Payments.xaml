@@ -32,7 +32,8 @@
                 Margin="198,238,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Eliminar" Click="DeletePaymentConceptBtn_Click" />
+                Click="DeletePaymentConceptBtn_Click"
+                Content="Eliminar" />
         <Button x:Name="CreatePaymentConceptBtn"
                 Width="75"
                 Margin="24,238,0,0"

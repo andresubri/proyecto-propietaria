@@ -41,22 +41,8 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 SupplierName.Text = aux.Name;
                 Identification.Text = aux.Identification.ToString();
                 SupplierBalance.Text = aux.Balance.ToString();
-                if (aux.Type == "Fisica")
-                {
-                    PersonType.SelectedIndex = 0;
-                }
-                else
-                {
-                    PersonType.SelectedIndex = 1;
-                }
-                if (aux.State == "Pendiente")
-                {
-                    StateCbx.SelectedIndex = 0;
-                }
-                else
-                {
-                    StateCbx.SelectedIndex = 1;
-                }
+                PersonType.SelectedIndex = aux.Type == "Fisica" ? 0 : 1;
+                StateCbx.SelectedIndex = aux.State == "Pendiente" ? 0 : 1;
                 objectId = aux.ObjectId;
 
             }
@@ -73,12 +59,12 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 var supplier = new Models.Supplier
                 {
                     Name = SupplierName.Text,
-                    Type = ((ComboBoxItem)PersonType.SelectedItem).Content.ToString(),
+                    Type = ((ComboBoxItem) PersonType.SelectedItem).Content.ToString(),
                     Identification = Identification.Text,
                     Balance = int.Parse(SupplierBalance.Text),
-                    State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString()
+                    State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString(),
+                    ObjectId = objectId
                 };
-                   supplier.ObjectId = objectId;
 
                 await supplier.SaveAsync();
                 MessageBox.Show("Editado satisfactoriamente");

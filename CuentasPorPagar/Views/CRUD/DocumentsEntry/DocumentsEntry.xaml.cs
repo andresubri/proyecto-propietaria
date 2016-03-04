@@ -18,7 +18,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            documentOperations("Create");
+            Crud("Create");
         }
 
         private  void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 MessageBox.Show(ex.ToString());
             }
         }
-        private void clear()
+        private void Clear()
         {
             conceptTxt.Text = "";
             amountTxt.Text = "";
@@ -58,75 +58,76 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             numberTxt.Text = "";
         }
 
-        private async void documentOperations(String option)
+        private async void Crud(string option)
         {
-            var ID = DocumentDgv.SelectedIndex;
+            var id = DocumentDgv.SelectedIndex;
             var query = new ParseQuery<Models.DocumentEntry>();
             var result = await query.FindAsync();
             var list = from p in result
                      select p.ObjectId;
             var element = "";
-            if (ID < 0)
+            if (id < 0)
+                element = list.ElementAt(id);
+            
+            
+            switch (option.ToLower())
             {
-            }
-            else
-            {
-                 element = list.ElementAt(ID);
-            }
-
-
-            switch (option)
-            {
-                case "Create":
-                    try
+                case "create":
+                    if (conceptTxt.Text != "" && (int.Parse(amountTxt.Text)) > 0 ||
+                        supplierTxt.Text != "" && (int.Parse(numberTxt.Text)) > 0)
                     {
-                        var document = new Models.DocumentEntry()
+                        try
                         {
-                            Concept = conceptTxt.Text,
-                            Amount = int.Parse(amountTxt.Text),
-                            Supplier = supplierTxt.Text,
-                            ReceiptNumber = int.Parse(numberTxt.Text)
-                        };
-                        await document.SaveAsync();
-                        MessageBox.Show("Documento creado");
+                            var document = new Models.DocumentEntry()
+                            {
+                                Concept = conceptTxt.Text,
+                                Amount = int.Parse(amountTxt.Text),
+                                Supplier = supplierTxt.Text,
+                                ReceiptNumber = int.Parse(numberTxt.Text)
+                            };
+                            await document.SaveAsync();
+                            MessageBox.Show("Documento creado");
+                            PopulateGrid();
+                            Clear();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                    }
+
+                 break;
+                case "delete":
+                    try
+                    {
+                        var deleteQuery = from o in new ParseQuery<Models.DocumentEntry>()
+                                     where o.ObjectId.Equals(element)
+                                     select o;
+
+                        await deleteQuery.FirstAsync().Result.DeleteAsync();
                         PopulateGrid();
-                        clear();
+                        
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
-                    }
-                    break;
-                case "Delete":
-                    try
-                    {
-                        var query2 = from a in new ParseQuery<Models.DocumentEntry>()
-                                     where a.ObjectId.Equals(element)
-                                     select a;
-                        var aux = query2.FirstAsync().Result;
-                        await aux.DeleteAsync();
-                        this.Close();
-                        var de = new DocumentsEntry();
-                        de.Show();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error eliminando documento\n{0}");
+                        MessageBox.Show($"Error eliminando documento\n{ex}");
                     }
 
                     break;
-                case "Edit":
+                case "edit":
                     try
                     {
 
-                        var query2 = from aux in new ParseQuery<Models.DocumentEntry>()
+                        var editQuery = from aux in new ParseQuery<Models.DocumentEntry>()
                                      where aux.ObjectId.Equals(element)
                                      select aux;
-                        var element1 = await query2.FirstAsync();
-                        conceptTxt.Text = element1.Concept;
-                        amountTxt.Text = element1.Amount.ToString();
-                        numberTxt.Text = element1.ReceiptNumber.ToString();
 
+                        var editElements = await editQuery.FirstAsync();
+                        conceptTxt.Text = editElements.Concept;
+                        amountTxt.Text = editElements.Amount.ToString();
+                        numberTxt.Text = editElements.ReceiptNumber.ToString();
+
+                        PopulateGrid();
                     }
                     catch (Exception ex)
                     {
@@ -139,12 +140,12 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void DeleteDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            documentOperations("Delete");
+            Crud("Delete");
         }
 
         private void EditDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Crud("Edit");
         }
 
         private void typeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -10,7 +10,7 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
-        [ParseFieldName("name")]
+        [ParseFieldName("Name")]
         public string Name
         {
             get { return GetProperty<string>(); }
@@ -22,11 +22,18 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
-        [ParseFieldName("permission")]
+        [ParseFieldName("Permission")]
         public string Permission
         {
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
+        }
+
+        [ParseFieldName("email")]
+        public new string Email
+        {
+            get { return GetProperty<string>();  }
+            set { SetProperty(value);}
         }
     }
 }

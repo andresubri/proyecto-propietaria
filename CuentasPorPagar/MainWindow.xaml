@@ -36,6 +36,11 @@
                 <MenuItem Header="Estado Cliente"/>
                 <MenuItem Header="Estado Proveedor"/>
             </MenuItem>
+            <MenuItem Header="Reporteria">
+                <MenuItem Header="Documentos"/>
+                <MenuItem Header="Proveedores" Click="MenuItem_Click_3"/>
+                <MenuItem Header="Cierre"/>
+            </MenuItem>
         </Menu>
         <Label x:Name="label" Content="Por pagar" HorizontalAlignment="Left" Margin="45,49,0,0" VerticalAlignment="Top"/>
 

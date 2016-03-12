@@ -77,6 +77,9 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
             {
                 MessageBox.Show("Error actualizando datos");
             }
+
             }
+
+       
     }
 }

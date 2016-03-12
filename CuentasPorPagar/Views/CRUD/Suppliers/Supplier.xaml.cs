@@ -53,7 +53,7 @@ namespace CuentasPorPagar.Views.CRUD
 
         private void DeleteSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
-            supplierOperations("Delete");
+            Crud("Delete");
         }
 
         private void ExitSupplierBtn_Click(object sender, RoutedEventArgs e)
@@ -63,9 +63,10 @@ namespace CuentasPorPagar.Views.CRUD
 
         private void EditSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
-            supplierOperations("Edit");
+            Crud("Edit");
+            
         }
-        private async void supplierOperations(String option)
+        private async void Crud(string option)
         {
             var ID = SupplierDgv.SelectedIndex;
             var query = new ParseQuery<Models.Supplier>();
@@ -80,19 +81,21 @@ namespace CuentasPorPagar.Views.CRUD
                            Creado = p.CreatedAt
 
                        };
-                    
-
-            switch (option)
+                   
+            switch (option.ToLower())
             {
-                case "Delete":
+                case "delete":
                     try
                     {
                     var element = list.ElementAt(ID);
-                    var query2 = from a in new ParseQuery<Models.Supplier>()
+                    var deleteSupplier = from a in new ParseQuery<Models.Supplier>()
                                                      where a.Id.Equals(element.Id)
                                                      select a;
-                    var aux = query2.FirstAsync().Result;
-                        await aux.DeleteAsync();
+
+                        await deleteSupplier.FirstAsync().Result.DeleteAsync();
+                        MessageBox.Show("Eliminado satisfactoriamente");
+                        PopulateGrid();
+
                     }
                     catch(Exception ex)
                     {
@@ -100,10 +103,32 @@ namespace CuentasPorPagar.Views.CRUD
                     }
                     
                     break;
-                case "Edit":
+                case "edit":
                     var window = new EditSupplier();
                     window.Show();
                     break;
+            }
+        }
+        private async void PopulateGrid()
+        {
+            try
+            {
+                var query = await new ParseQuery<Models.Supplier>().FindAsync();
+                var result = from o in query
+                    select new
+                    {
+                        Id = o.ObjectId,
+                        Nombre = o.Name,
+                        Identificacion = o.Identification,
+                        o.Balance,
+                        Creado = o.CreatedAt
+                    };
+                SupplierDgv.ItemsSource = result;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al popular \n{0}", ex.ToString());
             }
         }
     }

@@ -32,7 +32,7 @@ namespace CuentasPorPagar.Views
             try
             {
                 var user = await ParseUser.LogInAsync(userName, password);
-                MainWindow mw = new MainWindow();
+                var mw = new MainWindow();
                 mw.Show();
                 this.Close();
     

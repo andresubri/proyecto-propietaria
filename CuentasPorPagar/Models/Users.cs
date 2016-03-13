@@ -1,7 +1,7 @@
 ﻿using Parse;
 namespace CuentasPorPagar.Models
 {
-    [ParseClassName("User")]
+    [ParseClassName("Users")]
     class Users : ParseObject
     {
         [ParseFieldName("username")]

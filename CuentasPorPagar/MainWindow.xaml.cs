@@ -1,6 +1,7 @@
 ﻿using Parse;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,10 +80,26 @@ namespace CuentasPorPagar
             sr.Show();
         }
 
-        private void dataGrid_Loaded(object sender, RoutedEventArgs e)
+        private async void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            var pending = from o in new ParseQuery<Models.Supplier>()
+                where o.Balance > 0
+                select o;
+
+            var result = await pending.FindAsync();
             
+
+            dataGrid.ItemsSource = from o in result select new
+            {
+                Nombre = o.Name,
+                Balance = string.Format(new CultureInfo("en-US"), "{0:c}", o.Balance),
+                Estado = (o.Balance > 0 ) ? "Pendiente" : "Pago",
+                Tipo = o.Type,
+                
+                        
+            };
+
         }
+
     }
 }

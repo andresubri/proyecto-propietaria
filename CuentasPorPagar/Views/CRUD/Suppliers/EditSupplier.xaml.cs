@@ -80,6 +80,7 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
 
             }
 
-       
+        
+
     }
 }

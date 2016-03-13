@@ -84,5 +84,35 @@ namespace CuentasPorPagar
         {
            
         }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var LoggedUser = ParseUser.CurrentUser.Username;                            
+                var query = from a in new ParseQuery<Models.Users>()
+                            where a.Username.Equals(LoggedUser)
+                            select a;
+                var TableResult = query.FirstAsync().Result;
+                var UserPermission = TableResult.Permission;
+                txtUserPermission.Content = "Permisos: "+UserPermission;
+                 
+                if (UserPermission == "Administrador")
+                {
+                    App.Current.Properties["IsAdmin"] = true; 
+                }
+                else
+                {
+                    App.Current.Properties["IsAdmin"] = false;
+                }
+                
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

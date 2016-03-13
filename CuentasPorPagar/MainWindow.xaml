@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar"
         mc:Ignorable="d"
-        Title="Inicio" Height="350" Width="525" ResizeMode="NoResize">
+        Title="Inicio" Height="350" Width="525" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid Height="319" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="234*"/>
@@ -22,7 +22,7 @@
                 <MenuItem Name="UserCrudItem" Header="Usuarios" Click="UserCrudItem_OnClick"/>
                 <MenuItem Name="PaymentCrudItemm" Header="Pagos" Click="PaymentCrudItemm_Click"/>
                 <MenuItem Header="Documentos">
-                    <MenuItem Header="Crear Entrada" Click="MenuItem_Click_2"/>
+                    <MenuItem Name="CreateDocEntry"  Header="Crear Entrada" Click="MenuItem_Click_2"/>
                     <MenuItem Header="Pendientes"/>
                 </MenuItem>
             </MenuItem>
@@ -44,6 +44,7 @@
         </Menu>
         <Label x:Name="label" Content="Por pagar" HorizontalAlignment="Left" Margin="25,40,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="185" Width="465" Loaded="dataGrid_Loaded"/>
+        <Label x:Name="txtUserPermission" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="134,40,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

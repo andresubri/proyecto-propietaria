@@ -22,13 +22,13 @@
                 Width="76"
                 Margin="123,124,0,0"
                 HorizontalAlignment="Left"
-                Content="Editar" Grid.Row="1" Height="22" VerticalAlignment="Top" />
+                Content="Editar" Grid.Row="1" Height="22" VerticalAlignment="Top" IsEnabled="False" />
             <Button x:Name="DeleteDocumentBtn"
                 Width="76"
                 Margin="210,124,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" />
+                Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" IsEnabled="False" />
             <Button x:Name="CreateDocumentBtn"
                 Width="75"
                 Margin="36,124,0,0"

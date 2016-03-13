@@ -47,12 +47,6 @@ namespace CuentasPorPagar.Views.CRUD
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateGrid();
-            bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-            if (isAdmin)
-            {
-                EditUserBtn.IsEnabled = true;
-                DeleteUserBtn.IsEnabled = true;
-            }
 
         }
 
@@ -64,6 +58,7 @@ namespace CuentasPorPagar.Views.CRUD
                 select o.ObjectId;
             var element = "";
 
+            
                element = result.ElementAt(id);
 
             switch (option.ToLower())
@@ -76,6 +71,7 @@ namespace CuentasPorPagar.Views.CRUD
                         {
                             var user = new Models.Users
                             {
+
                                 Username = NicknameTxt.Text,
                                 Password = passwordBox.Password,
                                 Email = EmailTxt.Text,
@@ -133,9 +129,11 @@ namespace CuentasPorPagar.Views.CRUD
                             Name = UserNameTxt.Text,
                             Email = EmailTxt.Text,
                             Password = passwordBox.Password
-
                         };
-                    } catch (Exception ex)
+                        
+                       
+                    }
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString());
                     }
@@ -153,9 +151,9 @@ namespace CuentasPorPagar.Views.CRUD
             Crud("delete");
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void EditUserBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Crud("edit");
         }
     }
 }

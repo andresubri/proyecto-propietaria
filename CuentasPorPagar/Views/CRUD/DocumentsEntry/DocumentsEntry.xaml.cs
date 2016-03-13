@@ -11,10 +11,12 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
     /// </summary>
     public partial class DocumentsEntry : Window
     {
+
         public DocumentsEntry()
         {
             InitializeComponent();
         }
+
 
         private void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -43,7 +45,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                            {
                                Id = p.ObjectId,
                                Recibo = p.ReceiptNumber,
-                               Fecha = p.DocumentDate,
                                Monto= p.Amount,
                                Suplidor = p.Supplier
                            };
@@ -69,10 +70,12 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             var query = new ParseQuery<Models.DocumentEntry>();
             var result = await query.FindAsync();
             var list = from p in result
-                     select p.ObjectId;
-            var element = "";
-            if (id < 0)
-                element = list.ElementAt(id);
+                       select new
+                       {
+                           Id = p.ObjectId
+                       };
+
+                 var element = list.ElementAt(id).Id;
             
             
             switch (option.ToLower())
@@ -105,6 +108,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 case "delete":
                     try
                     {
+                        
                         var deleteQuery = from o in new ParseQuery<Models.DocumentEntry>()
                                      where o.ObjectId.Equals(element)
                                      select o;
@@ -122,18 +126,14 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 case "edit":
                     try
                     {
-
                         var editQuery = from aux in new ParseQuery<Models.DocumentEntry>()
                                      where aux.ObjectId.Equals(element)
                                      select aux;
-
                         var editElements = await editQuery.FirstAsync();
                         conceptTxt.Text = editElements.Concept;
                         amountTxt.Text = editElements.Amount.ToString();
                         numberTxt.Text = editElements.ReceiptNumber.ToString();
-
-
-                        PopulateGrid();
+                        supplierTxt.Text = editElements.Supplier.ToString();
                     }
                     catch (Exception ex)
                     {
@@ -151,12 +151,58 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void EditDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            Crud("Edit");
         }
 
         private void typeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void EditDocumentBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            Crud("Edit");
+        }
+
+        private async void loadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            save();
+        }
+        public async void save()
+        {
+            try
+            {
+                var id = DocumentDgv.SelectedIndex;
+                var query = new ParseQuery<Models.DocumentEntry>();
+                var result = await query.FindAsync();
+                var list = from p in result
+                           select new
+                           {
+                               Id = p.ObjectId
+                           };
+
+                var element = list.ElementAt(id).Id;
+                var editQuery = from aux in new ParseQuery<Models.DocumentEntry>()
+                                where aux.ObjectId.Equals(element)
+                                select aux;
+                var editElements = await editQuery.FirstAsync();
+                var document = new Models.DocumentEntry()
+                {
+                    DocumentNumber = element,
+                    Concept = conceptTxt.Text,
+                    Amount = int.Parse(amountTxt.Text),
+                    Supplier = supplierTxt.Text,
+                    ReceiptNumber = int.Parse(numberTxt.Text)
+                };
+
+                await document.SaveAsync();
+                MessageBox.Show("Documento actualizado");
+                PopulateGrid();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.ToString());
+                throw;
+            }
         }
     }
 }

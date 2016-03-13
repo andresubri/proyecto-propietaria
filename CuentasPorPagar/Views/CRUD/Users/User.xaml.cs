@@ -47,6 +47,13 @@ namespace CuentasPorPagar.Views.CRUD
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateGrid();
+            bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
+            if (isAdmin)
+            {
+                EditUserBtn.IsEnabled = true;
+                DeleteUserBtn.IsEnabled = true;
+            }
+             
 
         }
 

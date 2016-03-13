@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar.Views.CRUD.DocumentsEntry"
         mc:Ignorable="d"
-        Title="Documentos" Height="303.714" Width="520">
+        Title="Documentos" Height="303.714" Width="520" Loaded="Window_Loaded">
     <Grid>
         <Grid Loaded="Grid_Loaded">
             <Grid.RowDefinitions>
@@ -28,7 +28,7 @@
                 Margin="291,123,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" />
+                Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" IsEnabled="False" />
             <Button x:Name="CreateDocumentBtn"
                 Width="75"
                 Margin="36,124,0,0"
@@ -45,7 +45,7 @@
             <TextBox x:Name="conceptTxt" HorizontalAlignment="Left" Height="23" Margin="102,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="amountTxt" HorizontalAlignment="Left" Height="23" Margin="342,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="supplierTxt" HorizontalAlignment="Left" Height="23" Margin="343,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="loadBtn" Content="Editar" HorizontalAlignment="Left" Margin="120,125,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="loadBtn_Click"/>
+            <Button x:Name="loadBtn" Content="Editar" HorizontalAlignment="Left" Margin="120,125,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="loadBtn_Click" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>

@@ -28,6 +28,7 @@ namespace CuentasPorPagar.Views.CRUD
         {
             try
             {
+                bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
                 var query = new ParseQuery<Models.Supplier>();
                 var result = await query.FindAsync();
                 var list = from p in result
@@ -42,6 +43,13 @@ namespace CuentasPorPagar.Views.CRUD
                     };
                 
                 SupplierDgv.ItemsSource = list;
+
+                if (isAdmin)
+                {
+                    EditSupplierBtn.IsEnabled = true;
+                    DeleteSupplierBtn.IsEnabled = true;
+                }
+                
 
             }
             catch (Exception ex)

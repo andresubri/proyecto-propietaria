@@ -85,25 +85,19 @@ namespace CuentasPorPagar
             try
             {
 
-                var pendentSuppliers = from o in new ParseQuery<Models.Supplier>()
-                    where o.Balance > 0
-                    select o;
+                var query = new ParseQuery<Models.DocumentEntry>();
+                var result = await query.FindAsync();
+                var list = from p in result
+                           select new
+                           {
+                               Id = p.ObjectId,
+                               Fecha = p.CreatedAt,
+                               Recibo = p.ReceiptNumber,
+                               Monto = p.Amount,
+                               Suplidor = p.Supplier
+                           };
 
-               /* var documents = from document in ParseObject.GetQuery("DocumentEntry")
-                    join pendentDocument in pendentSuppliers on document["Supplier"]
-                        equals pendentDocument
-                    select document;*/
-
-                var supplierResults = await pendentSuppliers.FindAsync();
-                
-                dataGrid.ItemsSource = from p in supplierResults
-                                       select new
-                                       {
-                                           Nombre = p.Name,
-                                           Tipo = p.Type,
-                                           Estado = (p.Balance > 0) ? "Pendiente" : "Pago", //Todos estan pendientes por el query. BTW
-                                           Balance = String.Format(new CultureInfo("en-US"), "{0:C}", p.Balance),
-                                       };
+                dataGrid.ItemsSource = list;
 
 
             }

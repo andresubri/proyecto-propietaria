@@ -44,8 +44,9 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                            select new
                            {
                                Id = p.ObjectId,
+                               Fecha = p.CreatedAt,
                                Recibo = p.ReceiptNumber,
-                               Monto= p.Amount,
+                               Monto = p.Amount,
                                Suplidor = p.Supplier
                            };
 

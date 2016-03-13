@@ -82,24 +82,65 @@ namespace CuentasPorPagar
 
         private async void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            var pending = from o in new ParseQuery<Models.Supplier>()
-                where o.Balance > 0
-                select o;
-
-            var result = await pending.FindAsync();
-            
-
-            dataGrid.ItemsSource = from o in result select new
+            try
             {
-                Nombre = o.Name,
-                Balance = string.Format(new CultureInfo("en-US"), "{0:c}", o.Balance),
-                Estado = (o.Balance > 0 ) ? "Pendiente" : "Pago",
-                Tipo = o.Type,
-                
-                        
-            };
 
+                var pendentSuppliers = from o in new ParseQuery<Models.Supplier>()
+                    where o.Balance > 0
+                    select o;
+
+               /* var documents = from document in ParseObject.GetQuery("DocumentEntry")
+                    join pendentDocument in pendentSuppliers on document["Supplier"]
+                        equals pendentDocument
+                    select document;*/
+
+                var supplierResults = await pendentSuppliers.FindAsync();
+                
+                dataGrid.ItemsSource = from p in supplierResults
+                                       select new
+                                       {
+                                           Nombre = p.Name,
+                                           Tipo = p.Type,
+                                           Estado = (p.Balance > 0) ? "Pendiente" : "Pago", //Todos estan pendientes por el query. BTW
+                                           Balance = String.Format(new CultureInfo("en-US"), "{0:C}", p.Balance),
+                                       };
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var LoggedUser = ParseUser.CurrentUser.Username;                            
+                var query = from a in new ParseQuery<Models.Users>()
+                            where a.Username.Equals(LoggedUser)
+                            select a;
+                var TableResult = query.FirstAsync().Result;
+                var UserPermission = TableResult.Permission;
+                txtUserPermission.Content = $"Tipo: {UserPermission}";
+                 
+                if (UserPermission == "Administrador")
+                {
+                    App.Current.Properties["IsAdmin"] = true; 
+                }
+                else
+                {
+                    App.Current.Properties["IsAdmin"] = false;
+                }
+                
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

@@ -26,6 +26,12 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         private  void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             PopulateGrid();
+            bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
+            if (isAdmin)
+            {
+                EditDocumentBtn.IsEnabled = true;
+                DeleteDocumentBtn.IsEnabled = true;
+            }
         }
 
         private async void PopulateGrid()
@@ -157,7 +163,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             Crud("Edit");
         }
 
-        private async void loadBtn_Click(object sender, RoutedEventArgs e)
+        private void loadBtn_Click(object sender, RoutedEventArgs e)
         {
             save();
         }
@@ -196,6 +202,16 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             {
                 MessageBox.Show(ex.ToString());
                 throw;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
+            if(isAdmin)
+            {
+                EditDocumentBtn.IsEnabled = true;
+                DeleteDocumentBtn.IsEnabled = true;
             }
         }
     }

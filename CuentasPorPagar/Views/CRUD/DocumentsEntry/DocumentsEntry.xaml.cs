@@ -74,7 +74,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                        {
                            Id = p.ObjectId
                        };
-
+            
                  var element = list.ElementAt(id).Id;
             
             
@@ -133,7 +133,8 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                         conceptTxt.Text = editElements.Concept;
                         amountTxt.Text = editElements.Amount.ToString();
                         numberTxt.Text = editElements.ReceiptNumber.ToString();
-                        supplierTxt.Text = editElements.Supplier.ToString();
+
+                        PopulateGrid();
                     }
                     catch (Exception ex)
                     {
@@ -186,7 +187,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                 select aux;
                 var editElements = await editQuery.FirstAsync();
                 var document = new Models.DocumentEntry()
-                {
+        {
                     DocumentNumber = element,
                     Concept = conceptTxt.Text,
                     Amount = int.Parse(amountTxt.Text),

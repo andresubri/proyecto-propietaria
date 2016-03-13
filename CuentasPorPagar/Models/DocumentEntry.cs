@@ -9,6 +9,7 @@ namespace CuentasPorPagar.Models
         public string DocumentNumber
         {
             get { return GetProperty<string>(); }
+            set { SetProperty(value); }
         }
         [ParseFieldName("receiptNum")]
         public int ReceiptNumber

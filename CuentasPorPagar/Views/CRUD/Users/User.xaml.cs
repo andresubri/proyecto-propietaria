@@ -58,6 +58,7 @@ namespace CuentasPorPagar.Views.CRUD
                 select o.ObjectId;
             var element = "";
 
+            
                element = result.ElementAt(id);
 
             switch (option.ToLower())
@@ -70,6 +71,7 @@ namespace CuentasPorPagar.Views.CRUD
                         {
                             var user = new Models.Users
                             {
+
                                 Username = NicknameTxt.Text,
                                 Password = passwordBox.Password,
                                 Email = EmailTxt.Text,
@@ -127,9 +129,11 @@ namespace CuentasPorPagar.Views.CRUD
                             Name = UserNameTxt.Text,
                             Email = EmailTxt.Text,
                             Password = passwordBox.Password
-
                         };
-                    } catch (Exception ex)
+                        
+                       
+                    }
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString());
                     }
@@ -145,6 +149,11 @@ namespace CuentasPorPagar.Views.CRUD
         private void DeleteUserBtn_Click(object sender, RoutedEventArgs e)
         {
             Crud("delete");
+        }
+
+        private void EditUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Crud("edit");
         }
     }
 }

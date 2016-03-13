@@ -43,7 +43,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                            };
 
                 DocumentDgv.ItemsSource = list;
-
             }
             catch (Exception ex)
             {

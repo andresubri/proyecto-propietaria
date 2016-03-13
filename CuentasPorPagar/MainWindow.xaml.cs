@@ -15,7 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CuentasPorPagar.Models;
 using CuentasPorPagar.Views;
-
+using Parse;
+using SupplierReport = CuentasPorPagar.Views.Report.Supplier;
 using Supplier = CuentasPorPagar.Views.CRUD.Supplier;
 using Payments = CuentasPorPagar.Views.CRUD.Payments;
 
@@ -71,6 +72,17 @@ namespace CuentasPorPagar
         {
             var window = new Views.CRUD.User();
             window.Show();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            SupplierReport sr = new SupplierReport();
+            sr.Show();
+        }
+
+        private void dataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

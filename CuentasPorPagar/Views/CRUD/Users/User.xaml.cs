@@ -28,7 +28,7 @@ namespace CuentasPorPagar.Views.CRUD
 
         public async void PopulateGrid()
         {
-            var query = await new ParseQuery<ParseUser>().FindAsync();
+            var query = await new ParseQuery<Models.Users>().FindAsync();
             var result = from o in query
                 select new
                 {
@@ -69,15 +69,16 @@ namespace CuentasPorPagar.Views.CRUD
                     {
                         try
                         {
-                            var user = new Models.User
+                            var user = new Models.Users
                             {
                                 Username = NicknameTxt.Text,
                                 Password = passwordBox.Password,
-                                Name = UserNameTxt.Text,
                                 Email = EmailTxt.Text,
+                                Name = UserNameTxt.Text,
+                               
                                 Permission = ((ComboBoxItem) PermissionsCbx.SelectedItem).Content.ToString()
                             };
-                            await user.SignUpAsync();
+                            await user.SaveAsync();
                             MessageBox.Show("Usuario creado satisfactoriamente");
                             PopulateGrid();
                         }
@@ -94,7 +95,7 @@ namespace CuentasPorPagar.Views.CRUD
                 case "delete":
                     try
                     {
-                        var deleteQuery = from o in new ParseQuery<Models.User>()
+                        var deleteQuery = from o in new ParseQuery<Models.Users>()
                             where o.ObjectId.Equals(element)
                             select o;
 
@@ -111,8 +112,6 @@ namespace CuentasPorPagar.Views.CRUD
                     MessageBox.Show("No cases were assigned");
                     break;
             }
-
-
         }
 
         private void DeleteUserBtn_Click(object sender, RoutedEventArgs e)

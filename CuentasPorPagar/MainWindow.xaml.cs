@@ -85,7 +85,7 @@ namespace CuentasPorPagar
             try
             {
 
-                var query = new ParseQuery<Models.DocumentEntry>();
+                var query = new ParseQuery<Models.DocumentEntry>().OrderBy("createdAt");
                 var result = await query.FindAsync();
                 var list = from p in result
                            select new

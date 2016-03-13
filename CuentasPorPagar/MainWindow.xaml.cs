@@ -82,7 +82,7 @@ namespace CuentasPorPagar
 
         private void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-
+           
         }
     }
 }

@@ -53,13 +53,12 @@ namespace CuentasPorPagar.Views.CRUD
         public async void Crud(string option)
         {
             var id = UserDgv.SelectedIndex;
-            var query = await new ParseQuery<ParseUser>().FindAsync();
+            var query = await new ParseQuery<Models.Users>().FindAsync();
             var result = from o in query
                 select o.ObjectId;
             var element = "";
-            
-            if (id > 0)
-                element = result.ElementAt(id);
+
+               element = result.ElementAt(id);
 
             switch (option.ToLower())
             {
@@ -107,6 +106,35 @@ namespace CuentasPorPagar.Views.CRUD
                         MessageBox.Show(ex.ToString());
                     }
                     break;
+
+                case "edit":
+                    try
+                    {
+                        var editQuery = from o in new ParseQuery<Models.Users>()
+                            where o.ObjectId.Equals(element)
+                            select o;
+
+                        var editElements = await editQuery.FirstAsync();
+                        NicknameTxt.Text = editElements.Username;
+                        UserNameTxt.Text = editElements.Name;
+                        passwordBox.Password = editElements.Password;
+                        EmailTxt.Text = editElements.Email;
+
+
+                        var user = new Models.Users()
+                        {
+                            Username = NicknameTxt.Text,
+                            Name = UserNameTxt.Text,
+                            Email = EmailTxt.Text,
+                            Password = passwordBox.Password
+
+                        };
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    break;
+                    
 
                 default:
                     MessageBox.Show("No cases were assigned");

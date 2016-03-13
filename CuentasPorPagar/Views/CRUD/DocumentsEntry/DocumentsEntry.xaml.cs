@@ -126,6 +126,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                         amountTxt.Text = editElements.Amount.ToString();
                         numberTxt.Text = editElements.ReceiptNumber.ToString();
 
+
                         PopulateGrid();
                     }
                     catch (Exception ex)

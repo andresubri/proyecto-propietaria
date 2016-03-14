@@ -7,49 +7,60 @@
         xmlns:winForms="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         Title="Suplidor"
         Width="574"
-        Height="467"
-        mc:Ignorable="d" Loaded="Window_Loaded">
-    <Grid Margin="0,0,32,169">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="177*"/>
-            <ColumnDefinition Width="64*"/>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="116*"/>
-            <ColumnDefinition Width="29*"/>
-            <ColumnDefinition Width="81*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="115*"/>
-            <RowDefinition Height="154*"/>
-        </Grid.RowDefinitions>
-        <DataGrid x:Name="SupplierDgv"
-                  Width="520"
-                  Height="212"
-                  Margin="25,28,-8,0"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top" Grid.ColumnSpan="6" Grid.RowSpan="2" />
+        Height="332"
+        MinWidth="574"
+        MinHeight="332"
+        MaxWidth="574"
+        MaxHeight="332"
+        Loaded="Window_Loaded"
+        mc:Ignorable="d">
+    <Grid>
+
         <Button x:Name="EditSupplierBtn"
                 Width="76"
-                Margin="174,146.5,0,-11.5"
+                Height="20"
+                Margin="235,210,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Editar" Grid.Row="1" Click="EditSupplierBtn_Click" Grid.ColumnSpan="3" IsEnabled="False" Height="20" />
+                Click="EditSupplierBtn_Click"
+                Content="Editar"
+                FontWeight="Bold"
+                IsEnabled="False"
+                RenderTransformOrigin="0.5,0.5" />
         <Button x:Name="DeleteSupplierBtn"
                 Width="76"
-                Margin="10,146.5,0,-11.5"
+                Height="20"
+                Margin="325,210,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Eliminar" Grid.Row="1" Click="DeleteSupplierBtn_Click" Grid.Column="3" IsEnabled="False" Height="20" />
+                Click="DeleteSupplierBtn_Click"
+                Content="Eliminar"
+                FontWeight="Bold"
+                IsEnabled="False" />
         <Button x:Name="CreateSupplierBtn"
                 Width="75"
-                Margin="75,146.5,0,-11.5"
-                HorizontalAlignment="Left"
-                Content="Crear" Click="CreateSupplierBtn_Click" Height="20" VerticalAlignment="Top" Grid.Row="1" RenderTransformOrigin="0.533,2.25" />
-        <Button x:Name="ExitSupplierBtn"
-                Width="74"
-                Margin="75,146.5,0,-11.5"
+                Height="20"
+                Margin="145,210,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Salir" Grid.Row="1" Click="ExitSupplierBtn_Click" Grid.Column="3" Grid.ColumnSpan="3" Height="20" />
+                Click="CreateSupplierBtn_Click"
+                Content="Crear"
+                FontWeight="Bold"
+                RenderTransformOrigin="0.533,2.25" />
+        <Button x:Name="ExitSupplierBtn"
+                Width="74"
+                Height="20"
+                Margin="465,270,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="ExitSupplierBtn_Click"
+                Content="Salir"
+                FontWeight="Bold" />
+        <DataGrid x:Name="SupplierDgv"
+                  Width="515"
+                  Height="170"
+                  Margin="25,20,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top" />
     </Grid>
 </Window>

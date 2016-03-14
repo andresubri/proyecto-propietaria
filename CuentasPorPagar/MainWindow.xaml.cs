@@ -93,7 +93,7 @@ namespace CuentasPorPagar
                                Id = p.ObjectId,
                                Fecha = p.CreatedAt,
                                Recibo = p.ReceiptNumber,
-                               Monto = p.Amount,
+                               Monto = string.Format( new CultureInfo("en-US"),$"{p.Amount:c}"),
                                Suplidor = p.Supplier
                            };
 

@@ -23,6 +23,7 @@ namespace CuentasPorPagar.Views
         public Login()
         {
             InitializeComponent();
+
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)

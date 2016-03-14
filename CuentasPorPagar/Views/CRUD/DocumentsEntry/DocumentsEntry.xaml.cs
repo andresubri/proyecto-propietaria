@@ -44,10 +44,11 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                            select new
                            {
                                Id = p.ObjectId,
-                               Fecha = p.CreatedAt,
                                Recibo = p.ReceiptNumber,
+                               Concepto = p.Concept,
                                Monto = p.Amount,
-                               Suplidor = p.Supplier
+                               Suplidor = p.Supplier,
+                               Fecha = p.CreatedAt
                            };
 
                 DocumentDgv.ItemsSource = list;
@@ -76,8 +77,11 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                        {
                            Id = p.ObjectId
                        };
-            
-                 var element = list.ElementAt(id).Id;
+            var element = "";
+            if (id > 0) {
+                 element = list.ElementAt(id).Id;
+            }
+                 
             
             
             switch (option.ToLower())
@@ -88,16 +92,33 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     {
                         try
                         {
-                            var document = new Models.DocumentEntry()
+                            var document = new Models.DocumentEntry();
+                            if (!(objectIdTxt.Text.Length > 2))
                             {
-                                ObjectId = objectIdTxt.Text,
-                                Concept = conceptTxt.Text,
-                                Amount = int.Parse(amountTxt.Text),
-                                Supplier = supplierTxt.Text,
-                                ReceiptNumber = int.Parse(numberTxt.Text)
-                            };
-                            await document.SaveAsync();
-                            MessageBox.Show("Documento creado");
+                                document = new Models.DocumentEntry()
+                                {
+                                    //Crea nuevo registro
+                                    Concept = conceptTxt.Text,
+                                    Amount = int.Parse(amountTxt.Text),
+                                    Supplier = supplierTxt.Text,
+                                    ReceiptNumber = int.Parse(numberTxt.Text)
+                                };
+                                await document.SaveAsync();
+                                MessageBox.Show("Documento creado");
+                            }
+                            else {
+                                document = new Models.DocumentEntry()
+                                {
+                                    //Actualiza registro
+                                    ObjectId = objectIdTxt.Text,
+                                    Concept = conceptTxt.Text,
+                                    Amount = int.Parse(amountTxt.Text),
+                                    Supplier = supplierTxt.Text,
+                                    ReceiptNumber = int.Parse(numberTxt.Text)
+                                };
+                                await document.SaveAsync();
+                                MessageBox.Show("Documento actualizado");
+                            }
                             PopulateGrid();
                             Clear();
                         }
@@ -109,20 +130,25 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
                  break;
                 case "delete":
-                    try
+                    if (!(id < 0))
                     {
-                        
-                        var deleteQuery = from o in new ParseQuery<Models.DocumentEntry>()
-                                     where o.ObjectId.Equals(element)
-                                     select o;
 
-                        await deleteQuery.FirstAsync().Result.DeleteAsync();
-                        PopulateGrid();
-                        
+                        try
+                        {
+                            var deleteQuery = from o in new ParseQuery<Models.DocumentEntry>()
+                                              where o.ObjectId.Equals(element)
+                                              select o;
+                            await deleteQuery.FirstAsync().Result.DeleteAsync();
+                            PopulateGrid();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error eliminando documento\n{ex}");
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show($"Error eliminando documento\n{ex}");
+                        MessageBox.Show("Favor seleccionar un elemento de la lista.");
                     }
 
                     break;
@@ -239,6 +265,18 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             { 
                  supplierTxt.Text = findSupplier.supplier;
             }
+        }
+
+        private async void getNumberBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var query = new ParseQuery<Models.DocumentEntry>().OrderByDescending("receiptNum");
+            var result = await query.FindAsync();
+            var list = from p in result
+                       select new
+                       {
+                           Recibo = p.ReceiptNumber
+                       };
+            numberTxt.Text = (list.ElementAt(0).Recibo + 1).ToString();
         }
     }
 }

@@ -45,10 +45,10 @@
             <Label x:Name="label1" Content="Monto" HorizontalAlignment="Left" Margin="249,36,0,0" VerticalAlignment="Top" Width="78"/>
             <Label x:Name="label2" Content="Suplidor" HorizontalAlignment="Left" Margin="249,67,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label3" Content="No." HorizontalAlignment="Left" Margin="18,37,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="numberTxt" HorizontalAlignment="Left" Height="23" Margin="101,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="numberTxt" HorizontalAlignment="Left" Height="23" Margin="101,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <TextBox x:Name="conceptTxt" HorizontalAlignment="Left" Height="23" Margin="101,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="amountTxt" HorizontalAlignment="Left" Height="23" Margin="335,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="supplierTxt" HorizontalAlignment="Left" Height="23" Margin="336,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="supplierTxt" HorizontalAlignment="Left" Height="23" Margin="336,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <Label x:Name="label4" Content="ID" HorizontalAlignment="Left" Margin="17,11,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="objectIdTxt" HorizontalAlignment="Left" Height="23" Margin="101,11,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <Button x:Name="clearBtn" HorizontalAlignment="Left" Margin="468,8,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="clearBtn_Click">
@@ -59,6 +59,5 @@
                 <Image x:Name="image1" Width="20" Height="20" Source="/CuentasPorPagar;component/Resources/lupa.png" Stretch="Fill"/>
             </Button>
         </Grid>
-        <Image x:Name="image2" HorizontalAlignment="Left" Height="100" Margin="618,109,-206,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

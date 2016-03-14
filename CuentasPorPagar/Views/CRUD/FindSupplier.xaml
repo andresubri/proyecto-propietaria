@@ -10,7 +10,7 @@
     <Grid>
         <Label x:Name="label" Content="Buscar" HorizontalAlignment="Left" Margin="16,15,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="searchTxt" Height="23" Margin="72,17,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="searchTxt_TextChanged"/>
-        <Button x:Name="selectBtn" Content="Seleccionar" Margin="14,318,14,0" VerticalAlignment="Top" Click="selectBtn_Click"/>
+        <Button x:Name="selectBtn" Content="Seleccionar" Margin="14,314,14,0" VerticalAlignment="Top" Click="selectBtn_Click" Height="26"/>
         <DataGrid x:Name="supplierDvg" HorizontalAlignment="Left" Margin="12,50,0,0" VerticalAlignment="Top" Height="256" Width="266">
             <DataGrid.ItemContainerStyle>
                 <Style TargetType="DataGridRow">

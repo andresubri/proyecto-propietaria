@@ -41,22 +41,26 @@
             <Button x:Name="ExitDocumentBtn"
                 Margin="390,135,0,0"
                 Content="Salir" Grid.Row="1" HorizontalAlignment="Left" Width="75" Height="23" VerticalAlignment="Top" Click="ExitDocumentBtn_Click" />
-            <Label x:Name="label" Content="Concepto" HorizontalAlignment="Left" Margin="14,63,0,0" VerticalAlignment="Top" Width="101" Height="28"/>
-            <Label x:Name="label1" Content="Monto" HorizontalAlignment="Left" Margin="249,36,0,0" VerticalAlignment="Top" Width="78"/>
+            <Label x:Name="label" Content="Concepto" HorizontalAlignment="Left" Margin="16,63,0,0" VerticalAlignment="Top" Width="101" Height="28"/>
+            <Label x:Name="label1" Content="Monto" HorizontalAlignment="Left" Margin="249,0,0,70" VerticalAlignment="Bottom" Width="78"/>
             <Label x:Name="label2" Content="Suplidor" HorizontalAlignment="Left" Margin="249,67,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label3" Content="No." HorizontalAlignment="Left" Margin="18,37,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="numberTxt" HorizontalAlignment="Left" Height="23" Margin="101,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
             <TextBox x:Name="conceptTxt" HorizontalAlignment="Left" Height="23" Margin="101,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="amountTxt" HorizontalAlignment="Left" Height="23" Margin="335,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="supplierTxt" HorizontalAlignment="Left" Height="23" Margin="336,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <Label x:Name="label4" Content="ID" HorizontalAlignment="Left" Margin="17,11,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label4" Content="ID" HorizontalAlignment="Left" Margin="19,11,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="objectIdTxt" HorizontalAlignment="Left" Height="23" Margin="101,11,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-            <Button x:Name="clearBtn" HorizontalAlignment="Left" Margin="468,8,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="clearBtn_Click">
+            <Button x:Name="clearBtn" HorizontalAlignment="Left" Margin="468,52,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="clearBtn_Click">
                 <Image x:Name="image" Source="/CuentasPorPagar;component/Resources/escoba.png" Stretch="Fill"/>
 
             </Button>
-            <Button x:Name="loadSupplierBtn" HorizontalAlignment="Left" Margin="466,71,0,0" VerticalAlignment="Top" Click="loadSupplierBtn_Click" Width="20">
-                <Image x:Name="image1" Width="20" Height="20" Source="/CuentasPorPagar;component/Resources/lupa.png" Stretch="Fill"/>
+            <Button x:Name="loadSupplierBtn" HorizontalAlignment="Left" Margin="434,70,0,0" VerticalAlignment="Top" Click="loadSupplierBtn_Click" Width="21" Height="21">
+                <Image x:Name="image1" Width="15" Height="15" Source="/CuentasPorPagar;component/Resources/lupa.png" Stretch="Fill"/>
+            </Button>
+            <Button x:Name="getNumberBtn" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" Width="21" Height="21" Click="getNumberBtn_Click">
+                <Image x:Name="image2" Height="15" Width="15" Source="/CuentasPorPagar;component/Resources/reload.png" Stretch="Fill"/>
+
             </Button>
         </Grid>
     </Grid>

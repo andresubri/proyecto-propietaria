@@ -96,7 +96,6 @@ namespace CuentasPorPagar
                                Monto = string.Format( new CultureInfo("en-US"),$"{p.Amount:c}"),
                                Suplidor = p.Supplier
                            };
-
                 dataGrid.ItemsSource = list;
 
 

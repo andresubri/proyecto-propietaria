@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar.Views.CRUD.DocumentsEntry"
         mc:Ignorable="d"
-        Title="Documentos" Height="303.714" Width="520" Loaded="Window_Loaded">
+        Title="Documentos" Height="340" Width="520" Loaded="Window_Loaded">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid Loaded="Grid_Loaded">
             <Grid.RowDefinitions>
                 <RowDefinition Height="115*"/>
@@ -15,37 +18,40 @@
             <DataGrid x:Name="DocumentDgv"
                   Width="480"
                   Height="152"
-                  Margin="17,79,0,0"
+                  Margin="17,102,0,0"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top" Grid.RowSpan="2" />
-            <Button x:Name="EditDocumentBtn"
-                Width="76"
-                Margin="206,124,0,0"
-                HorizontalAlignment="Left"
-                Content="Cargar" Grid.Row="1" Height="22" VerticalAlignment="Top" Click="EditDocumentBtn_Click_1" />
+                  VerticalAlignment="Top" Grid.RowSpan="2" >
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+            </DataGrid>
             <Button x:Name="DeleteDocumentBtn"
                 Width="76"
-                Margin="291,123,0,0"
+                Margin="205,135,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" IsEnabled="False" />
             <Button x:Name="CreateDocumentBtn"
                 Width="75"
-                Margin="36,124,0,0"
+                Margin="36,136,0,0"
                 HorizontalAlignment="Left"
                 Content="Crear"  Height="22" VerticalAlignment="Top" Grid.Row="1" Click="CreateDocumentBtn_Click" />
             <Button x:Name="ExitDocumentBtn"
-                Margin="390,123,0,0"
+                Margin="390,135,0,0"
                 Content="Salir" Grid.Row="1" HorizontalAlignment="Left" Width="75" Height="23" VerticalAlignment="Top" />
-            <Label x:Name="label" Content="Concepto" HorizontalAlignment="Left" Margin="14,40,0,0" VerticalAlignment="Top" Width="101" Height="28"/>
-            <Label x:Name="label1" Content="Monto" HorizontalAlignment="Left" Margin="256,13,0,0" VerticalAlignment="Top" Width="78"/>
-            <Label x:Name="label2" Content="Suplidor" HorizontalAlignment="Left" Margin="256,44,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label3" Content="No." HorizontalAlignment="Left" Margin="18,14,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="numberTxt" HorizontalAlignment="Left" Height="23" Margin="101,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="conceptTxt" HorizontalAlignment="Left" Height="23" Margin="102,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="amountTxt" HorizontalAlignment="Left" Height="23" Margin="342,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="supplierTxt" HorizontalAlignment="Left" Height="23" Margin="343,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="loadBtn" Content="Editar" HorizontalAlignment="Left" Margin="120,125,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="loadBtn_Click" IsEnabled="False"/>
+            <Label x:Name="label" Content="Concepto" HorizontalAlignment="Left" Margin="14,63,0,0" VerticalAlignment="Top" Width="101" Height="28"/>
+            <Label x:Name="label1" Content="Monto" HorizontalAlignment="Left" Margin="256,36,0,0" VerticalAlignment="Top" Width="78"/>
+            <Label x:Name="label2" Content="Suplidor" HorizontalAlignment="Left" Margin="256,67,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label3" Content="No." HorizontalAlignment="Left" Margin="18,37,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="numberTxt" HorizontalAlignment="Left" Height="23" Margin="101,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="conceptTxt" HorizontalAlignment="Left" Height="23" Margin="101,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="amountTxt" HorizontalAlignment="Left" Height="23" Margin="342,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="supplierTxt" HorizontalAlignment="Left" Height="23" Margin="343,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="loadBtn" Content="Guardar" HorizontalAlignment="Left" Margin="120,137,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="loadBtn_Click" IsEnabled="False"/>
+            <Label x:Name="label4" Content="ID" HorizontalAlignment="Left" Margin="17,11,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="objectIdTxt" HorizontalAlignment="Left" Height="23" Margin="101,11,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>

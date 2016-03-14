@@ -21,7 +21,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            Crud("Create");
+            Crud("guardar");
         }
 
         private  void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -63,6 +63,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             amountTxt.Text = "";
             supplierTxt.Text = "";
             numberTxt.Text = "";
+            objectIdTxt.Text = "";
         }
 
         private async void Crud(string option)
@@ -81,7 +82,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             
             switch (option.ToLower())
             {
-                case "create":
+                case "guardar":
                     if (conceptTxt.Text != "" && (int.Parse(amountTxt.Text)) > 0 ||
                         supplierTxt.Text != "" && (int.Parse(numberTxt.Text)) > 0)
                     {
@@ -89,6 +90,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                         {
                             var document = new Models.DocumentEntry()
                             {
+                                ObjectId = objectIdTxt.Text,
                                 Concept = conceptTxt.Text,
                                 Amount = int.Parse(amountTxt.Text),
                                 Supplier = supplierTxt.Text,
@@ -166,10 +168,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         }
 
-        private void EditDocumentBtn_Click_1(object sender, RoutedEventArgs e)
-        {
-            Crud("Edit");
-        }
 
         private void loadBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -220,6 +218,21 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             {
                 DeleteDocumentBtn.IsEnabled = true;
             }
+        }
+
+        private void ExitDocumentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void clearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void loadSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

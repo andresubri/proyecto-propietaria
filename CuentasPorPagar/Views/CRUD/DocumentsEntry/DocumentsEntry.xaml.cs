@@ -1,5 +1,6 @@
 ﻿using Parse;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,8 +47,9 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                Id = p.ObjectId,
                                Recibo = p.ReceiptNumber,
                                Concepto = p.Concept,
-                               Monto = p.Amount,
+                               Monto = string.Format(new CultureInfo("en-US"), $"{p.Amount:c}"),
                                Suplidor = p.Supplier,
+                               Estatus = p.Status,
                                Fecha = p.CreatedAt
                            };
 
@@ -101,7 +103,9 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                     Concept = conceptTxt.Text,
                                     Amount = int.Parse(amountTxt.Text),
                                     Supplier = supplierTxt.Text,
-                                    ReceiptNumber = int.Parse(numberTxt.Text)
+                                    ReceiptNumber = int.Parse(numberTxt.Text),
+                                    Status = "pendiente"
+
                                 };
                                 await document.SaveAsync();
                                 MessageBox.Show("Documento creado");
@@ -114,7 +118,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                     Concept = conceptTxt.Text,
                                     Amount = int.Parse(amountTxt.Text),
                                     Supplier = supplierTxt.Text,
-                                    ReceiptNumber = int.Parse(numberTxt.Text)
+                                    ReceiptNumber = int.Parse(numberTxt.Text),
                                 };
                                 await document.SaveAsync();
                                 MessageBox.Show("Documento actualizado");
@@ -154,7 +158,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     break;
                 
             }
-            
         }
 
         private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)

@@ -41,5 +41,11 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+        [ParseFieldName("status")]
+        public string Status
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
     }
 }

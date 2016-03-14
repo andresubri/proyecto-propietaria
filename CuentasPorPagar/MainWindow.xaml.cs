@@ -96,7 +96,6 @@ namespace CuentasPorPagar
                                Monto = p.Amount,
                                Suplidor = p.Supplier
                            };
-
                 dataGrid.ItemsSource = list;
 
 

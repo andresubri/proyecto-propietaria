@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 {
@@ -29,7 +30,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
             if (isAdmin)
             {
-                EditDocumentBtn.IsEnabled = true;
                 DeleteDocumentBtn.IsEnabled = true;
             }
         }
@@ -124,26 +124,32 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     }
 
                     break;
-                case "edit":
-                    try
-                    {
-                        var editQuery = from aux in new ParseQuery<Models.DocumentEntry>()
-                                     where aux.ObjectId.Equals(element)
-                                     select aux;
-                        var editElements = await editQuery.FirstAsync();
-                        conceptTxt.Text = editElements.Concept;
-                        amountTxt.Text = editElements.Amount.ToString();
-                        numberTxt.Text = editElements.ReceiptNumber.ToString();
-
-                        PopulateGrid();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                    break;
+                
             }
             
+        }
+
+        private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var id = DocumentDgv.SelectedIndex;
+            var query = new ParseQuery<Models.DocumentEntry>();
+            var result = await query.FindAsync();
+            var list = from p in result
+                       select new
+                       {
+                           Id = p.ObjectId
+                       };
+
+            var element = list.ElementAt(id).Id;
+            var editQuery = from aux in new ParseQuery<Models.DocumentEntry>()
+                            where aux.ObjectId.Equals(element)
+                            select aux;
+            var editElements = await editQuery.FirstAsync();
+            conceptTxt.Text = editElements.Concept;
+            amountTxt.Text = editElements.Amount.ToString();
+            numberTxt.Text = editElements.ReceiptNumber.ToString();
+            supplierTxt.Text = editElements.Supplier.ToString();
+            objectIdTxt.Text = editElements.ObjectId;
         }
 
         private void DeleteDocumentBtn_Click(object sender, RoutedEventArgs e)
@@ -212,7 +218,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
             if(isAdmin)
             {
-                EditDocumentBtn.IsEnabled = true;
                 DeleteDocumentBtn.IsEnabled = true;
             }
         }

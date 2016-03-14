@@ -232,7 +232,13 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void loadSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
+            var findSupplier = new FindSupplier();
+            findSupplier.ShowDialog();
 
+            if (findSupplier.DialogResult == true)
+            { 
+                 supplierTxt.Text = findSupplier.supplier;
+            }
         }
     }
 }

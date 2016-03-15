@@ -135,5 +135,12 @@ namespace CuentasPorPagar
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            Views.Query.Supplier supplierQuery = new Views.Query.Supplier();
+            supplierQuery.Show();
+
+        }
     }
 }

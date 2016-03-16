@@ -85,7 +85,7 @@ namespace CuentasPorPagar
             try
             {
 
-                var query = new ParseQuery<Models.DocumentEntry>().OrderBy("createdAt");
+                var query = new ParseQuery<Models.DocumentEntry>().WhereContains("status","pendiente").OrderBy("createdAt");
                 var result = await query.FindAsync();
                 var list = from p in result
                            select new
@@ -134,6 +134,13 @@ namespace CuentasPorPagar
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            Views.Query.Supplier supplierQuery = new Views.Query.Supplier();
+            supplierQuery.Show();
+
         }
     }
 }

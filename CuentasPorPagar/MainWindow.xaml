@@ -51,8 +51,8 @@
                 <MenuItem Header="Cierre" />
             </MenuItem>
             <MenuItem Header="Consultas">
-                <MenuItem Header="Estado Cliente" />
-                <MenuItem Header="Estado Proveedor" />
+                <MenuItem Header="Proveedor" Click="MenuItem_Click_4" />
+                <MenuItem Header="Documentos" />
             </MenuItem>
             <MenuItem Header="Reporteria">
                 <MenuItem Header="Documentos" />

@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="Documentos" Height="340" Width="520" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid Loaded="Grid_Loaded">
             <Grid.RowDefinitions>
                 <RowDefinition Height="115*"/>
@@ -29,10 +26,10 @@
             </DataGrid>
             <Button x:Name="DeleteDocumentBtn"
                 Width="76"
-                Margin="124,137,0,0"
+                Margin="125,133,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" IsEnabled="False" />
+                Content="Eliminar" Grid.Row="1" Height="23" Click="DeleteDocumentBtn_Click" IsEnabled="False" RenderTransformOrigin="0.855,0.217" />
             <Button x:Name="CreateDocumentBtn"
                 Width="75"
                 Margin="36,136,0,0"

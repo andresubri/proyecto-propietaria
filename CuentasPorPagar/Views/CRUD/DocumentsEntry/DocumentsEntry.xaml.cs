@@ -185,14 +185,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             Crud("Delete");
         }
 
-        private void EditDocumentBtn_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void typeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
 
 
         private void loadBtn_Click(object sender, RoutedEventArgs e)

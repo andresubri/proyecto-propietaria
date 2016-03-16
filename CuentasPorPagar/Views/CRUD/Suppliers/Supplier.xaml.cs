@@ -46,7 +46,6 @@ namespace CuentasPorPagar.Views.CRUD
 
                 if (isAdmin)
                 {
-                    EditSupplierBtn.IsEnabled = true;
                     DeleteSupplierBtn.IsEnabled = true;
                 }
                 
@@ -92,6 +91,7 @@ namespace CuentasPorPagar.Views.CRUD
                    
             switch (option.ToLower())
             {
+                
                 case "delete":
                     try
                     {

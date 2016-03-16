@@ -5,32 +5,20 @@
         xmlns:local="clr-namespace:CuentasPorPagar.Views.CRUD"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:winForms="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
-        Title="Suplidor"
-        Width="574"
-        Height="332"
+        Title="Suplidores"
+        Width="434"
+        Height="272"
         MinWidth="574"
         MinHeight="332"
         MaxWidth="574"
         MaxHeight="332"
         Loaded="Window_Loaded"
         mc:Ignorable="d">
-    <Grid>
-
-        <Button x:Name="EditSupplierBtn"
-                Width="76"
-                Height="20"
-                Margin="235,210,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="EditSupplierBtn_Click"
-                Content="Editar"
-                FontWeight="Bold"
-                IsEnabled="False"
-                RenderTransformOrigin="0.5,0.5" />
+    <Grid Margin="0,0,0,29">
         <Button x:Name="DeleteSupplierBtn"
                 Width="76"
                 Height="20"
-                Margin="325,210,0,0"
+                Margin="144,265,0,-13"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="DeleteSupplierBtn_Click"
@@ -40,17 +28,17 @@
         <Button x:Name="CreateSupplierBtn"
                 Width="75"
                 Height="20"
-                Margin="145,210,0,0"
+                Margin="50,265,0,-13"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="CreateSupplierBtn_Click"
-                Content="Crear"
+                Content="Guardar"
                 FontWeight="Bold"
                 RenderTransformOrigin="0.533,2.25" />
         <Button x:Name="ExitSupplierBtn"
                 Width="74"
                 Height="20"
-                Margin="465,270,0,0"
+                Margin="465,260,0,-8"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="ExitSupplierBtn_Click"
@@ -59,8 +47,19 @@
         <DataGrid x:Name="SupplierDgv"
                   Width="515"
                   Height="170"
-                  Margin="25,20,0,0"
+                  Margin="30,75,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top" />
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="100,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label" Content="ID" HorizontalAlignment="Left" Margin="40,15,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="100,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Content="Nombre" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="350,13,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label2" Content="Tipo" HorizontalAlignment="Left" Margin="290,15,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="350,45,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label3" HorizontalAlignment="Left" Margin="290,44,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button"  HorizontalAlignment="Left" Margin="220,45,0,0" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.5,0.75" Height="20">
+            <Image x:Name="image3" Height="15" Width="15" Source="/CuentasPorPagar;component/Resources/lupa.png" Stretch="Fill"/>
+        </Button>
     </Grid>
 </Window>

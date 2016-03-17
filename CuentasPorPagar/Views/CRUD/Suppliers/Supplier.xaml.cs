@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using CuentasPorPagar.Views.CRUD.Suppliers;
+
 using Parse;
 
 namespace CuentasPorPagar.Views.CRUD
@@ -13,43 +18,24 @@ namespace CuentasPorPagar.Views.CRUD
     {
         public Supplier()
         {
-            InitializeComponent();
-           
+            InitializeComponent();   
         }
 
         private void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
-            var window = new CreateSupplier();
-            window.Show();
-            this.Close();
+            Crud("save");
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-                var query = new ParseQuery<Models.Supplier>();
-                var result = await query.FindAsync();
-                var list = from p in result
-                    select new
-                    {
-                        Id = p.ObjectId,
-                        Nombre = p.Name,
-                        Identificacion = p.Identification,
-                        p.Balance,
-                        Creado = p.CreatedAt
-                        
-                    };
-                
-                SupplierDgv.ItemsSource = list;
+                var isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
+                var query = await new ParseQuery<Models.Supplier>().FindAsync();
+                PopulateGrid();
 
                 if (isAdmin)
-                {
                     DeleteSupplierBtn.IsEnabled = true;
-                }
-                
-
             }
             catch (Exception ex)
             {
@@ -68,30 +54,95 @@ namespace CuentasPorPagar.Views.CRUD
             Close();
         }
 
-        private void EditSupplierBtn_Click(object sender, RoutedEventArgs e)
+        private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Crud("Edit");
-            
+
+            var id = SupplierDgv.SelectedIndex;
+            var query = await  new ParseQuery<Models.Supplier>().FindAsync();
+            var result = query.Select(o => new { Id = o.ObjectId });
+            var element = result.ElementAt(id).Id;
+            var editQuery = from p in new ParseQuery<Models.Supplier>()
+                where p.ObjectId.Equals(element)
+                select p;
+
+            var editElements = await editQuery.FirstAsync();
+
+            IdTxt.Text = editElements.ObjectId;
+            NameTxt.Text = editElements.Name;
+            IdentificationTxt.Text = editElements.Identification;
+            BalanceTxt.Text = editElements.Balance.ToString();
+            TypeCbx.SelectedIndex = (editElements.Type.Equals("Juridica"))? 0 : 1;
+            StateCbx.SelectedIndex = (editElements.Type.Equals("Activo")) ? 0 : 1;
+
+
         }
+
+      
+
         private async void Crud(string option)
         {
             var ID = SupplierDgv.SelectedIndex;
-            var query = new ParseQuery<Models.Supplier>();
-            var result = await query.FindAsync();
-            var list = from p in result
-                       select new
-                       {
-                           Id = p.ObjectId,
-                           Nombre = p.Name,
-                           Identificacion = p.Identification,
-                           p.Balance,
-                           Creado = p.CreatedAt
-
-                       };
+            var query = await new ParseQuery<Models.Supplier>().FindAsync();
+            var list = query.Select(p => new
+            {
+                Id = p.ObjectId,
+                Nombre = p.Name,
+                Identificacion = p.Identification,
+                p.Balance,
+                Creado = p.CreatedAt
+            });
                    
             switch (option.ToLower())
             {
-                
+
+                //TODO: Identification validation. Returns false
+                case "save":
+                    if (NameTxt.Text != "" && IdentificationTxt.Text != ""
+                        && int.Parse(BalanceTxt.Text) > 0)
+                    {
+                        try
+                        {
+                            Models.Supplier supplier;
+                            if (!(IdTxt.Text.Length > 2))
+                            {
+
+                                supplier = new Models.Supplier()
+                                {
+                                    Name = NameTxt.Text,
+                                    Balance = int.Parse(BalanceTxt.Text),
+                                    Identification = IdentificationTxt.Text,
+                                    State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString(),
+                                    Type = ((ComboBoxItem) TypeCbx.SelectedItem).Content.ToString()
+
+                                };
+                                await supplier.SaveAsync();
+                                MessageBox.Show("Suplidor creado");
+                            }
+                            else
+                            {
+                                supplier = new Models.Supplier()
+                                {
+                                    ObjectId = IdTxt.Text,
+                                    Name = NameTxt.Text,
+                                    Balance = int.Parse(BalanceTxt.Text),
+                                    Identification = IdentificationTxt.Text,
+                                    State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString(),
+                                    Type = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString()
+                                };
+                                await supplier.SaveAsync();
+                                MessageBox.Show("Suplidor actualizado");
+                            }
+                            PopulateGrid();
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                            MessageBox.Show(ex.ToString());
+                        }
+                    }
+
+                    break;
                 case "delete":
                     try
                     {
@@ -111,6 +162,7 @@ namespace CuentasPorPagar.Views.CRUD
                     }
                     
                     break;
+
                 case "edit":
                     var window = new EditSupplier();
                     window.Show();
@@ -122,22 +174,28 @@ namespace CuentasPorPagar.Views.CRUD
             try
             {
                 var query = await new ParseQuery<Models.Supplier>().FindAsync();
-                var result = from o in query
-                    select new
-                    {
-                        Id = o.ObjectId,
-                        Nombre = o.Name,
-                        Identificacion = o.Identification,
-                        o.Balance,
-                        Creado = o.CreatedAt
-                    };
-                SupplierDgv.ItemsSource = result;
+                var result = query.Select(o => new
+                {
+                    Id = o.ObjectId,
+                    Nombre = o.Name,
+                    Identificacion = o.Identification,
+                    Balance = Utilities.ToDOPCurrencyFormat(o.Balance),  
+                    Creado = o.CreatedAt
+                });
 
+                SupplierDgv.ItemsSource = result;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al popular \n{0}", ex.ToString());
             }
         }
+
+        private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utilities.Clear(this);
+        }
+        
     }
+
 }

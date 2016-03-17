@@ -111,24 +111,11 @@ namespace CuentasPorPagar
             try
             {
                 var LoggedUser = ParseUser.CurrentUser.Username;                            
-                var query = from a in new ParseQuery<Models.Users>()
-                            where a.Username.Equals(LoggedUser)
-                            select a;
-                var TableResult = query.FirstAsync().Result;
-                var UserPermission = TableResult.Permission;
-                txtUserPermission.Content = $"Tipo: {UserPermission}";
-                 
-                if (UserPermission == "Administrador")
-                {
-                    App.Current.Properties["IsAdmin"] = true; 
-                }
-                else
-                {
-                    App.Current.Properties["IsAdmin"] = false;
-                }
-                
-
-
+                var query = new ParseQuery<Models.Users>().Where(a => a.Username.Equals(LoggedUser));
+                var TableResult = query.FirstAsync().Result.Permission;
+               
+                txtUserPermission.Content = $"Tipo: {TableResult}";
+                App.Current.Properties["IsAdmin"] = TableResult == "Administrador";
             }
             catch (Exception ex)
             {

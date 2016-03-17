@@ -1,4 +1,5 @@
-﻿using Parse;
+﻿using System;
+using Parse;
 
 namespace CuentasPorPagar.Models
 {
@@ -47,5 +48,7 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
+       
     }
 }

@@ -74,12 +74,14 @@ namespace CuentasPorPagar
                         Id = p.ObjectId,
                         Suplidor = p.Supplier,
                         Recibo = p.ReceiptNumber,
-                        Monto = Utilities.ToDOPCurrencyFormat(p.Amount),
+                        Monto = Utilities.ToDopCurrencyFormat(p.Amount),
                         Fecha = p.CreatedAt
                     };
-                var sum = result.Sum(o => o.Amount);
-                PaymentLeft.Content += sum.ToString();
 
+                
+                var total = result.Sum(v => v.Amount);
+                
+                TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
                 dataGrid.ItemsSource = list;
             }
             catch (Exception ex)

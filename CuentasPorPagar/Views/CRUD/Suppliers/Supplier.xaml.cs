@@ -160,7 +160,7 @@ namespace CuentasPorPagar.Views.CRUD
                     Id = o.ObjectId,
                     Nombre = o.Name,
                     Identificacion = o.Identification,
-                    Balance = Utilities.ToDOPCurrencyFormat(o.Balance),
+                    Balance = Utilities.ToDopCurrencyFormat(o.Balance),
                     Creado = o.CreatedAt
                 });
 

@@ -50,6 +50,6 @@ namespace CuentasPorPagar
             }
         }
 
-        public static string ToDOPCurrencyFormat(int value) => $"{value:RD$#,##0.00;($#,##0.00);''}";
+        public static string ToDopCurrencyFormat(int value) => $"{value:RD$#,##0.00;($#,##0.00);''}";
     }
 }

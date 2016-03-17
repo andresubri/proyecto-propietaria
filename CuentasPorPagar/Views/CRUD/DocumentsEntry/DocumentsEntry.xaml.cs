@@ -32,7 +32,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     Id = p.ObjectId,
                     Recibo = p.ReceiptNumber,
                     Concepto = p.Concept,
-                    Monto = Utilities.ToDOPCurrencyFormat(p.Amount),
+                    Monto = Utilities.ToDopCurrencyFormat(p.Amount),
                     Suplidor = p.Supplier,
                     Estatus = p.Status,
                     Fecha = p.CreatedAt

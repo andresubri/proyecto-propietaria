@@ -1,24 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using CuentasPorPagar.Models;
 using Parse;
-
 
 namespace CuentasPorPagar.Views.CRUD
 {
     /// <summary>
-    /// Interaction logic for PaymentConcept.xaml
+    ///     Interaction logic for PaymentConcept.xaml
     /// </summary>
     public partial class Payments : Window
     {
@@ -31,18 +20,18 @@ namespace CuentasPorPagar.Views.CRUD
         {
             try
             {
-                bool isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-                var query = new ParseQuery<Models.Payment>();
+                var isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
+                var query = new ParseQuery<Payment>();
                 var result = await query.FindAsync();
                 var list = from p in result
-                           select new
-                           {
-                             Id = p.ObjectId,
-                             Concepto = p.Concept,
-                             Monto = p.Amount,
-                             Proveedor = p.Supplier,
-                             Estado = p.State                        
-                           };
+                    select new
+                    {
+                        Id = p.ObjectId,
+                        Concepto = p.Concept,
+                        Monto = p.Amount,
+                        Proveedor = p.Supplier,
+                        Estado = p.State
+                    };
 
                 PaymentDgv.ItemsSource = list;
 
@@ -61,7 +50,7 @@ namespace CuentasPorPagar.Views.CRUD
         private async void DeletePaymentConceptBtn_Click(object sender, RoutedEventArgs e)
         {
             var ID = PaymentDgv.SelectedIndex;
-            var query = new ParseQuery<Models.Payment>();
+            var query = new ParseQuery<Payment>();
             var result = await query.FindAsync();
             var list = from p in result
                 select new
@@ -75,7 +64,7 @@ namespace CuentasPorPagar.Views.CRUD
             try
             {
                 var element = list.ElementAt(ID);
-                var getObject = from a in new ParseQuery<Models.Payment>()
+                var getObject = from a in new ParseQuery<Payment>()
                     where a.Id.Equals(element.Id)
                     select a;
 
@@ -85,9 +74,6 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 MessageBox.Show(ex.ToString());
             }
-
-
-
         }
     }
 }

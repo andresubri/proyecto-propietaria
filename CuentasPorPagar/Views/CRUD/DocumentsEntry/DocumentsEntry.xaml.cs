@@ -1,20 +1,17 @@
-﻿using Parse;
-using System;
-using System.Globalization;
+﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
+using CuentasPorPagar.Models;
+using Parse;
 
 namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 {
     /// <summary>
-    /// Interaction logic for DocumentsEntry.xaml
+    ///     Interaction logic for DocumentsEntry.xaml
     /// </summary>
     public partial class DocumentsEntry : Window
     {
-
         public DocumentsEntry()
         {
             InitializeComponent();
@@ -24,12 +21,12 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         {
             Crud("save");
         }
-        
+
         private async void PopulateGrid()
         {
             try
             {
-                var query = await new ParseQuery<Models.DocumentEntry>().FindAsync();
+                var query = await new ParseQuery<DocumentEntry>().FindAsync();
                 var list = query.Select(p => new
                 {
                     Id = p.ObjectId,
@@ -48,21 +45,21 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 MessageBox.Show(ex.ToString());
             }
         }
-     
+
         private async void Crud(string option)
         {
             var id = DocumentDgv.SelectedIndex;
-            var query = new ParseQuery<Models.DocumentEntry>();
+            var query = new ParseQuery<DocumentEntry>();
             var result = await query.FindAsync();
             var list = from p in result
-                       select new
-                       {
-                           Id = p.ObjectId
-                       };
+                select new
+                {
+                    Id = p.ObjectId
+                };
             var element = "";
-            if (id > 0) 
-                 element = list.ElementAt(id).Id;
-            
+            if (id > 0)
+                element = list.ElementAt(id).Id;
+
             switch (option.ToLower())
             {
                 case "save":
@@ -71,10 +68,10 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     {
                         try
                         {
-                            Models.DocumentEntry document;
+                            DocumentEntry document;
                             if (!(objectIdTxt.Text.Length > 2))
                             {
-                                document = new Models.DocumentEntry()
+                                document = new DocumentEntry
                                 {
                                     //CREATE
                                     Concept = conceptTxt.Text,
@@ -82,21 +79,20 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                     Supplier = supplierTxt.Text,
                                     ReceiptNumber = int.Parse(numberTxt.Text),
                                     Status = "pendiente"
-
                                 };
                                 await document.SaveAsync();
                                 MessageBox.Show("Documento creado");
                             }
                             else
                             {
-                                document = new Models.DocumentEntry()
+                                document = new DocumentEntry
                                 {
                                     //UPDATE 
                                     ObjectId = objectIdTxt.Text,
                                     Concept = conceptTxt.Text,
                                     Amount = int.Parse(amountTxt.Text),
                                     Supplier = supplierTxt.Text,
-                                    ReceiptNumber = int.Parse(numberTxt.Text),
+                                    ReceiptNumber = int.Parse(numberTxt.Text)
                                 };
                                 await document.SaveAsync();
                                 MessageBox.Show("Documento actualizado");
@@ -110,15 +106,15 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                         }
                     }
 
-                 break;
+                    break;
 
                 case "delete":
                     if (!(id < 0))
                     {
                         try
                         {
-                            var deleteQuery =  new ParseQuery<Models.DocumentEntry>()
-                                                .Where(o => o.ObjectId.Equals(element));
+                            var deleteQuery = new ParseQuery<DocumentEntry>()
+                                .Where(o => o.ObjectId.Equals(element));
                             await deleteQuery.FirstAsync().Result.DeleteAsync();
                             PopulateGrid();
                         }
@@ -129,7 +125,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     }
                     else
                         MessageBox.Show("Favor seleccionar un elemento de la lista.");
-                    
+
 
                     break;
 
@@ -137,19 +133,18 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     MessageBox.Show("No parameters passed");
                     break;
             }
-
         }
 
         private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             var id = DocumentDgv.SelectedIndex;
-            var query = await new ParseQuery<Models.DocumentEntry>().FindAsync(); 
-            var list = query.Select(p => new { Id = p.ObjectId });
+            var query = await new ParseQuery<DocumentEntry>().FindAsync();
+            var list = query.Select(p => new {Id = p.ObjectId});
 
             var element = list.ElementAt(id).Id;
-            var editQuery = from aux in new ParseQuery<Models.DocumentEntry>()
-                            where aux.ObjectId.Equals(element)
-                            select aux;
+            var editQuery = from aux in new ParseQuery<DocumentEntry>()
+                where aux.ObjectId.Equals(element)
+                select aux;
 
             //Fill the controls
             var editElements = await editQuery.FirstAsync();
@@ -163,22 +158,20 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         private void DeleteDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
             Crud("delete");
-
         }
-        
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-            if(isAdmin)
+            if (isAdmin)
                 DeleteDocumentBtn.IsEnabled = true;
 
             PopulateGrid();
-
         }
 
         private void ExitDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void clearBtn_Click(object sender, RoutedEventArgs e)
@@ -192,14 +185,13 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             findSupplier.ShowDialog();
 
             if (findSupplier.DialogResult == true)
-                 supplierTxt.Text = findSupplier.supplier;
-            
+                supplierTxt.Text = findSupplier.supplier;
         }
 
         private async void getNumberBtn_Click(object sender, RoutedEventArgs e)
         {
-            var query = await new ParseQuery<Models.DocumentEntry>().OrderByDescending("receiptNum").FindAsync(); 
-            var list = query.Select(p => new {  p.ReceiptNumber });
+            var query = await new ParseQuery<DocumentEntry>().OrderByDescending("receiptNum").FindAsync();
+            var list = query.Select(p => new {p.ReceiptNumber});
             numberTxt.Text = (list.ElementAt(0).ReceiptNumber + 1).ToString();
         }
     }

@@ -1,29 +1,18 @@
-﻿using Parse;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CuentasPorPagar.Models;
 using CuentasPorPagar.Views;
-using SupplierReport = CuentasPorPagar.Views.Report.Supplier;
+using CuentasPorPagar.Views.CRUD;
+using CuentasPorPagar.Views.CRUD.DocumentsEntry;
+using Parse;
 using Supplier = CuentasPorPagar.Views.CRUD.Supplier;
-using Payments = CuentasPorPagar.Views.CRUD.Payments;
+using SupplierReport = CuentasPorPagar.Views.Report.Supplier;
 
 namespace CuentasPorPagar
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -34,13 +23,13 @@ namespace CuentasPorPagar
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            var login = new Login();
-            login.Show();
+            var window = new Login();
+            window.Show();
         }
 
         private void SupplierCrudItem_Click(object sender, RoutedEventArgs e)
         {
-           var window = new Supplier();
+            var window = new Supplier();
             window.Show();
         }
 
@@ -48,57 +37,50 @@ namespace CuentasPorPagar
         {
             var window = new Payments();
             window.Show();
-
         }
 
         private void PaymentTypeCrudItem_Click(object sender, RoutedEventArgs e)
         {
-            
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            var window = new Views.CRUD.DocumentsEntry.DocumentsEntry();
+            var window = new DocumentsEntry();
             window.Show();
         }
 
         private void UserCrudItem_OnClick(object sender, RoutedEventArgs e)
         {
-            var window = new Views.CRUD.User();
+            var window = new User();
             window.Show();
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
-            var sr = new SupplierReport();
-            sr.Show();
+            var window = new SupplierReport();
+            window.Show();
         }
 
         private async void dataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-
-                var query = new ParseQuery<Models.DocumentEntry>().WhereContains("status","pendiente").OrderBy("createdAt");
+                var query = new ParseQuery<DocumentEntry>().WhereContains("status", "pendiente").OrderBy("createdAt");
                 var result = await query.FindAsync();
                 var list = from p in result
-                           select new
-                           {
-                               Id = p.ObjectId,
-                               Fecha = p.CreatedAt,
-                               Recibo = p.ReceiptNumber,
-                               Monto = string.Format( new CultureInfo("en-US"),$"{p.Amount:c}"),
-                               Suplidor = p.Supplier
-                           };
+                    select new
+                    {
+                        Id = p.ObjectId,
+                        Suplidor = p.Supplier,
+                        Recibo = p.ReceiptNumber,
+                        Monto = Utilities.ToDOPCurrencyFormat(p.Amount),
+                        Fecha = p.CreatedAt
+                    };
+                var sum = result.Sum(o => o.Amount);
+                PaymentLeft.Content += sum.ToString();
+
                 dataGrid.ItemsSource = list;
-
-
             }
             catch (Exception ex)
             {
@@ -110,12 +92,12 @@ namespace CuentasPorPagar
         {
             try
             {
-                var LoggedUser = ParseUser.CurrentUser.Username;                            
-                var query = new ParseQuery<Models.Users>().Where(a => a.Username.Equals(LoggedUser));
-                var TableResult = query.FirstAsync().Result.Permission;
-               
-                txtUserPermission.Content = $"Tipo: {TableResult}";
-                App.Current.Properties["IsAdmin"] = TableResult == "Administrador";
+                var loggedUser = ParseUser.CurrentUser.Username;
+                var query = new ParseQuery<Users>().Where(a => a.Username.Equals(loggedUser));
+                var tableResult = query.FirstAsync().Result.Permission;
+
+                txtUserPermission.Content = $"Tipo: {tableResult}";
+                Application.Current.Properties["IsAdmin"] = tableResult == "Administrador";
             }
             catch (Exception ex)
             {
@@ -125,9 +107,8 @@ namespace CuentasPorPagar
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
-            Views.Query.Supplier supplierQuery = new Views.Query.Supplier();
+            var supplierQuery = new Views.Query.Supplier();
             supplierQuery.Show();
-
         }
     }
 }

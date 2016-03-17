@@ -2,15 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace CuentasPorPagar.Views.CRUD.Suppliers
 {
     /// <summary>
-    /// Interaction logic for CreateSupplier.xaml
+    ///     Interaction logic for CreateSupplier.xaml
     /// </summary>
     public partial class CreateSupplier : Window
     {
-        
         public CreateSupplier()
         {
             InitializeComponent();
@@ -39,16 +37,14 @@ namespace CuentasPorPagar.Views.CRUD.Suppliers
                 await supplier.SaveAsync();
                 MessageBox.Show("Agregado satisfactoriamente");
 
-                this.Close();
+                Close();
                 var back = new Supplier();
                 back.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al agregar suplidor \n{ex}");
-               
             }
-
         }
     }
 }

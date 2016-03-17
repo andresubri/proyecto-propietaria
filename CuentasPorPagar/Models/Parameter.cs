@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Parse;
 
 namespace CuentasPorPagar.Models
 {
-    class Parameter : Parse.ParseObject
+    internal class Parameter : ParseObject
     {
         public Parameter(string processedYear, string processedMonth, bool executedClosing)
         {

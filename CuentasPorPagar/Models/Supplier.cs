@@ -3,7 +3,7 @@
 namespace CuentasPorPagar.Models
 {
     [ParseClassName("Supplier")]
-    class Supplier : ParseObject
+    internal class Supplier : ParseObject
     {
         [ParseFieldName("identification")]
         public string Identification
@@ -11,30 +11,35 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
         [ParseFieldName("balance")]
         public int Balance
         {
             get { return GetProperty<int>(); }
             set { SetProperty(value); }
         }
+
         [ParseFieldName("objectId")]
         public string Id
         {
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
         [ParseFieldName("name")]
         public string Name
         {
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
         [ParseFieldName("type")]
         public string Type
         {
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
         [ParseFieldName("state")]
         public string State
         {

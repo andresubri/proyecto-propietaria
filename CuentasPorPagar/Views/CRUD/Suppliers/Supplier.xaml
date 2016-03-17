@@ -58,23 +58,23 @@
             </DataGrid.ItemContainerStyle>
         </DataGrid>
         <Button x:Name="clearBtn"
-                    Width="30"
-                    Height="30"
-                    Margin="225,280,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Click="ClearBtn_OnClick">
+                Width="30"
+                Height="30"
+                Margin="225,280,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="ClearBtn_OnClick">
             <Image x:Name="image"
-                       Source="/CuentasPorPagar;component/Resources/escoba.png"
-                       Stretch="Fill" />
+                   Source="/CuentasPorPagar;component/Resources/escoba.png"
+                   Stretch="Fill" />
 
         </Button>
 
         <Label x:Name="label"
                Margin="29,25,0,0"
                HorizontalAlignment="Left"
-               VerticalAlignment="Top" >
-            <Label x:Name="IdLabel" Content="ID"/>
+               VerticalAlignment="Top">
+            <Label x:Name="IdLabel" Content="ID" />
         </Label>
         <TextBox x:Name="NameTxt"
                  Width="150"
@@ -92,10 +92,8 @@
                   Width="85"
                   Margin="385,53,0,0"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  
-                  >
-            <ComboBoxItem Content="Fisica"  IsSelected="True"/>
+                  VerticalAlignment="Top">
+            <ComboBoxItem Content="Fisica" IsSelected="True" />
             <ComboBoxItem Content="Juridica" />
         </ComboBox>
         <Label x:Name="label2"
@@ -107,9 +105,7 @@
                   Width="85"
                   Margin="385,23,0,0"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  
-                  >
+                  VerticalAlignment="Top">
             <ComboBoxItem Content="Inactivo" IsSelected="True" />
             <ComboBoxItem Content="Activo " />
             <Label x:Name="label5"
@@ -167,6 +163,7 @@
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Cedula/RNC" />
-        <TextBox x:Name="IdTxt" HorizontalAlignment="Left" Height="23" Margin="85,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="IdTxt" HorizontalAlignment="Left" Height="23" Margin="85,30,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" IsEnabled="False" />
     </Grid>
 </Window>

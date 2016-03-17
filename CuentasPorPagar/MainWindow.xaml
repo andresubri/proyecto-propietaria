@@ -60,13 +60,13 @@
                 <MenuItem Header="Cierre" />
             </MenuItem>
         </Menu>
-        <Label x:Name="label"
+        <Label x:Name="PaymentLeft"
                Width="100"
                Height="31"
                Margin="25,40,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Content="Por pagar"
+               Content="Por pagar: "
                FontWeight="Bold" />
         <DataGrid x:Name="dataGrid"
                   Grid.ColumnSpan="2"

@@ -162,11 +162,7 @@ namespace CuentasPorPagar.Views.CRUD
                     }
                     
                     break;
-
-                case "edit":
-                    var window = new EditSupplier();
-                    window.Show();
-                    break;
+                    
             }
         }
         private async void PopulateGrid()

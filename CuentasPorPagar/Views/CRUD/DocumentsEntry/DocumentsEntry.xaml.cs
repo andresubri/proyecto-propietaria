@@ -86,8 +86,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                             else
                             {
                                 document = new DocumentEntry
-                                {
-                                    //UPDATE 
+                                { 
                                     ObjectId = objectIdTxt.Text,
                                     Concept = conceptTxt.Text,
                                     Amount = int.Parse(amountTxt.Text),
@@ -125,8 +124,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     }
                     else
                         MessageBox.Show("Favor seleccionar un elemento de la lista.");
-
-
+                    
                     break;
 
                 default:
@@ -146,7 +144,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 where aux.ObjectId.Equals(element)
                 select aux;
 
-            //Fill the controls
+           
             var editElements = await editQuery.FirstAsync();
             conceptTxt.Text = editElements.Concept;
             amountTxt.Text = editElements.Amount.ToString();

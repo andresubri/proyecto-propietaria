@@ -65,8 +65,8 @@ namespace CuentasPorPagar.Views.CRUD
             NameTxt.Text = editElements.Name;
             IdentificationTxt.Text = editElements.Identification;
             BalanceTxt.Text = editElements.Balance.ToString();
-            TypeCbx.SelectedIndex = (editElements.Type.Equals("Juridica")) ? 0 : 1;
-            StateCbx.SelectedIndex = (editElements.Type.Equals("Activo")) ? 0 : 1;
+            TypeCbx.SelectedIndex = (editElements.Type.Equals("Juridica")) ? 1 : 2;
+            StateCbx.SelectedIndex = (editElements.Type.Equals("Activo")) ? 1 : 2;
         }
 
 

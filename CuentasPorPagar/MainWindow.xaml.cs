@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using CuentasPorPagar.Models;
@@ -111,6 +112,13 @@ namespace CuentasPorPagar
         {
             var supplierQuery = new Views.Query.Supplier();
             supplierQuery.Show();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+
         }
     }
 }

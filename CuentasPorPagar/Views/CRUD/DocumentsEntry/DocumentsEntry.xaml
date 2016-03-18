@@ -97,7 +97,8 @@
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      IsEnabled="False"
-                     Text="&#10;"
+                     Text="
+&#10;"
                      TextWrapping="Wrap" />
             <Button x:Name="clearBtn"
                     Width="30"

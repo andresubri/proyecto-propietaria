@@ -28,8 +28,8 @@
                 VerticalAlignment="Top"
                 Content="Editar" IsEnabled="False" />
         <Button x:Name="DeletePaymentConceptBtn"
-                Width="76"
-                Margin="198,238,0,0"
+                Width="87"
+                Margin="198,238,0,-1"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="DeletePaymentConceptBtn_Click"

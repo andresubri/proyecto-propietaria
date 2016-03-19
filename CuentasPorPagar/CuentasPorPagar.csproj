@@ -187,16 +187,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\escoba.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\lupa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\reload.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

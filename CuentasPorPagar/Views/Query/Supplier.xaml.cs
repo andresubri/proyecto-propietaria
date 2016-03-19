@@ -25,50 +25,79 @@ namespace CuentasPorPagar.Views.Query
             InitializeComponent();
         }
 
-        public async void query(string name, 
-                                string identification, 
-                                string state, 
-                                string type 
-                                //string balance1, 
-                                //string balance2, 
-                                //string date1, 
-                                //string date2
-                                )
+        private async void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            var query = new ParseQuery<Models.Supplier>()
-                .WhereContains("name",name)
-                .WhereContains("identification",identification)
-                .WhereContains("state",state)
-                .WhereContains("type",type);
-            var result = await query.FindAsync();
-            var list = from p in result
-                       select new
-                       {
-                           Id = p.ObjectId,
-                           Nombre = p.Name,
-                           Identificacion = p.Identification,
-                           Estado = p.State,
-                           Tipo = p.Type,
-                           p.Balance,
-                           Creado = p.CreatedAt
-                       };
-            dataGrid.ItemsSource = list;
-        }
+            DateTime? dateFrom = date1.SelectedDate;
+            DateTime? dateTo = date2.SelectedDate;
 
-        private void searchBtn_Click(object sender, RoutedEventArgs e)
-        {
             //Ejecuta la busqueda al presionar el boton
-            query(nameTxt.Text,
-                  documentTxt.Text,
-                  ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString(),
-                  ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString()
-                  );
+
+            try
+            {
+
+                var query = new ParseQuery<Models.Supplier>();
+
+                if (nameTxt.Text != "")
+                {
+                    query.WhereMatches("name", nameTxt.Text);
+                }
+
+                if (documentTxt.Text != "")
+                {
+                    query.WhereMatches("identification", documentTxt.Text);
+                }
+
+                if (((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Activo" || ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Inactivo")
+                {
+                    query.WhereContains("state", ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString());
+                }
+                if (((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Fisica" || ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Juridica")
+                {
+                    query.WhereContains("type", ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString());
+                }
+                if (amountTxt1.Text != "")
+                {
+                    query.WhereGreaterThanOrEqualTo("balance", Int32.Parse(amountTxt1.Text));
+                }
+                if (amountTxt2.Text != "")
+                {
+                    query.WhereLessThanOrEqualTo("balance", Int32.Parse(amountTxt2.Text));
+                }
+
+                /*if (date1 != null)
+                {
+                    query.WhereGreaterThanOrEqualTo("createdAt", date1);
+                }
+                if (date2 != null)
+                {
+                    query.WhereLessThanOrEqualTo("createdAt", date2);
+                }*/
+
+                var result = await query.FindAsync();
+                var list = from p in result
+                           select new
+                           {
+                               Id = p.ObjectId,
+                               Nombre = p.Name,
+                               Identificacion = p.Identification,
+                               Estado = p.State,
+                               Tipo = p.Type,
+                               p.Balance,
+                               Creado = p.CreatedAt
+                           };
+                dataGrid.ItemsSource = list;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             stateCmb.SelectedIndex = 0;
-            typeCmb.SelectedItem = 0;
+            typeCmb.SelectedIndex = 0;
             //Popula el Datagrid al lanzarse
             var query = new ParseQuery<Models.Supplier>();
             var result = await query.FindAsync();

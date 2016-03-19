@@ -34,7 +34,7 @@ namespace CuentasPorPagar.Views.Query
 
             try
             {
-
+                
                 var query = new ParseQuery<Models.Supplier>();
 
                 if (nameTxt.Text != "")

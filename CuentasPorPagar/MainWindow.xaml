@@ -14,7 +14,8 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d">
-    <Grid Height="318" VerticalAlignment="Bottom">
+    <Grid Height="312" VerticalAlignment="Bottom">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="155*"/>
             <RowDefinition Height="164*"/>
@@ -70,25 +71,25 @@
         <Label x:Name="PaymentLeft"
                Width="90"
                Height="31"
-               Margin="15,40,0,0"
+               Margin="10,15,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Por pagar: "
                FontWeight="Bold" FontSize="17.333" />
         <DataGrid x:Name="dataGrid"
                   Grid.ColumnSpan="2"
-                  Height="210"
-                  Margin="15,100,12,0"
+                  Height="250"
+                  Margin="15,60,12,0"
                   VerticalAlignment="Top"
                   Loaded="dataGrid_Loaded" Grid.RowSpan="2" />
         <Label x:Name="txtUserPermission"
-               Margin="15,5,0,0"
+               Margin="10,-20,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Label"
                FontWeight="Bold" Width="165" FontSize="17.333" />
 
-        <Label x:Name="TotalLbl" Content="Label" HorizontalAlignment="Left"  Margin="110,40,0,0" VerticalAlignment="Top" ToolTip="La suma de todo el balance por pagar" FontSize="17.333" />
+        <Label x:Name="TotalLbl" Content="Label" HorizontalAlignment="Left"  Margin="105,15,0,0" VerticalAlignment="Top" ToolTip="La suma de todo el balance por pagar" FontSize="17.333" />
 
     </Grid>
 </Window>

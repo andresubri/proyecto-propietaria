@@ -19,7 +19,7 @@ namespace CuentasPorPagar.Views
             var userName = UserField.Text;
             var password = PasswordField.Password;
 
-
+            LoginButton.IsEnabled = false;
             try
             {
                 var user = await ParseUser.LogInAsync(userName, password);
@@ -31,7 +31,7 @@ namespace CuentasPorPagar.Views
             catch (Exception)
             {
                 MessageBox.Show("Usuario o contraseña son erroneos");
-
+                LoginButton.IsEnabled = true;
             }
         }
 

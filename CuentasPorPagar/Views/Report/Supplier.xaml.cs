@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 using Microsoft.Reporting.WinForms;
 using Parse;
+using System.Threading.Tasks;
 
 namespace CuentasPorPagar.Views.Report
 {
@@ -16,38 +20,41 @@ namespace CuentasPorPagar.Views.Report
             InitializeComponent();
         }
 
-        private async void WindowsFormsHost_Loaded(object sender, RoutedEventArgs e)
+        private void WindowsFormsHost_Loaded(object sender, RoutedEventArgs e)
         {
+
             try
             {
-                var query = new ParseQuery<Models.Supplier>();
-                var result = await query.FindAsync();
-                var list = from p in result
-                    select new
-                    {
-                        Id = p.ObjectId,
-                        Nombre = p.Name,
-                        Identificacion = p.Identification,
-                        p.Balance,
-                        Creado = p.CreatedAt
-                    };
-
-
-                var rds = new ReportDataSource();
-                rds.Value = list.ToList();
-                rds.Name = "DataSet1";
-                _reportViewer.LocalReport.DataSources.Clear();
-                _reportViewer.LocalReport.DataSources.Add(rds);
-                _reportViewer.LocalReport.ReportEmbeddedResource = "Report1.rdlc";
-                _reportViewer.LocalReport.ReportPath =
-                    @"C:\Users\DELL\Desktop\proyecto-propietaria\CuentasPorPagar\Views\Report\Report1.rdlc";
-                _reportViewer.LocalReport.Refresh();
+                var suppliers =  GetSuppliers();
+                
+                var reportData = new ReportDataSource("Reporte", suppliers);
+                _reportViewer.LocalReport.DataSources.Add(reportData);
                 _reportViewer.RefreshReport();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }       
+        //Eso es un force muy grande
+        public async Task<IEnumerable<dynamic>> GetSuppliers()
+        {
+            var query = await new ParseQuery<Models.Supplier>().FindAsync();
+            var result = query.Select(o => new
+            {
+                ID = o.Id,
+                Nombre = o.Name,
+                Balance = Utilities.ToDopCurrencyFormat(o.Balance),
+                Tipo = o.Type,
+                Estado = o.State
+
+            });
+
+            return result.AsEnumerable();
         }
+        
+
+
     }
 }

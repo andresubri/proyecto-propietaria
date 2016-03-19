@@ -9,9 +9,10 @@
         Height="350"
         
         Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Loaded="Window_Loaded"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        
         mc:Ignorable="d" ResizeMode="NoResize">
 
 

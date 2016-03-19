@@ -8,6 +8,10 @@
         Width="490"
         Height="412"
         Loaded="Window_Loaded"
+         WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d">
     <Grid Margin="0,0,0,4">
         <Grid.ColumnDefinitions>
@@ -17,17 +21,17 @@
         <DataGrid x:Name="UserDgv"
                   Grid.ColumnSpan="2"
                   Width="440"
-                  Height="120"
+                  Height="140"
                   Margin="20,165,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top" />
         <Label x:Name="Label"
                Grid.ColumnSpan="2"
                Width="78"
-               Margin="32,24,0,0"
+               Margin="30,25,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Content="Usuario" />
+               Content="Usuario" FontFamily="Roboto" />
         <Label x:Name="Label2"
                Grid.ColumnSpan="2"
                Margin="30,65,0,0"
@@ -37,41 +41,31 @@
         <Label x:Name="Label213"
                Grid.ColumnSpan="2"
                Height="31"
-               Margin="33,100,0,0"
+               Margin="30,105,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Permisos" />
-        <Button x:Name="EditUserBtn"
-                Grid.Column="1"
-                Width="76"
-                Margin="3,311,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="EditUserBtn_Click"
-                Content="Editar"
-                IsEnabled="False" />
         <Button x:Name="DeleteUserBtn"
                 Grid.Column="1"
-                Width="76"
-                Margin="135,310,0,0"
+                Width="86"
+                Margin="89,323,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="DeleteUserBtn_Click"
                 Content="Eliminar"
                 IsEnabled="False" />
         <Button x:Name="CreateUserBtn"
-                Grid.Column="1"
-                Width="75"
-                Margin="200,105,0,0"
+                Width="85"
+                Margin="30,323,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="CreateUserBtn_Click"
                 Content="Guardar"
-                RenderTransformOrigin="2.4,0" />
+                RenderTransformOrigin="2.4,0" Grid.ColumnSpan="2" />
         <Button x:Name="ExitUserBtn"
                 Grid.Column="1"
-                Width="75"
-                Margin="270,310,0,0"
+                Width="85"
+                Margin="305,320,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="Salir" />
@@ -120,10 +114,11 @@
                Content="Correo" />
         <ComboBox x:Name="PermissionsCbx"
                   Grid.Column="1"
-                  Width="120"
-                  Margin="40,105,0,0"
+                  Width="145"
+                  Margin="40,110,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top">
+            <ComboBoxItem Content="Seleccione el permiso" IsEnabled="False" IsSelected="True"/>
             <ComboBoxItem Content="Administrador" />
             <ComboBoxItem Content="Limitado" />
         </ComboBox>

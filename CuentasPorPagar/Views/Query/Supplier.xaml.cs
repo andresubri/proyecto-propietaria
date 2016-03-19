@@ -20,6 +20,7 @@ namespace CuentasPorPagar.Views.Query
     /// </summary>
     public partial class Supplier : Window
     {
+        private ParseQuery<Models.Supplier> Query = new ParseQuery<Models.Supplier>();
         public Supplier()
         {
             InitializeComponent();
@@ -30,50 +31,40 @@ namespace CuentasPorPagar.Views.Query
             DateTime? dateFrom = date1.SelectedDate;
             DateTime? dateTo = date2.SelectedDate;
 
-            //Ejecuta la busqueda al presionar el boton
-
             try
             {
-
-                var query = new ParseQuery<Models.Supplier>();
-
-                if (nameTxt.Text != "")
-                {
-                    query.WhereMatches("name", nameTxt.Text);
-                }
-
-                if (documentTxt.Text != "")
-                {
-                    query.WhereMatches("identification", documentTxt.Text);
-                }
-
-                if (((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Activo" || ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Inactivo")
-                {
-                    query.WhereContains("state", ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString());
-                }
-                if (((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Fisica" || ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Juridica")
-                {
-                    query.WhereContains("type", ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString());
-                }
-                if (amountTxt1.Text != "")
-                {
-                    query.WhereGreaterThanOrEqualTo("balance", Int32.Parse(amountTxt1.Text));
-                }
-                if (amountTxt2.Text != "")
-                {
-                    query.WhereLessThanOrEqualTo("balance", Int32.Parse(amountTxt2.Text));
-                }
+                
+                if (!string.IsNullOrEmpty(nameTxt.Text))
+                    Query.WhereMatches("name", nameTxt.Text);
+                
+                if (!string.IsNullOrEmpty(documentTxt.Text))
+                    Query.WhereMatches("identification", documentTxt.Text);
+                
+                if (((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Activo" 
+                    || ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Inactivo")
+                    Query.WhereContains("state", ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString());
+                
+                if (((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Fisica" 
+                    || ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Juridica")
+                    Query.WhereContains("type", ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString());
+                
+                if (!string.IsNullOrEmpty(amountTxt1.Text))
+                    Query.WhereGreaterThanOrEqualTo("balance", int.Parse(amountTxt1.Text));
+                
+                if (string.IsNullOrEmpty(amountTxt2.Text))
+                    Query.WhereLessThanOrEqualTo("balance", int.Parse(amountTxt2.Text));
+                
 
                 /*if (date1 != null)
                 {
-                    query.WhereGreaterThanOrEqualTo("createdAt", date1);
+                    Query.WhereGreaterThanOrEqualTo("createdAt", date1);
                 }
                 if (date2 != null)
                 {
-                    query.WhereLessThanOrEqualTo("createdAt", date2);
+                    Query.WhereLessThanOrEqualTo("createdAt", date2);
                 }*/
 
-                var result = await query.FindAsync();
+                var result = await Query.FindAsync();
                 var list = from p in result
                            select new
                            {
@@ -82,7 +73,7 @@ namespace CuentasPorPagar.Views.Query
                                Identificacion = p.Identification,
                                Estado = p.State,
                                Tipo = p.Type,
-                               p.Balance,
+                               Balance = Utilities.ToDopCurrencyFormat(p.Balance),
                                Creado = p.CreatedAt
                            };
                 dataGrid.ItemsSource = list;
@@ -98,20 +89,20 @@ namespace CuentasPorPagar.Views.Query
         {
             stateCmb.SelectedIndex = 0;
             typeCmb.SelectedIndex = 0;
-            //Popula el Datagrid al lanzarse
-            var query = new ParseQuery<Models.Supplier>();
-            var result = await query.FindAsync();
-            var list = from p in result
-                       select new
-                       {
-                           Id = p.ObjectId,
-                           Nombre = p.Name,
-                           Identificacion = p.Identification,
-                           Estado = p.State,
-                           Tipo = p.Type,
-                           p.Balance,
-                           Creado = p.CreatedAt
-                       };
+            
+
+            var query = await new ParseQuery<Models.Supplier>().FindAsync();
+            var list = query.Select(p => new
+            {
+                Id = p.ObjectId,
+                Nombre = p.Name,
+                Identificacion = p.Identification,
+                Estado = p.State,
+                Tipo = p.Type,
+                Balance = Utilities.ToDopCurrencyFormat(p.Balance),
+                Creado = p.CreatedAt
+            });
+                      
             dataGrid.ItemsSource = list;
            
         }

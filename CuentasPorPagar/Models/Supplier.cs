@@ -3,7 +3,7 @@
 namespace CuentasPorPagar.Models
 {
     [ParseClassName("Supplier")]
-    internal class Supplier : ParseObject
+    public class Supplier : ParseObject
     {
         [ParseFieldName("identification")]
         public string Identification

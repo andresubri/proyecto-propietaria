@@ -26,11 +26,10 @@ namespace CuentasPorPagar.Views.CRUD
         {
             try
             {
-                var isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-                var query = await new ParseQuery<Models.Supplier>().FindAsync();
+                
                 PopulateGrid();
 
-                if (isAdmin)
+                if (bool.Parse(Application.Current.Properties["IsAdmin"].ToString()))
                     DeleteSupplierBtn.IsEnabled = true;
             }
             catch (Exception ex)

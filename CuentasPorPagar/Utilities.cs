@@ -38,14 +38,21 @@ namespace CuentasPorPagar
         public static void Clear(Visual window)
         {
             var childrenCount = VisualTreeHelper.GetChildrenCount(window);
+            dynamic found;
             for (var i = 0; i < childrenCount; i++)
             {
                 var child = (Visual) VisualTreeHelper.GetChild(window, i);
                 if (child is TextBox)
                 {
-                    var found = (TextBox) child;
+                    found = (TextBox) child;
                     found.Clear();
                 }
+                else if (child is ComboBox)
+                {
+                    found = (ComboBox) child;
+                    found.SelectedIndex = 0;
+                }
+
                 Clear(child);
             }
         }

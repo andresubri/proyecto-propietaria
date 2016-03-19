@@ -174,8 +174,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\Report1.rdlc" />
-    <None Include="CuentasPorPagar.Models.Supplier.datasource" />
-    <None Include="CuentasPorPagar.Views.Report.Supplier1.datasource" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

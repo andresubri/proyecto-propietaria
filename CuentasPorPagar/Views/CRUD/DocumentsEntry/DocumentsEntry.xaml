@@ -112,7 +112,7 @@
                     VerticalAlignment="Top"
                     Click="clearBtn_Click" Grid.Column="1">
                 <Image x:Name="image"
-                       Source="/CuentasPorPagar;component/Resources/escoba.png"
+                       
                        Stretch="Fill" />
 
             </Button>
@@ -126,7 +126,7 @@
                 <Image x:Name="image1"
                        Width="15"
                        Height="15"
-                       Source="/CuentasPorPagar;component/Resources/lupa.png"
+                     
                        Stretch="Fill" />
             </Button>
             <Button x:Name="getNumberBtn"
@@ -139,7 +139,7 @@
                 <Image x:Name="image2"
                        Width="15"
                        Height="15"
-                       Source="/CuentasPorPagar;component/Resources/reload.png"
+                       
                        Stretch="Fill" />
 
             </Button>

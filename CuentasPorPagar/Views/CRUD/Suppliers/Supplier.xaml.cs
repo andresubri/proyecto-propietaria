@@ -22,7 +22,7 @@ namespace CuentasPorPagar.Views.CRUD
             Crud("save");
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {

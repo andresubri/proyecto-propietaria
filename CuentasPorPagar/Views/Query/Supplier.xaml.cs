@@ -30,31 +30,32 @@ namespace CuentasPorPagar.Views.Query
         {
             DateTime? dateFrom = date1.SelectedDate;
             DateTime? dateTo = date2.SelectedDate;
+            var query = new ParseQuery<Models.Supplier>();
+            var state = ((ComboBoxItem) stateCmb.SelectedItem).Content.ToString();
+            var type = ((ComboBoxItem) typeCmb.SelectedItem).Content.ToString();
 
             try
             {
                 
                 if (!string.IsNullOrEmpty(nameTxt.Text))
-                    Query.WhereMatches("name", nameTxt.Text);
+                    query = query.WhereMatches("name", nameTxt.Text);
+              
+               if (string.IsNullOrEmpty(documentTxt.Text))
+                    query = query.WhereMatches("identification", documentTxt.Text);
                 
-                if (!string.IsNullOrEmpty(documentTxt.Text))
-                    Query.WhereMatches("identification", documentTxt.Text);
+                if (state.Equals("Activo") || state.Equals("Inactivo"))
+                    query = query.WhereContains("state", state);
                 
-                if (((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Activo" 
-                    || ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString() == "Inactivo")
-                    Query.WhereContains("state", ((ComboBoxItem)stateCmb.SelectedItem).Content.ToString());
-                
-                if (((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Fisica" 
-                    || ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString() == "Juridica")
-                    Query.WhereContains("type", ((ComboBoxItem)typeCmb.SelectedItem).Content.ToString());
+                if (type.Equals("Fisica") || type.Equals("Juridica"))
+                    query = query.WhereContains("type", type);
                 
                 if (!string.IsNullOrEmpty(amountTxt1.Text))
-                    Query.WhereGreaterThanOrEqualTo("balance", int.Parse(amountTxt1.Text));
+                     query = query.WhereGreaterThanOrEqualTo("balance", int.Parse(amountTxt1.Text));
                 
-                if (string.IsNullOrEmpty(amountTxt2.Text))
-                    Query.WhereLessThanOrEqualTo("balance", int.Parse(amountTxt2.Text));
-                
+                if (!string.IsNullOrEmpty(amountTxt2.Text))
+                     query = query.WhereLessThanOrEqualTo("balance", int.Parse(amountTxt2.Text));
 
+                
                 /*if (date1 != null)
                 {
                     Query.WhereGreaterThanOrEqualTo("createdAt", date1);
@@ -64,7 +65,7 @@ namespace CuentasPorPagar.Views.Query
                     Query.WhereLessThanOrEqualTo("createdAt", date2);
                 }*/
 
-                var result = await Query.FindAsync();
+                var result = await query.FindAsync();
                 var list = from p in result
                            select new
                            {

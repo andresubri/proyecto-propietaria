@@ -24,13 +24,13 @@
             <ComboBoxItem Content="Inactivo" />
         </ComboBox>
         <Label x:Name="label3" Content="Fecha" HorizontalAlignment="Left" Margin="20,65,0,0" VerticalAlignment="Top" />
-        <DatePicker x:Name="date1" HorizontalAlignment="Left" Margin="80,65,0,0" VerticalAlignment="Top" />
+        <DatePicker x:Name="date1" HorizontalAlignment="Left" Margin="80,65,0,0" VerticalAlignment="Top" Width="100" />
         <Label x:Name="label4" Content="Hasta" HorizontalAlignment="Left" Margin="230,69,0,0" VerticalAlignment="Top" />
         <DatePicker x:Name="date2" HorizontalAlignment="Left" Margin="285,65,0,0" VerticalAlignment="Top" Width="120" />
         <Label x:Name="label5" Content="Monto" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="amountTxt1" HorizontalAlignment="Left" Height="24" Margin="80,96,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="80" />
-        <Label x:Name="label6" Content="Hasta" HorizontalAlignment="Left" Margin="165,96,0,0" VerticalAlignment="Top" />
+        <Label x:Name="label6" Content="Hasta" HorizontalAlignment="Left" Margin="170,100,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="amountTxt2" HorizontalAlignment="Left" Height="24" Margin="210,96,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="80" />
         <Button x:Name="searchBtn" HorizontalAlignment="Left" Margin="610,40,0,0" VerticalAlignment="Top" Width="55"

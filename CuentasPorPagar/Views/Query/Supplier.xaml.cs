@@ -65,7 +65,7 @@ namespace CuentasPorPagar.Views.Query
                 {
                     Query.WhereLessThanOrEqualTo("createdAt", date2);
                 }*/
-
+                
                 var result = await query.FindAsync();
                 dataGrid.ItemsSource = result.Select(o => new
                 {

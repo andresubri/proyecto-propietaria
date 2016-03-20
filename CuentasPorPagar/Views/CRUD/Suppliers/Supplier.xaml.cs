@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -86,8 +87,8 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 //TODO: Identification validation. Returns false
                 case "save":
-                    if (NameTxt.Text != "" && IdentificationTxt.Text != ""
-                        && int.Parse(BalanceTxt.Text) > 0)
+                    if (NameTxt.Text != "" && Utilities.ValidateRnc(IdentificationTxt.Text).Equals(true)
+                        && int.Parse(BalanceTxt.Text) > 0 )
                     {
                         try
                         {
@@ -146,7 +147,22 @@ namespace CuentasPorPagar.Views.CRUD
                     }
 
                     break;
+
+                case "search":
+                    try
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.ToString());
+                    }
+                    break;
+
             }
+
+
         }
 
         private async void PopulateGrid()
@@ -174,6 +190,64 @@ namespace CuentasPorPagar.Views.CRUD
         private void ClearBtn_OnClick(object sender, RoutedEventArgs e)
         {
             Utilities.Clear(this);
+        }
+
+        private void NameTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var name = (TextBox) sender;
+
+            try
+            {
+                if (Regex.IsMatch(name.Text, "\\P{L}"))
+                {
+                    var index = name.SelectionStart - 1;
+                    name.Text = name.Text.Remove(index, 1);
+
+                    name.SelectionStart = index;
+                    name.SelectionLength = 0;
+                }
+            }
+            catch (Exception)
+            {
+               //No need to implement
+            }
+        }
+
+        private void BalanceTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var balance = (TextBox) sender;
+            
+            if (Regex.IsMatch(balance.Text, "\\D"))
+            {
+                var index = balance.SelectionStart - 1;
+                balance.Text = balance.Text.Remove(index, 1);
+
+                balance.SelectionStart = index;
+                balance.SelectionLength = 0;
+            }
+        }
+
+        private void IdentificationTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var identification = (TextBox) sender;
+
+            try
+            {
+
+               if (Regex.IsMatch(identification.Text, "\\D"))
+                {
+                    var index = identification.SelectionStart - 1;
+                    identification.Text = identification.Text.Remove(index, 1);
+
+                    identification.SelectionStart = index;
+                    identification.SelectionLength = 0;
+                }
+            }
+            catch (Exception)
+            {
+                //No need to implement
+            }
+
         }
     }
 }

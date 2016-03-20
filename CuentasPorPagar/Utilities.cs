@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -57,6 +58,8 @@ namespace CuentasPorPagar
             }
         }
 
+        
         public static string ToDopCurrencyFormat(int value) => $"{value:RD$#,##0.00;($#,##0.00);''}";
+        
     }
 }

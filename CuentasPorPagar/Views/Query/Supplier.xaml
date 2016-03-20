@@ -19,7 +19,7 @@
                  VerticalAlignment="Top" Width="120" />
         <Label x:Name="label2" Content="Estado" HorizontalAlignment="Left" Margin="410,30,0,0" VerticalAlignment="Top" />
         <ComboBox x:Name="stateCmb" HorizontalAlignment="Left" Margin="460,30,20,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Seleccionar" />
+            <ComboBoxItem Content="Seleccionar" IsSelected="True" IsEnabled="False" />
             <ComboBoxItem Content="Activo" />
             <ComboBoxItem Content="Inactivo" />
         </ComboBox>
@@ -42,7 +42,7 @@
         </Button>
         <Label x:Name="label7" Content="Tipo" HorizontalAlignment="Left" Margin="406,65,0,0" VerticalAlignment="Top" />
         <ComboBox x:Name="typeCmb" HorizontalAlignment="Left" Margin="460,65,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Seleccionar" />
+            <ComboBoxItem Content="Seleccionar" IsSelected="True" IsEnabled="False" />
             <ComboBoxItem Content="Fisica" />
             <ComboBoxItem Content="Juridica" />
         </ComboBox>

@@ -31,6 +31,7 @@ namespace CuentasPorPagar.Views.Query
             DateTime? dateFrom = date1.SelectedDate;
             DateTime? dateTo = date2.SelectedDate;
             var query = new ParseQuery<Models.Supplier>();
+
             var state = ((ComboBoxItem) stateCmb.SelectedItem).Content.ToString();
             var type = ((ComboBoxItem) typeCmb.SelectedItem).Content.ToString();
 
@@ -66,18 +67,17 @@ namespace CuentasPorPagar.Views.Query
                 }*/
 
                 var result = await query.FindAsync();
-                var list = from p in result
-                           select new
-                           {
-                               Id = p.ObjectId,
-                               Nombre = p.Name,
-                               Identificacion = p.Identification,
-                               Estado = p.State,
-                               Tipo = p.Type,
-                               Balance = Utilities.ToDopCurrencyFormat(p.Balance),
-                               Creado = p.CreatedAt
-                           };
-                dataGrid.ItemsSource = list;
+                dataGrid.ItemsSource = result.Select(o => new
+                {
+                    Id = o.ObjectId,
+                    Nombre = o.Name,
+                    Identificacion = o.Identification,
+                    Estado = o.State,
+                    Tipo = o.Type,
+                    Balance = Utilities.ToDopCurrencyFormat(o.Balance),
+                    Creado = o.CreatedAt
+
+                });
 
             }
             catch (Exception ex)
@@ -86,12 +86,12 @@ namespace CuentasPorPagar.Views.Query
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {  
+            Populate(); 
+        }
+        public async void Populate()
         {
-            stateCmb.SelectedIndex = 0;
-            typeCmb.SelectedIndex = 0;
-            
-
             var query = await new ParseQuery<Models.Supplier>().FindAsync();
             var list = query.Select(p => new
             {
@@ -103,10 +103,12 @@ namespace CuentasPorPagar.Views.Query
                 Balance = Utilities.ToDopCurrencyFormat(p.Balance),
                 Creado = p.CreatedAt
             });
-                      
+
             dataGrid.ItemsSource = list;
-           
+
         }
+
+
     }
 }
 

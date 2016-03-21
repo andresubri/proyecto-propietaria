@@ -155,7 +155,6 @@ namespace CuentasPorPagar.Views.CRUD
                     }
                     catch (Exception ex)
                     {
-
                         MessageBox.Show(ex.ToString());
                     }
                     break;
@@ -248,6 +247,12 @@ namespace CuentasPorPagar.Views.CRUD
                 //No need to implement
             }
 
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Query.Supplier();
+                window.Show();
         }
     }
 }

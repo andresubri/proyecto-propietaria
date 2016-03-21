@@ -160,8 +160,8 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-            if (isAdmin)
+            
+            if (bool.Parse(Application.Current.Properties["IsAdmin"].ToString()))
                 DeleteDocumentBtn.IsEnabled = true;
 
             PopulateGrid();

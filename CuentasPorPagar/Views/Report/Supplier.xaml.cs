@@ -1,17 +1,24 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using Microsoft.Reporting.WinForms;
 using Parse;
-using System.Threading.Tasks;
 
 namespace CuentasPorPagar.Views.Report
 {
     /// <summary>
-    ///     Interaction logic for Supplier.xaml
+    /// Interaction logic for Supplier.xaml
     /// </summary>
     public partial class Supplier : Window
     {
@@ -20,25 +27,7 @@ namespace CuentasPorPagar.Views.Report
             InitializeComponent();
         }
 
-        private void WindowsFormsHost_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            try
-            {
-                var suppliers =  GetSuppliers();
-                
-                var reportData = new ReportDataSource("Reporte", suppliers);
-                _reportViewer.LocalReport.DataSources.Add(reportData);
-                _reportViewer.RefreshReport();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }       
-        //Eso es un force muy grande
-        public async Task<IEnumerable<dynamic>> GetSuppliers()
+        private async void WindowsFormsHost_Loaded(object sender, RoutedEventArgs e)
         {
             var query = await new ParseQuery<Models.Supplier>().FindAsync();
             var result = query.Select(o => new
@@ -49,12 +38,11 @@ namespace CuentasPorPagar.Views.Report
                 Tipo = o.Type,
                 Estado = o.State
 
-            });
+            }).ToDataTable();
+            ReportDataSource dataSource = new ReportDataSource {Value = result};
 
-            return result.AsEnumerable();
+            _reportViewer.LocalReport.DataSources.Add(dataSource);
+            
         }
-        
-
-
     }
 }

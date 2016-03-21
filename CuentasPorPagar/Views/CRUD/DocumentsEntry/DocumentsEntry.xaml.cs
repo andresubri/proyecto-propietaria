@@ -49,14 +49,10 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         private async void Crud(string option)
         {
             var id = DocumentDgv.SelectedIndex;
-            var query = new ParseQuery<DocumentEntry>();
-            var result = await query.FindAsync();
-            var list = from p in result
-                select new
-                {
-                    Id = p.ObjectId
-                };
+            var query = await new ParseQuery<DocumentEntry>().FindAsync();
+            var list = query.Select( p => new { Id = p.ObjectId });
             var element = "";
+
             if (id > 0)
                 element = list.ElementAt(id).Id;
 
@@ -72,8 +68,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                             if (!(objectIdTxt.Text.Length > 2))
                             {
                                 document = new DocumentEntry
-                                {
-                                    //CREATE
+                                {                                   
                                     Concept = conceptTxt.Text,
                                     Amount = int.Parse(amountTxt.Text),
                                     Supplier = supplierTxt.Text,

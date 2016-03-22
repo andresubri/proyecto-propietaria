@@ -27,7 +27,9 @@ namespace CuentasPorPagar.Views.Report
             InitializeComponent();
         }
 
-        private async void WindowsFormsHost_Loaded(object sender, RoutedEventArgs e)
+    
+
+        private async void WindowsFormsHost_Loaded_1(object sender, RoutedEventArgs e)
         {
             var query = await new ParseQuery<Models.Supplier>().FindAsync();
             var result = query.Select(o => new
@@ -39,10 +41,11 @@ namespace CuentasPorPagar.Views.Report
                 Estado = o.State
 
             }).ToDataTable();
-            ReportDataSource dataSource = new ReportDataSource {Value = result};
+            ReportDataSource dataSource = new ReportDataSource { Value = result };
 
             _reportViewer.LocalReport.DataSources.Add(dataSource);
-            
+            _reportViewer.LocalReport.ReportPath = "Reporte.rdlc";
+            _reportViewer.RefreshReport();
         }
     }
 }

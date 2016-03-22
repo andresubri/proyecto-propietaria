@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:CuentasPorPagar"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="Bienvenido"
+        Title="Pendientes"
         Width="743"
         Height="431"
         Loaded="Window_Loaded"
@@ -15,25 +15,17 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d">
     <Grid Height="312" VerticalAlignment="Bottom">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="155*"/>
-            <RowDefinition Height="164*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="234*" />
-            <ColumnDefinition Width="283*" />
-        </Grid.ColumnDefinitions>
         <Menu x:Name="Menu"
-              Grid.ColumnSpan="2"
-              Margin="5,-83,-5,0"
-              VerticalAlignment="Top">
-            <MenuItem Header="Archivo">
+              Margin="0,-90,-0.2,0"
+              VerticalAlignment="Top"
+              Background= "#2196F3"
+              Foreground="White" Height="48">
+            <MenuItem Header="&#xD;&#xA;Archivo">
                 <MenuItem Header="Parámetros" />
                 <MenuItem Header="Cerrar sesión" Click="MenuItem_OnClick" />
                 <MenuItem Header="Salir" />
             </MenuItem>
-            <MenuItem Header="Gestión">
+            <MenuItem Header="&#xD;&#xA;Gestión">
                 <MenuItem Name="SupplierCrudItem"
                           Click="SupplierCrudItem_Click"
                           Header="Provedores" />
@@ -51,18 +43,12 @@
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Operaciones">
-                <MenuItem Header="Generar Pago" />
-                <MenuItem x:Name="PaymentTypeCrudItem"
-                          Click="PaymentTypeCrudItem_Click"
-                          Header="Concepto de Pago" />
-                <MenuItem Header="Cierre" />
-            </MenuItem>
-            <MenuItem Header="Consultas">
+           
+            <MenuItem Header="&#xD;&#xA;Consultas">
                 <MenuItem Header="Proveedor" Click="MenuItem_Click_4" />
                 <MenuItem Header="Documentos" />
             </MenuItem>
-            <MenuItem Header="Reporteria">
+            <MenuItem Header="&#xD;&#xA;Reporteria">
                 <MenuItem Header="Documentos" />
                 <MenuItem Click="MenuItem_Click_3" Header="Proveedores" />
                 <MenuItem Header="Cierre" />
@@ -81,7 +67,15 @@
                   Height="250"
                   Margin="15,60,12,0"
                   VerticalAlignment="Top"
-                  Loaded="dataGrid_Loaded" Grid.RowSpan="2" />
+                  Grid.RowSpan="2" ToolTip="Haga doble click a uno de los elementos pendientes para pagar" 
+                  >
+
+            <DataGrid.ItemContainerStyle >
+                <Style TargetType="DataGridRow" >
+                    <EventSetter Event="MouseDoubleClick"  Handler="RowDoubleClick_Event"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
         <Label x:Name="txtUserPermission"
                Margin="10,-20,0,0"
                HorizontalAlignment="Left"
@@ -89,7 +83,7 @@
                Content="Label"
                FontWeight="Bold" Width="165" FontSize="17.333" />
 
-        <Label x:Name="TotalLbl" Content="Label" HorizontalAlignment="Left"  Margin="105,15,0,0" VerticalAlignment="Top" ToolTip="La suma de todo el balance por pagar" FontSize="17.333" />
+        <Label x:Name="TotalLbl" Content="cargando..." HorizontalAlignment="Left"  Margin="105,15,0,0" VerticalAlignment="Top" ToolTip="La suma de todo el balance por pagar" FontSize="17.333" />
 
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using CuentasPorPagar.Models;
 using CuentasPorPagar.Views;
 using CuentasPorPagar.Views.CRUD;
@@ -40,10 +41,7 @@ namespace CuentasPorPagar
             window.Show();
         }
 
-        private void PaymentTypeCrudItem_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
+      
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
@@ -63,34 +61,7 @@ namespace CuentasPorPagar
             window.Show();
         }
 
-        private async void dataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var query = new ParseQuery<DocumentEntry>().WhereContains("status", "pendiente").OrderBy("createdAt");
-                var result = await query.FindAsync();
-                var list = from p in result
-                    select new
-                    {
-                        Id = p.ObjectId,
-                        Suplidor = p.Supplier,
-                        Recibo = p.ReceiptNumber,
-                        Monto = Utilities.ToDopCurrencyFormat(p.Amount),
-                        Fecha = p.CreatedAt
-                    };
-
-                
-                var total = result.Sum(v => v.Amount);
-                
-                TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
-                dataGrid.ItemsSource = list;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
+      
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -98,14 +69,37 @@ namespace CuentasPorPagar
                 var loggedUser = ParseUser.CurrentUser.Username;
                 var query = new ParseQuery<Users>().Where(a => a.Username.Equals(loggedUser));
                 var tableResult = query.FirstAsync().Result.Permission;
-
                 txtUserPermission.Content = $"Tipo: {tableResult}";
                 Application.Current.Properties["IsAdmin"] = tableResult == "Administrador";
+
+
+               PopulateWindow();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        public async void PopulateWindow()
+        {
+            var pendent = new ParseQuery<DocumentEntry>().WhereContains("status", "pendiente").OrderBy("createdAt");
+            var result = await pendent.FindAsync();
+            var list = from p in result
+                       select new
+                       {
+                           Id = p.ObjectId,
+                           Suplidor = p.Supplier,
+                           Recibo = p.ReceiptNumber,
+                           Monto = Utilities.ToDopCurrencyFormat(p.Amount),
+                           Fecha = p.CreatedAt
+                       };
+
+
+            var total = result.Sum(v => v.Amount);
+
+            TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
+            dataGrid.ItemsSource = list;
         }
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
@@ -120,5 +114,33 @@ namespace CuentasPorPagar
             Application.Current.Shutdown();
 
         }
+
+        private async void RowDoubleClick_Event(object sender, MouseButtonEventArgs e)
+        {
+           
+            var query = await new ParseQuery<DocumentEntry>().FindAsync();
+            var list = query.Select(p => new { Id = p.ObjectId, p.Amount, p.Concept, p.Supplier }).ToList();
+            
+            var window = new Checkout
+            {
+                CheckoutNumberLbl = {Content = list[dataGrid.SelectedIndex].Id },
+                SupplierNameLbl = {Content = list[dataGrid.SelectedIndex].Supplier},
+                ConceptLabel = { Content = list[dataGrid.SelectedIndex].Concept },
+                AmounTxt = {Text = list[dataGrid.SelectedIndex].Amount.ToString()},
+                CurrentAmount = list[dataGrid.SelectedIndex].Amount
+            };
+            if (window.ShowDialog().Equals(true))
+            {
+                this.PopulateWindow();
+            }
+
+            // var element = list.ElementAt(id).Id;
+            //  var editQuery = new ParseQuery<DocumentEntry>().Where(aux => aux.ObjectId.Equals(element));
+
+
+
+
+        }
+
     }
 }

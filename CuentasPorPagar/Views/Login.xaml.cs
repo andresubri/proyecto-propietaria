@@ -18,7 +18,7 @@ namespace CuentasPorPagar.Views
         {
             var userName = UserField.Text;
             var password = PasswordField.Password;
-
+            LoginButton.Content = "Cargando...";
             LoginButton.IsEnabled = false;
             try
             {
@@ -32,6 +32,7 @@ namespace CuentasPorPagar.Views
             {
                 MessageBox.Show("Usuario o contraseña son erroneos");
                 LoginButton.IsEnabled = true;
+                LoginButton.Content = "Iniciar sesión";
             }
         }
 

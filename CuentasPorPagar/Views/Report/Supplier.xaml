@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Supplier" Height="300" Width="300">
     <Grid>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="240" Margin="16,15,0,0" VerticalAlignment="Top" Width="261">
+        <WindowsFormsHost HorizontalAlignment="Left" Height="240" Margin="16,15,0,0" VerticalAlignment="Top" Width="261" Loaded="WindowsFormsHost_Loaded_1">
             <rv:ReportViewer x:Name="_reportViewer"/>
         </WindowsFormsHost>
 

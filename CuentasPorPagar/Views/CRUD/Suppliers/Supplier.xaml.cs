@@ -147,18 +147,7 @@ namespace CuentasPorPagar.Views.CRUD
                     }
 
                     break;
-
-                case "search":
-                    try
-                    {
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                    break;
-
+                    
             }
 
 

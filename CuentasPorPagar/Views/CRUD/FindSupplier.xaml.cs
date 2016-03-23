@@ -25,6 +25,7 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 var query = new ParseQuery<Models.Supplier>();
                 var result = await query.FindAsync();
+                
                 var list = from p in result
                     select new
                     {
@@ -82,7 +83,6 @@ namespace CuentasPorPagar.Views.CRUD
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                throw;
             }
         }
     }

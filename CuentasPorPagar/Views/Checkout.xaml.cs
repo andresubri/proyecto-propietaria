@@ -29,8 +29,10 @@ namespace CuentasPorPagar.Views
         }
 
         public int CurrentAmount { get; set; }
+        public string ID  { get; set; }
+    
 
-        private void AmounTxt_TextChanged(object sender, TextChangedEventArgs e)
+    private void AmounTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
 
             var amount = (TextBox) sender;
@@ -53,25 +55,35 @@ namespace CuentasPorPagar.Views
 
         private  async void PaymentButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var amount = CurrentAmount - int.Parse(AmounTxt.Text);
-             var payment = new Models.Payment
-             {
-                 Supplier = SupplierNameLbl.Content.ToString(),
-                 Concept = ConceptLabel.Content.ToString(),
-                 Amount = amount,
-                 State = amount.Equals(0) ? "Completado" : "Abonado"
-             };
+            try
+            {
+                var amount = CurrentAmount - int.Parse(AmounTxt.Text);
+                var abonated = int.Parse(AmounTxt.Text);
+                var payment = new Models.Payment
+                {
+                    Supplier = SupplierNameLbl.Content.ToString(),
+                    Concept = ConceptLabel.Content.ToString(),
+                    Amount = amount,
+                    State = amount.Equals(0) ? "Completado" : "Abonado"
+                };
 
-             await payment.SaveAsync();
+                await payment.SaveAsync();
 
-            var query = await new ParseQuery<Models.DocumentEntry>()
-                .Where(p => p.ObjectId.Equals(CheckoutNumberLbl.Content.ToString())).FirstAsync();
+                var query = await new ParseQuery<Models.DocumentEntry>()
+                    .Where(p => p.ObjectId.Equals(ID)).FirstAsync();
 
-            query.Amount = amount;
-            query.Status = (amount.Equals(0)) ? "Pagado" : "Pendiente";
-            await query.SaveAsync();
+                query.Amount = amount;
+                query.Status = (amount.Equals(0)) ? "pagado" : "pendiente";
+                await query.SaveAsync();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+           
         }
     }
 }

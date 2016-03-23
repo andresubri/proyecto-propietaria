@@ -62,7 +62,7 @@ namespace CuentasPorPagar
             }
         }
         
-        public static string ToDopCurrencyFormat(int value) => $"{value:RD$#,##0.00;($#,##0.00);''}";
+        public static string ToDopCurrencyFormat(int value) =>(value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
         public static DataTable ToDataTable<T>(this IEnumerable<T> collection)
         {
             DataTable dt = new DataTable("DataTable");

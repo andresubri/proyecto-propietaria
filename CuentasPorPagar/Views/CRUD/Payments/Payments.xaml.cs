@@ -16,26 +16,36 @@ namespace CuentasPorPagar.Views.CRUD
             InitializeComponent();
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        public async void PopulateWindow()
         {
             try
             {
-                var isAdmin = Convert.ToBoolean(Application.Current.Properties["IsAdmin"]);
-                var query = new ParseQuery<Payment>();
-                var result = await query.FindAsync();
-                var list = from p in result
-                    select new
-                    {
-                        Id = p.ObjectId,
-                        Concepto = p.Concept,
-                        Monto = p.Amount,
-                        Proveedor = p.Supplier,
-                        Estado = p.State
-                    };
+
+                var query = await new ParseQuery<Payment>().FindAsync();
+                var list = query.Select(p => new
+                {
+                    Id = p.ObjectId,
+                    Concepto = p.Concept,
+                    Monto = p.Amount,
+                    Proveedor = p.Supplier,
+                    Estado = p.State
+                });
 
                 PaymentDgv.ItemsSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
-                if (isAdmin)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+               PopulateWindow();
+
+                if (bool.Parse(Application.Current.Properties["IsAdmin"].ToString()))
                 {
                     EditPaymentConceptBtn.IsEnabled = true;
                     DeletePaymentConceptBtn.IsEnabled = true;
@@ -52,22 +62,11 @@ namespace CuentasPorPagar.Views.CRUD
             var ID = PaymentDgv.SelectedIndex;
             var query = new ParseQuery<Payment>();
             var result = await query.FindAsync();
-            var list = from p in result
-                select new
-                {
-                    Id = p.ObjectId,
-                    Concepto = p.Concept,
-                    Monto = p.Amount,
-                    Proveedor = p.Supplier,
-                    Estado = p.State
-                };
+            var list = result.Select(p => new {  Id = p.ObjectId });
             try
             {
-                var element = list.ElementAt(ID);
-                var getObject = from a in new ParseQuery<Payment>()
-                    where a.Id.Equals(element.Id)
-                    select a;
-
+                var element = list.ElementAt(ID).Id;
+                var getObject = new ParseQuery<Payment>().Where(a => a.Id.Equals(element));
                 await getObject.FirstAsync().Result.DeleteAsync();
             }
             catch (Exception ex)
@@ -75,5 +74,7 @@ namespace CuentasPorPagar.Views.CRUD
                 MessageBox.Show(ex.ToString());
             }
         }
+
+       
     }
 }

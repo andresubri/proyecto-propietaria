@@ -23,11 +23,7 @@ namespace CuentasPorPagar
             InitializeComponent();
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            var window = new Login();
-            window.Show();
-        }
+    
 
         private void SupplierCrudItem_Click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +86,8 @@ namespace CuentasPorPagar
                        {
                            Id = p.ObjectId,
                            Suplidor = p.Supplier,
-                           Recibo = p.ReceiptNumber,
+                           Concepto = p.Concept,
+                           Factura = p.ReceiptNumber,
                            Monto = Utilities.ToDopCurrencyFormat(p.Amount),
                            Fecha = p.CreatedAt
                        };
@@ -99,6 +96,7 @@ namespace CuentasPorPagar
             var total = result.Sum(v => v.Amount);
 
             TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
+            dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = list;
         }
 
@@ -119,28 +117,29 @@ namespace CuentasPorPagar
         {
            
             var query = await new ParseQuery<DocumentEntry>().FindAsync();
-            var list = query.Select(p => new { Id = p.ObjectId, p.Amount, p.Concept, p.Supplier }).ToList();
+            var list = query.Select(p => new { Id = p.ObjectId, p.Amount, p.Concept, p.Supplier, p.ReceiptNumber }).ToList();
             
             var window = new Checkout
             {
-                CheckoutNumberLbl = {Content = list[dataGrid.SelectedIndex].Id },
+                ID = list[dataGrid.SelectedIndex].Id,
+                CheckoutNumberLbl = {Content = list[dataGrid.SelectedIndex].ReceiptNumber},
                 SupplierNameLbl = {Content = list[dataGrid.SelectedIndex].Supplier},
                 ConceptLabel = { Content = list[dataGrid.SelectedIndex].Concept },
                 AmounTxt = {Text = list[dataGrid.SelectedIndex].Amount.ToString()},
                 CurrentAmount = list[dataGrid.SelectedIndex].Amount
             };
-            if (window.ShowDialog().Equals(true))
-            {
-                this.PopulateWindow();
-            }
 
-            // var element = list.ElementAt(id).Id;
-            //  var editQuery = new ParseQuery<DocumentEntry>().Where(aux => aux.ObjectId.Equals(element));
-
+            if (!window.ShowDialog().Equals(true))
+                PopulateWindow();
+            
 
 
 
         }
 
+        private void Reloadbutton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PopulateWindow();
+        }
     }
 }

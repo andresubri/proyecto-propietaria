@@ -5,18 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar.Views"
         mc:Ignorable="d"
-        Title="Checkout" Height="451.4" Width="348.2"
+        Title="Checkout" Height="326.3" Width="348.2"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <Grid>
-        <Label x:Name="SupplierNameLbl" Content="Nombre de suplidor"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="90,145,0,0" Width="205" Height="35" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="SupplierNameLbl" Content="Nombre de suplidor"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="90,35,0,0" Width="205" Height="35" FontSize="18.667" FontWeight="Bold"/>
 
-        <Label x:Name="CheckoutNumberLbl" Content="No:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,95,0,0" Width="170" Height="30" FontSize="16" FontWeight="Bold" />
-        <Label x:Name="MountLbl" Content="Monto:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,205,0,0" Width="75" Height="30" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.467,0.82"/>
-        <TextBox x:Name="AmounTxt" HorizontalAlignment="Left" Height="23" Margin="85,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="AmounTxt_TextChanged"/>
-        <Button x:Name="PaymentButton" Content="PAGAR" HorizontalAlignment="Left" Margin="0,345,-0.4,-3.4" VerticalAlignment="Top" Width="342" Height="80" FontWeight="Normal" Click="PaymentButton_OnClick"/>
-        <Label x:Name="ConceptLabel" Content="Concepto de pago" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Height="65" Width="325" FontWeight="Bold" FontSize="18.667"/>
-        <Label x:Name="SupplierLbl" Content="Suplidor:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,145,0,0" Width="90" Height="30" FontSize="16" FontWeight="Bold" />
+        <Label x:Name="CheckoutNumberLbl" Content="No:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,35,0,0" Width="55" Height="30" FontSize="18.667" FontWeight="Bold" />
+        <Label x:Name="MountLbl" Content="Monto:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,80,0,0" Width="80" Height="30" FontSize="18.667" FontWeight="Bold" RenderTransformOrigin="0.467,0.82"/>
+        <TextBox x:Name="AmounTxt" HorizontalAlignment="Left" Height="30" Margin="80,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="AmounTxt_TextChanged" FontSize="18.667"/>
+        <Button x:Name="PaymentButton" Content="PAGAR" HorizontalAlignment="Left" Margin="-2,220,0,0" VerticalAlignment="Top" Width="342" Height="80" FontWeight="Normal" Click="PaymentButton_OnClick"/>
+        <Label x:Name="ConceptLabel" Content="Concepto de pago" HorizontalAlignment="Left" Margin="50,125,0,0" VerticalAlignment="Top" Height="85" Width="250" FontWeight="Bold" FontSize="18.667"/>
     </Grid>
 </Window>

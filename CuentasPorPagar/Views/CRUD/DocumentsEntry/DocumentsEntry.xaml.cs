@@ -53,8 +53,8 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             var list = query.Select( p => new { Id = p.ObjectId });
             var element = "";
 
-            if (id > 0)
-                element = list.ElementAt(id).Id;
+            
+                
 
             switch (option.ToLower())
             {
@@ -103,6 +103,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     break;
 
                 case "delete":
+                    element = list.ElementAt(id).Id;
                     if (!(id < 0))
                     {
                         try
@@ -175,14 +176,24 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         private void loadSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
             var findSupplier = new FindSupplier();
-            
+            findSupplier.ShowDialog();
+            this.supplierTxt.Text = findSupplier.supplier;
         }
 
         private async void getNumberBtn_Click(object sender, RoutedEventArgs e)
         {
-            var query = await new ParseQuery<DocumentEntry>().OrderByDescending("receiptNum").FindAsync();
-            var list = query.Select(p => new {p.ReceiptNumber});
-            numberTxt.Text = (list.ElementAt(0).ReceiptNumber + 1).ToString();
+            try
+            {
+                var query = await new ParseQuery<DocumentEntry>().OrderByDescending("receiptNum").FindAsync();
+                var list = query.Select(p => new { p.ReceiptNumber });
+                numberTxt.Text = (list.ElementAt(0).ReceiptNumber + 1).ToString();
+            }
+            catch (Exception ex)
+            {
+
+               numberTxt.Text = "1";
+            }
+            
         }
     }
 }

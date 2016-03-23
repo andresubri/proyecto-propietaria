@@ -39,5 +39,7 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+
+       
     }
 }

@@ -15,9 +15,9 @@
         mc:Ignorable="d">
     <Grid>
         <DataGrid x:Name="DocumentDgv"
-                      Width="860"
+                      Width="850"
                       Height="325"
-                      Margin="-5,120,0,0"
+                      Margin="5,120,0,0"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top" >
             <DataGrid.ItemContainerStyle>
@@ -70,7 +70,7 @@
                      Margin="410,75,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     TextWrapping="Wrap" />
+                     TextWrapping="Wrap" TextChanged="amountTxt_TextChanged" />
         <TextBox x:Name="supplierTxt"
                      Width="120"
                      Height="23"

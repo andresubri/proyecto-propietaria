@@ -79,25 +79,35 @@ namespace CuentasPorPagar
 
         public async void PopulateWindow()
         {
-            var pendent = new ParseQuery<DocumentEntry>().WhereContains("status", "pendiente").OrderBy("createdAt");
-            var result = await pendent.FindAsync();
-            var list = from p in result
-                       select new
-                       {
-                           Id = p.ObjectId,
-                           Suplidor = p.Supplier,
-                           Concepto = p.Concept,
-                           Factura = p.ReceiptNumber,
-                           Monto = Utilities.ToDopCurrencyFormat(p.Amount),
-                           Fecha = p.CreatedAt
-                       };
+            try
+            {
+
+                var pendent = new ParseQuery<DocumentEntry>().Where(o => o.Status.Equals("pendiente")).OrderBy("receiptNum");
+                var result = await pendent.FindAsync();
+                var list = result.Select(p => new
+                {
+                    Id = p.ObjectId,
+                    Suplidor = p.Supplier,
+                    Concepto = p.Concept,
+                    Factura = p.ReceiptNumber,
+                    Total = Utilities.ToDopCurrencyFormat(p.TotalAmount),
+                    Restante = Utilities.ToDopCurrencyFormat(p.Amount),
+                    Fecha = p.CreatedAt,
+                    Ultimo = p.UpdatedAt
+                });
 
 
-            var total = result.Sum(v => v.Amount);
+                var total = result.Sum(v => v.Amount);
 
-            TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = list;
+                TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
+                dataGrid.ItemsSource = list;
+                dataGrid.Columns[6].Header = "Última abonación";
+            }
+            catch (Exception)
+            {
+
+                dataGrid.Visibility = 0;
+            }
         }
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
@@ -122,18 +132,15 @@ namespace CuentasPorPagar
             var window = new Checkout
             {
                 ID = list[dataGrid.SelectedIndex].Id,
-                CheckoutNumberLbl = {Content = list[dataGrid.SelectedIndex].ReceiptNumber},
-                SupplierNameLbl = {Content = list[dataGrid.SelectedIndex].Supplier},
-                ConceptLabel = { Content = list[dataGrid.SelectedIndex].Concept },
+                DocumentNumber = {Text = list[dataGrid.SelectedIndex].ReceiptNumber.ToString()},
+                SupplierNameTxt = {Text= list[dataGrid.SelectedIndex].Supplier},
+                ConceptTxt = { Text = list[dataGrid.SelectedIndex].Concept },
                 AmounTxt = {Text = list[dataGrid.SelectedIndex].Amount.ToString()},
                 CurrentAmount = list[dataGrid.SelectedIndex].Amount
             };
 
             if (!window.ShowDialog().Equals(true))
                 PopulateWindow();
-            
-
-
 
         }
 

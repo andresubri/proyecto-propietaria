@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using CuentasPorPagar.Models;
 using Parse;
@@ -17,9 +19,36 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             InitializeComponent();
         }
 
-        private void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
+        private async void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
-            Crud("save");
+            try
+            {
+                if (string.IsNullOrEmpty(amountTxt.Text).Equals(false) &&
+                    string.IsNullOrEmpty(conceptTxt.Text).Equals(false) &&
+                    string.IsNullOrEmpty(supplierTxt.Text).Equals(false))
+                {
+                    Crud("save");
+                    var query = await new ParseQuery<Models.Supplier>()
+                            .Where(o => o.Name.Equals(supplierTxt.Text)).FirstAsync();
+
+                    if (query.State.Equals("Inactivo"))
+                    {
+                        query.State = "Activo";
+                        await query.SaveAsync();
+                    }
+
+
+                }
+               
+                else
+                    MessageBox.Show("Faltan campos por llenar");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+           
+
         }
 
         private async void PopulateGrid()
@@ -27,106 +56,138 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             try
             {
                 var query = await new ParseQuery<DocumentEntry>().FindAsync();
+
                 var list = query.Select(p => new
                 {
                     Id = p.ObjectId,
                     Recibo = p.ReceiptNumber,
                     Concepto = p.Concept,
-                    Monto = Utilities.ToDopCurrencyFormat(p.Amount),
+                    Total = p.TotalAmount,
+                    Monto = Utilities.ToDopCurrencyFormat(p.Amount), 
                     Suplidor = p.Supplier,
                     Estatus = p.Status,
                     Fecha = p.CreatedAt
                 });
-
                 DocumentDgv.ItemsSource = list;
+
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                
             }
         }
 
         private async void Crud(string option)
         {
-            var id = DocumentDgv.SelectedIndex;
-            var query = await new ParseQuery<DocumentEntry>().FindAsync();
-            var list = query.Select( p => new { Id = p.ObjectId });
-            var element = "";
-
-            
-                
-
-            switch (option.ToLower())
+            try
             {
-                case "save":
-                    if (conceptTxt.Text != "" && (int.Parse(amountTxt.Text)) > 0 ||
-                        supplierTxt.Text != "" && (int.Parse(numberTxt.Text)) > 0)
-                    {
-                        try
+                var id = DocumentDgv.SelectedIndex;
+                var query = await new ParseQuery<DocumentEntry>().FindAsync();
+                var list = query.Select(p => new { Id = p.ObjectId, p.Supplier });
+                var element = "";
+
+
+
+
+                switch (option.ToLower())
+                {
+                    case "save":
+                        if (conceptTxt.Text != "" && (int.Parse(amountTxt.Text)) > 0 ||
+                            supplierTxt.Text != "" && (int.Parse(numberTxt.Text)) > 0)
                         {
-                            DocumentEntry document;
-                            if (!(objectIdTxt.Text.Length > 2))
+                            try
                             {
-                                document = new DocumentEntry
-                                {                                   
-                                    Concept = conceptTxt.Text,
-                                    Amount = int.Parse(amountTxt.Text),
-                                    Supplier = supplierTxt.Text,
-                                    ReceiptNumber = int.Parse(numberTxt.Text),
-                                    Status = "pendiente"
-                                };
-                                await document.SaveAsync();
-                                MessageBox.Show("Documento creado");
+                                DocumentEntry document;
+                                if (!(objectIdTxt.Text.Length > 2))
+                                {
+                                    document = new DocumentEntry
+                                    {
+                                        Concept = conceptTxt.Text,
+                                        Amount = int.Parse(amountTxt.Text),
+                                        TotalAmount = int.Parse(amountTxt.Text),
+                                        Supplier = supplierTxt.Text,
+                                        ReceiptNumber = int.Parse(numberTxt.Text),
+                                        Status = "pendiente"
+                                    };
+                                    await document.SaveAsync();
+                                    MessageBox.Show("Documento creado");
+                                }
+                                else
+                                {
+                                    document = new DocumentEntry
+                                    {
+                                        ObjectId = objectIdTxt.Text,
+                                        Concept = conceptTxt.Text,
+                                        TotalAmount = int.Parse(amountTxt.Text),
+                                        Supplier = supplierTxt.Text,
+                                        ReceiptNumber = int.Parse(numberTxt.Text),
+                                        Status = (amountTxt.Text.Equals("0")) ? "pagado" : "pendiente"
+                                    };
+                                    await document.SaveAsync();
+                                    MessageBox.Show("Documento actualizado");
+                                }
+                                PopulateGrid();
+                                Utilities.Clear(this);
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                document = new DocumentEntry
-                                { 
-                                    ObjectId = objectIdTxt.Text,
-                                    Concept = conceptTxt.Text,
-                                    Amount = int.Parse(amountTxt.Text),
-                                    Supplier = supplierTxt.Text,
-                                    ReceiptNumber = int.Parse(numberTxt.Text)
-                                };
-                                await document.SaveAsync();
-                                MessageBox.Show("Documento actualizado");
+                                MessageBox.Show(ex.ToString());
                             }
-                            PopulateGrid();
-                            Utilities.Clear(this);
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString());
-                        }
-                    }
 
-                    break;
+                        break;
 
-                case "delete":
-                    element = list.ElementAt(id).Id;
-                    if (!(id < 0))
-                    {
-                        try
+                    case "delete":
+                       if (id >= 0)
                         {
-                            var deleteQuery = new ParseQuery<DocumentEntry>()
-                                .Where(o => o.ObjectId.Equals(element));
-                            await deleteQuery.FirstAsync().Result.DeleteAsync();
-                            PopulateGrid();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Error eliminando documento\n{ex}");
-                        }
-                    }
-                    else
-                        MessageBox.Show("Favor seleccionar un elemento de la lista.");
-                    
-                    break;
+                            try
+                            {
+                                var deleteQuery = new ParseQuery<DocumentEntry>()
+                                    .Where(o => o.ObjectId.Equals(list.ElementAt(id).Id));
 
-                default:
-                    MessageBox.Show("No parameters passed");
-                    break;
+                                await deleteQuery.FirstAsync().Result.DeleteAsync();
+
+                                try
+                                {
+                                    var updateState = await new ParseQuery<Models.Supplier>()
+                                                 .Where(o => o.Name.Equals(list.ElementAt(id).Supplier)).FirstAsync();
+
+                                    if (updateState.State.Equals("Activo"))
+                                    {
+                                        updateState.State = "Inactivo";
+                                        updateState.Balance = 0;
+                                        await updateState.SaveAsync();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("No se pudo actualizar el estado");
+                                }
+                               
+                                PopulateGrid();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Error eliminando documento\n{ex}");
+                            }
+                        }
+                        else
+                            MessageBox.Show("Favor seleccionar un elemento de la lista.");
+
+                        break;
+
+                    default:
+                        MessageBox.Show("No se pasaron parametros");
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+           
         }
 
         private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -188,12 +249,32 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 var list = query.Select(p => new { p.ReceiptNumber });
                 numberTxt.Text = (list.ElementAt(0).ReceiptNumber + 1).ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                numberTxt.Text = "1";
             }
             
+        }
+
+        private void amountTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var balance = (TextBox)sender;
+
+            try
+            {
+                if (Regex.IsMatch(balance.Text, "\\D"))
+                {
+                    var index = balance.SelectionStart - 1;
+                    balance.Text = balance.Text.Remove(index, 1);
+
+                    balance.SelectionStart = index;
+                    balance.SelectionLength = 0;
+                }
+            }
+            catch (Exception)
+            {
+                //No need to implement
+            }
         }
     }
 }

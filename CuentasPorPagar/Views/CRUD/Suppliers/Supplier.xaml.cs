@@ -20,6 +20,7 @@ namespace CuentasPorPagar.Views.CRUD
 
         private void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
+           
             Crud("save");
         }
 

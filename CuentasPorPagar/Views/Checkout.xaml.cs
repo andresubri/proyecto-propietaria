@@ -57,25 +57,43 @@ namespace CuentasPorPagar.Views
         {
             try
             {
+                //Guardo el modelo de pago
                 var amount = CurrentAmount - int.Parse(AmounTxt.Text);
                 var abonated = int.Parse(AmounTxt.Text);
                 var payment = new Models.Payment
                 {
-                    Supplier = SupplierNameLbl.Content.ToString(),
-                    Concept = ConceptLabel.Content.ToString(),
-                    Amount = amount,
+                    Supplier = SupplierNameTxt.Text,
+                    Concept = ConceptTxt.Text,
+                    Amount = int.Parse(AmounTxt.Text), 
                     State = amount.Equals(0) ? "Completado" : "Abonado"
                 };
 
+
                 await payment.SaveAsync();
+                //Actualizar el documento, si el balance abonado es el total a pagar, entonces el balance será 0, por ende pasa de pendiente a pagado
 
                 var query = await new ParseQuery<Models.DocumentEntry>()
                     .Where(p => p.ObjectId.Equals(ID)).FirstAsync();
 
                 query.Amount = amount;
                 query.Status = (amount.Equals(0)) ? "pagado" : "pendiente";
+                
                 await query.SaveAsync();
 
+                //Actualizar el balance total  de cada suplidor. El balance total es la suma de todos los documentos pendientes
+                //Retira una lista de balance de los documentos donde exista un suplidor N
+                var sumOfDocuments =
+                    await new ParseQuery<Models.DocumentEntry>()
+                    .Where(d => d.Supplier.Equals(payment.Supplier)).FindAsync();
+                var listOfDocumentBalance = sumOfDocuments.Sum(sum => sum.Amount);
+                
+
+                var updateSupplier = await new ParseQuery<Models.Supplier>()
+                                    .Where(o => o.Name.Equals(payment.Supplier) && !o.State.Equals("pagado")).FirstAsync(); //Como no existe dos veces un suplidor. Busco el objeto por el nombre
+                updateSupplier.Balance = listOfDocumentBalance - int.Parse(AmounTxt.Text); //Actualizo su balance
+
+                await updateSupplier.SaveAsync();
+                
                 this.Close();
             }
             catch (Exception ex)
@@ -85,5 +103,7 @@ namespace CuentasPorPagar.Views
             }
            
         }
+
+   
     }
 }

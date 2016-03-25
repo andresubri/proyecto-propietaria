@@ -53,5 +53,11 @@ namespace CuentasPorPagar.Models
             get { return GetProperty<string>(); }
             set { SetProperty(value); }
         }
+        [ParseFieldName("total_payment")]
+        public int TotalAmount
+        {
+            get { return GetProperty<int>(); }
+            set { SetProperty(value); }
+        }
     }
 }

@@ -20,8 +20,8 @@ namespace CuentasPorPagar.Views.CRUD
 
         private void CreateSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
-           
             Crud("save");
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -88,20 +88,26 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 //TODO: Identification validation. Returns false
                 case "save":
-                    if (NameTxt.Text != "" && Utilities.ValidateRnc(IdentificationTxt.Text).Equals(true)
-                        && int.Parse(BalanceTxt.Text) > 0 )
+                    if (string.IsNullOrEmpty(NameTxt.Text).Equals(false) && string.IsNullOrEmpty(IdentificationTxt.Text).Equals(false))
                     {
                         try
                         {
+
+                            //Cuando se crea un suplidor, este debe de tener un balance de RD$0. La razón es que existe una relación balance-documentos
+                            //donde el balance es la suma de todos sus documentos pendientes. Por ende, tampoco se podrá editar el balance de un suplidor directamente.
+                            //De igual forma, el estado al crearlo será inactivo por default, porque el estado de un suplidor se maneja por medio del balance.
+                            //Dejaré que se permita modificar el estado de un suplidor ya existente, debido a que puede que pase un tiempo y este, si se desea,
+                            //pase a inactivo y tenga documentos pendientes.
+                            
                             Models.Supplier supplier;
                             if (!(IdTxt.Text.Length > 2))
                             {
                                 supplier = new Models.Supplier
                                 {
                                     Name = NameTxt.Text,
-                                    Balance = int.Parse(BalanceTxt.Text),
+                                    Balance = 0,
                                     Identification = IdentificationTxt.Text,
-                                    State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString(),
+                                    State = "Inactivo",
                                     Type = ((ComboBoxItem) TypeCbx.SelectedItem).Content.ToString()
                                 };
                                 await supplier.SaveAsync();
@@ -113,7 +119,6 @@ namespace CuentasPorPagar.Views.CRUD
                                 {
                                     ObjectId = IdTxt.Text,
                                     Name = NameTxt.Text,
-                                    Balance = int.Parse(BalanceTxt.Text),
                                     Identification = IdentificationTxt.Text,
                                     State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString(),
                                     Type = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString()

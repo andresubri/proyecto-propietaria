@@ -105,7 +105,6 @@ namespace CuentasPorPagar
             }
             catch (Exception)
             {
-
                 dataGrid.Visibility = 0;
             }
         }
@@ -120,7 +119,6 @@ namespace CuentasPorPagar
         {
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
-
         }
 
         private async void RowDoubleClick_Event(object sender, MouseButtonEventArgs e)

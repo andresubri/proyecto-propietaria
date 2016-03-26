@@ -147,7 +147,7 @@
                  Margin="80,100,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
-                 TextWrapping="Wrap" TextChanged="BalanceTxt_TextChanged" />
+                 TextWrapping="Wrap" TextChanged="BalanceTxt_TextChanged"  IsEnabled="False"/>
         <Label x:Name="BalanceLbl"
                Margin="20,100,0,0"
                HorizontalAlignment="Left"

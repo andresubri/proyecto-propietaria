@@ -74,7 +74,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -85,11 +85,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 var id = DocumentDgv.SelectedIndex;
                 var query = await new ParseQuery<DocumentEntry>().FindAsync();
                 var list = query.Select(p => new { Id = p.ObjectId, p.Supplier });
-                var element = "";
-
-
-
-
+                
                 switch (option.ToLower())
                 {
                     case "save":
@@ -110,6 +106,11 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                         ReceiptNumber = int.Parse(numberTxt.Text),
                                         Status = "pendiente"
                                     };
+                                    var updateSupplierAmount = await new ParseQuery<Models.Supplier>()
+                                        .Where(s => s.Name.Equals(supplierTxt.Text)).FirstAsync();
+                                        updateSupplierAmount.Balance += int.Parse(amountTxt.Text);
+
+                                    await updateSupplierAmount.SaveAsync();
                                     await document.SaveAsync();
                                     MessageBox.Show("Documento creado");
                                 }
@@ -184,7 +185,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
            

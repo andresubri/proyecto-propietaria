@@ -71,7 +71,7 @@ namespace CuentasPorPagar
         public static string ToDopCurrencyFormat(int value)
             => (value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
 
-        public static void ExportToPdf(DataGrid grid, string name)
+        public static void ExportToPdf(DataGrid grid, string name, string title)
         {
             var table = new PdfPTable(grid.Columns.Count);
 
@@ -79,10 +79,20 @@ namespace CuentasPorPagar
             {
                 using (PdfWriter.GetInstance(doc, new FileStream($"{name}.pdf", FileMode.Create)))
                 {
+
+                    var parentPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+                    var logo = Image.GetInstance(parentPath + "/Resources/CS.jpg");
+                    var robotoFontBlack = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Medium.ttf",
+                                                    BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 22f);
+                    var robotoFontLight = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Light.ttf",
+                                                    BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 14f);
+                    var robotoFontLightSmall = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Light.ttf",
+                                                        BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 9f);
+
                     doc.Open();
                     foreach (var t in grid.Columns)
                     {
-                        table.AddCell(new Phrase(t.Header.ToString()));
+                        table.AddCell(new Phrase(t.Header.ToString()) {Font = robotoFontLight });
                     }
                     table.HeaderRows = 1;
                     var itemsSource = grid.ItemsSource;
@@ -99,7 +109,7 @@ namespace CuentasPorPagar
                                 var txt = cell.Content as TextBlock;
                                 if (txt != null)
                                 {
-                                    table.AddCell(new Phrase(txt.Text));
+                                    table.AddCell(new Phrase(txt.Text, robotoFontLightSmall));
                                 }
                             }
                         }
@@ -107,21 +117,11 @@ namespace CuentasPorPagar
                         try
                         {
 
-                            var parentPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-                            var logo = Image.GetInstance(parentPath + "/Resources/CS.jpg");
-                            logo.Alignment = Image.ALIGN_MIDDLE; 
-
-                            var roboto = BaseFont.CreateFont( parentPath + "/Resources/roboto/Roboto-Black.ttf"
-                                ,BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-
-                            var robotoFont = new Font(roboto, 20f);
-
+                            logo.Alignment = Element.ALIGN_MIDDLE;
                             doc.Add(logo);
-                            doc.Add(new Phrase("\n"));
-                            var title = new Phrase("Cuentas X Pagar", robotoFont);
-                            
-                            doc.Add(title);
-
+                            doc.Add(new Paragraph("CUENTAS POR PAGAR", robotoFontBlack) {Alignment = Element.ALIGN_CENTER,});
+                            doc.Add(new Paragraph($"{title}", robotoFontBlack) {Alignment = Element.ALIGN_CENTER });
+                            doc.Add(Chunk.NEWLINE);
                             doc.Add(table);
                             doc.Close();
 

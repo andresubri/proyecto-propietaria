@@ -52,6 +52,7 @@ namespace CuentasPorPagar.Views.CRUD
 
         private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
+            StateCbx.IsEnabled = true;
             var id = SupplierDgv.SelectedIndex;
             var query = await new ParseQuery<Models.Supplier>().FindAsync();
             var result = query.Select(o => new {Id = o.ObjectId});
@@ -67,7 +68,8 @@ namespace CuentasPorPagar.Views.CRUD
             IdentificationTxt.Text = editElements.Identification;
             BalanceTxt.Text = editElements.Balance.ToString();
             TypeCbx.SelectedIndex = (editElements.Type.Equals("Juridica")) ? 1 : 2;
-            StateCbx.SelectedIndex = (editElements.Type.Equals("Activo")) ? 1 : 2;
+            StateCbx.SelectedIndex = (editElements.State.Equals("Activo")) ? 2 : 1;
+            
         }
 
 

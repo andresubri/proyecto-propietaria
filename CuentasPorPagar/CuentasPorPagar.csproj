@@ -102,6 +102,9 @@
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Query\AdvanceDocument.xaml.cs">
+      <DependentUpon>AdvanceDocument.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Query\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Query\AdvanceDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace CuentasPorPagar
 {
@@ -63,39 +68,76 @@ namespace CuentasPorPagar
         }
         
         public static string ToDopCurrencyFormat(int value) =>(value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
-        public static DataTable ToDataTable<T>(this IEnumerable<T> collection)
+        public static void ExportToPdf(DataGrid grid, string name)
         {
-            DataTable dt = new DataTable("DataTable");
-            Type t = typeof(T);
-            PropertyInfo[] pia = t.GetProperties();
+            var table = new PdfPTable(grid.Columns.Count);
 
-            //Inspect the properties and create the columns in the DataTable
-            foreach (PropertyInfo pi in pia)
+            using (var doc = new Document(iTextSharp.text.PageSize.A4))
             {
-                Type ColumnType = pi.PropertyType;
-                if ((ColumnType.IsGenericType))
+                using (PdfWriter.GetInstance(doc, new FileStream($"{name}.pdf", FileMode.Create)))
                 {
-                    ColumnType = ColumnType.GetGenericArguments()[0];
-                }
-                dt.Columns.Add(pi.Name, ColumnType);
-            }
-
-            //Populate the data table
-            foreach (T item in collection)
-            {
-                DataRow dr = dt.NewRow();
-                dr.BeginEdit();
-                foreach (PropertyInfo pi in pia)
-                {
-                    if (pi.GetValue(item, null) != null)
+                    doc.Open();
+                    foreach (var t in grid.Columns)
                     {
-                        dr[pi.Name] = pi.GetValue(item, null);
+                        table.AddCell(new Phrase(t.Header.ToString()));
+                    }
+                    table.HeaderRows = 1;
+                    var itemsSource = grid.ItemsSource;
+                    if (itemsSource != null)
+                    {
+                        foreach (var presenter
+                            in (from object item in itemsSource select grid.ItemContainerGenerator.ContainerFromItem(item))
+                                .OfType<DataGridRow>().Select(FindVisualChild<DataGridCellsPresenter>))
+                        {
+                            for (var i = 0; i < grid.Columns.Count; ++i)
+                            {
+                                var cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(i);
+                                var txt = cell.Content as TextBlock;
+                                if (txt != null)
+                                {
+                                    table.AddCell(new Phrase(txt.Text));
+                                }
+                            }
+                        }
+                        doc.Add(new Phrase("Cuentas X Pagar"));
+                        doc.Add(new Phrase("Reporte de suplidores"));
+                        doc.Add(table);
+                        doc.Close();
+
                     }
                 }
-                dr.EndEdit();
-                dt.Rows.Add(dr);
             }
-            return dt;
+        }
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj)
+       where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
+        public static childItem FindVisualChild<childItem>(DependencyObject obj)
+            where childItem : DependencyObject
+        {
+            foreach (childItem child in FindVisualChildren<childItem>(obj))
+            {
+                return child;
+            }
+
+            return null;
         }
 
     }

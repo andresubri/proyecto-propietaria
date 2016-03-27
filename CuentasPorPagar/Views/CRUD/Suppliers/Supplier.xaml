@@ -13,15 +13,16 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Loaded="Window_Loaded"
         mc:Ignorable="d" ResizeMode="NoResize">
-    <Grid Margin="3,0,-2.6,0" Height="446" VerticalAlignment="Top">
+    <Grid Margin="3,0,-0.6,0" Height="446" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button x:Name="DeleteSupplierBtn"
                 Width="55"
                 Height="56"
-                Margin="85,374,0,-104"
+                Margin="85,374,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="DeleteSupplierBtn_Click"
@@ -33,7 +34,7 @@
         </Button>
         <Button x:Name="CreateSupplierBtn"
               
-                Margin="15,374,0,-103"
+                Margin="15,374,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                Width="55"
@@ -43,14 +44,14 @@
                 FontWeight="Bold"
                 RenderTransformOrigin="0.533,2.25" ToolTip="Crear/Editar" >
             <Canvas Width="24" Height="24">
-                <Path Data="M17,7V3H7V7H17M14,17A3,3 0 0,0 17,14A3,3 0 0,0 14,11A3,3 0 0,0 11,14A3,3 0 0,0 14,17M19,1L23,5V17A2,2 0 0,1 21,19H7C5.89,19 5,18.1 5,17V3A2,2 0 0,1 7,1H19M1,7H3V21H17V23H3A2,2 0 0,1 1,21V7Z" Fill="White" Canvas.Left="-6.4" Canvas.Top="-4.8" Height="29.834" Stretch="Fill" Width="37.6" ToolTip="Crear/Editar un suplidor" />
+                <Path Data="M17,7V3H7V7H17M14,17A3,3 0 0,0 17,14A3,3 0 0,0 14,11A3,3 0 0,0 11,14A3,3 0 0,0 14,17M19,1L23,5V17A2,2 0 0,1 21,19H7C5.89,19 5,18.1 5,17V3A2,2 0 0,1 7,1H19M1,7H3V21H17V23H3A2,2 0 0,1 1,21V7Z" Fill="White" Canvas.Left="-6.2" Canvas.Top="-4.8" Height="34.4" Stretch="Fill" Width="37.4" ToolTip="Crear/Editar un suplidor" />
             </Canvas>
         </Button>
 
         <Button x:Name="ExitSupplierBtn"
                 Width="74"
                 Height="55"
-                Margin="235,375,0,-104"
+                Margin="234.6,375,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="ExitSupplierBtn_Click"
@@ -60,7 +61,7 @@
         <Button x:Name="clearBtn"
                 Width="55"
                 Height="56"
-                Margin="156,374,0,-104"
+                Margin="156,374,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="ClearBtn_OnClick" 
@@ -91,7 +92,7 @@
                Content="Nombre" FontWeight="SemiBold" />
         <ComboBox x:Name="TypeCbx"
                   Width="152"
-                  Margin="148,66,0,0"
+                  Margin="147.6,66,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top" Grid.Column="1" >
             <ComboBoxItem Content="Seleccione un tipo" IsSelected="True" IsEnabled="False"/>
@@ -99,13 +100,13 @@
             <ComboBoxItem Content="Juridica" />
         </ComboBox>
         <Label x:Name="label2"
-               Margin="70,70,0,0"
+               Margin="69.6,70,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Tipo" FontWeight="SemiBold" Grid.Column="1" />
         <ComboBox x:Name="StateCbx"
                   Width="150"
-                  Margin="150,36,0,0"
+                  Margin="149.6,36,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top" Grid.Column="1">
             <ComboBoxItem Content="Seleccione un estado"  IsEnabled="False"/>
@@ -118,13 +119,13 @@
         </ComboBox>
 
         <Label x:Name="label3"
-               Margin="196,76,0,0"
+               Margin="195.6,76,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top" Grid.Column="1" />
         <Button x:Name="button"
                 Width="55"
                 Height="55"
-                Margin="227,375,0,-104"
+                Margin="227,375,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 RenderTransformOrigin="0.5,0.75" ToolTip="Busqueda avanzada" Click="button_Click">
@@ -136,7 +137,7 @@
         <Label x:Name="label4"
                Width="50"
                Height="25"
-               Margin="70,36,0,0"
+               Margin="69.6,36,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Estado"

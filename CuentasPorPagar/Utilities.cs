@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Image = iTextSharp.text.Image;
 
 namespace CuentasPorPagar
 {
@@ -66,8 +67,10 @@ namespace CuentasPorPagar
                 Clear(child);
             }
         }
-        
-        public static string ToDopCurrencyFormat(int value) =>(value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
+
+        public static string ToDopCurrencyFormat(int value)
+            => (value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
+
         public static void ExportToPdf(DataGrid grid, string name)
         {
             var table = new PdfPTable(grid.Columns.Count);
@@ -86,12 +89,13 @@ namespace CuentasPorPagar
                     if (itemsSource != null)
                     {
                         foreach (var presenter
-                            in (from object item in itemsSource select grid.ItemContainerGenerator.ContainerFromItem(item))
+                            in
+                            (from object item in itemsSource select grid.ItemContainerGenerator.ContainerFromItem(item))
                                 .OfType<DataGridRow>().Select(FindVisualChild<DataGridCellsPresenter>))
                         {
                             for (var i = 0; i < grid.Columns.Count; ++i)
                             {
-                                var cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(i);
+                                var cell = (DataGridCell) presenter.ItemContainerGenerator.ContainerFromIndex(i);
                                 var txt = cell.Content as TextBlock;
                                 if (txt != null)
                                 {
@@ -99,17 +103,41 @@ namespace CuentasPorPagar
                                 }
                             }
                         }
-                        doc.Add(new Phrase("Cuentas X Pagar"));
-                        doc.Add(new Phrase("Reporte de suplidores"));
-                        doc.Add(table);
-                        doc.Close();
+
+                        try
+                        {
+
+                            var parentPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+                            var logo = Image.GetInstance(parentPath + "/Resources/CS.jpg");
+                            logo.Alignment = Image.ALIGN_MIDDLE; 
+
+                            var roboto = BaseFont.CreateFont( parentPath + "/Resources/roboto/Roboto-Black.ttf"
+                                ,BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+                            var robotoFont = new Font(roboto, 20f);
+
+                            doc.Add(logo);
+                            doc.Add(new Phrase("\n"));
+                            var title = new Phrase("Cuentas X Pagar", robotoFont);
+                            
+                            doc.Add(title);
+
+                            doc.Add(table);
+                            doc.Close();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
 
                     }
                 }
             }
         }
+
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj)
-       where T : DependencyObject
+            where T : DependencyObject
         {
             if (depObj != null)
             {
@@ -118,7 +146,7 @@ namespace CuentasPorPagar
                     DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
                     if (child != null && child is T)
                     {
-                        yield return (T)child;
+                        yield return (T) child;
                     }
 
                     foreach (T childOfChild in FindVisualChildren<T>(child))
@@ -138,6 +166,17 @@ namespace CuentasPorPagar
             }
 
             return null;
+        }
+
+        public static Stream GetEmbeddedResourceStream(string resourceName)
+        {
+            return Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+        }
+    
+
+    public static string[] GetEmbeddedResourceNames()
+        {
+            return Assembly.GetExecutingAssembly().GetManifestResourceNames();
         }
 
     }

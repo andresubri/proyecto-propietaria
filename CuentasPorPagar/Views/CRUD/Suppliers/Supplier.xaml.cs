@@ -172,10 +172,13 @@ namespace CuentasPorPagar.Views.CRUD
                     Nombre = o.Name,
                     Identificacion = o.Identification,
                     Balance = Utilities.ToDopCurrencyFormat(o.Balance),
-                    Creado = o.CreatedAt
+                    Estado = o.State,
+                    Creado = o.CreatedAt,
+                    Ultimo = o.UpdatedAt
                 });
 
                 SupplierDgv.ItemsSource = result;
+                SupplierDgv.Columns[6].Header = "Última abonación";
             }
             catch (Exception ex)
             {

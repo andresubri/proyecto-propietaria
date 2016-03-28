@@ -40,7 +40,7 @@
 
             <MenuItem Header="&#xD;&#xA;Consultas">
                 <MenuItem Header="Proveedor" Click="MenuItem_Click_4" />
-                <MenuItem Header="Documentos" />
+                <MenuItem Header="Documentos" Click="ConsultMenuItem_OnClick"/>
             </MenuItem>
             <MenuItem Header="&#xD;&#xA;Reporteria">
                 <MenuItem Header="Documentos" />

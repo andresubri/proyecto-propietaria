@@ -60,7 +60,7 @@
                 Click="DeleteUserBtn_Click"
                 IsEnabled="False" Height="45" >
             <Canvas Width="24" Height="24">
-                <Path Data="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8.46,11.88L9.87,10.47L12,12.59L14.12,10.47L15.53,11.88L13.41,14L15.53,16.12L14.12,17.53L12,15.41L9.88,17.53L8.47,16.12L10.59,14L8.46,11.88M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" Fill="White" Height="39.7" Canvas.Left="-6.2" Stretch="Fill" Canvas.Top="-10.5" Width="40" />
+                <Path Data="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8.46,11.88L9.87,10.47L12,12.59L14.12,10.47L15.53,11.88L13.41,14L15.53,16.12L14.12,17.53L12,15.41L9.88,17.53L8.47,16.12L10.59,14L8.46,11.88M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" Fill="White" Height="39.7" Canvas.Left="-8.8" Stretch="Fill" Canvas.Top="-7.85" Width="40" />
             </Canvas>
         </Button>
         <Button x:Name="CreateUserBtn"
@@ -146,7 +146,7 @@
                     VerticalAlignment="Top"
                     Click="ClearBtn_OnClick" Grid.Column="1"  >
             <Canvas Width="24" Height="24">
-                <Path Data="M5,13H19V11H5M3,17H17V15H3M7,7V9H21V7" Fill="White" Height="44.775" Canvas.Left="-10.8" Stretch="Fill" Width="45" Canvas.Top="-11.2" />
+                <Path Data="M5,13H19V11H5M3,17H17V15H3M7,7V9H21V7" Fill="White" Height="39.388" Canvas.Left="-6.2" Stretch="Fill" Width="40.2" Canvas.Top="-9.1" />
             </Canvas>
         </Button>
     </Grid>

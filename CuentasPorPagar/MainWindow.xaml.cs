@@ -7,6 +7,7 @@ using CuentasPorPagar.Models;
 using CuentasPorPagar.Views;
 using CuentasPorPagar.Views.CRUD;
 using CuentasPorPagar.Views.CRUD.DocumentsEntry;
+using CuentasPorPagar.Views.Query;
 using Parse;
 using Supplier = CuentasPorPagar.Views.CRUD.Supplier;
 using SupplierReport = CuentasPorPagar.Views.Report.Supplier;
@@ -145,6 +146,12 @@ namespace CuentasPorPagar
         private void Reloadbutton_OnClick(object sender, RoutedEventArgs e)
         {
             PopulateWindow();
+        }
+
+        private void ConsultMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new AdvanceDocument();
+            window.Show();
         }
     }
 }

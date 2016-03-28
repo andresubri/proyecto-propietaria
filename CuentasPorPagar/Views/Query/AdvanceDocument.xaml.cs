@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Parse;
 
 namespace CuentasPorPagar.Views.Query
 {
@@ -22,6 +23,44 @@ namespace CuentasPorPagar.Views.Query
         public AdvanceDocument()
         {
             InitializeComponent();
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos", "Reporte de documentos " + DateTime.Now.Date);
+        }
+
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            var state = ((ComboBoxItem)StateComboBox.SelectedItem).Content.ToString();
+
+            var query = new ParseQuery<Models.DocumentEntry>();
+            if (!string.IsNullOrEmpty(ConceptTextBox.Text)) ;
+            query = query.WhereEqualTo("concept", ConceptTextBox.Text);
+
+            if (!string.IsNullOrEmpty(SupplierTextBox.Text))
+                query = query.WhereEqualTo("supplier", SupplierTextBox.Text);
+
+            if (!string.IsNullOrEmpty(BalanceTextBox.Text))
+                query = query.WhereGreaterThanOrEqualTo("total_payment", BalanceTextBox.Text);
+
+            if (StateComboBox.SelectedIndex > 0)
+                query = query.WhereEqualTo("status", state);
+
+           var result = await query.FindAsync();
+           
+
+            DocumentDataGrid.ItemsSource = result.Select(p => new
+            {
+                Id = p.ObjectId,
+                Recibo = p.ReceiptNumber,
+                Concepto = p.Concept,
+                Total = p.TotalAmount,
+                Monto = Utilities.ToDopCurrencyFormat(p.Amount),
+                Suplidor = p.Supplier,
+                Estatus = p.Status,
+                Fecha = p.CreatedAt
+            }); ;
         }
     }
 }

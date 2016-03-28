@@ -68,8 +68,7 @@ namespace CuentasPorPagar
             }
         }
 
-        public static string ToDopCurrencyFormat(int value)
-            => (value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
+        public static string ToDopCurrencyFormat(int value) => (value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
 
         public static void ExportToPdf(DataGrid grid, string name, string title)
         {
@@ -83,7 +82,7 @@ namespace CuentasPorPagar
                     var parentPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
                     var logo = Image.GetInstance(parentPath + "/Resources/CS.jpg");
                     var robotoFontBlack = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Medium.ttf",
-                                                    BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 22f);
+                                                    BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 30f);
                     var robotoFontLight = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Light.ttf",
                                                     BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 14f);
                     var robotoFontLightSmall = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Light.ttf",
@@ -116,7 +115,7 @@ namespace CuentasPorPagar
 
                         try
                         {
-
+                            
                             logo.Alignment = Element.ALIGN_MIDDLE;
                             doc.Add(logo);
                             doc.Add(new Paragraph("CUENTAS POR PAGAR", robotoFontBlack) {Alignment = Element.ALIGN_CENTER,});
@@ -160,12 +159,7 @@ namespace CuentasPorPagar
         public static childItem FindVisualChild<childItem>(DependencyObject obj)
             where childItem : DependencyObject
         {
-            foreach (childItem child in FindVisualChildren<childItem>(obj))
-            {
-                return child;
-            }
-
-            return null;
+            return FindVisualChildren<childItem>(obj).FirstOrDefault();
         }
 
         public static Stream GetEmbeddedResourceStream(string resourceName)

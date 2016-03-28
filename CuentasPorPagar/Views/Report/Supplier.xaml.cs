@@ -51,10 +51,13 @@ namespace CuentasPorPagar.Views.Report
                     Nombre = o.Name,
                     Identificacion = o.Identification,
                     Balance = Utilities.ToDopCurrencyFormat(o.Balance),
-                    Creado = o.CreatedAt
+                    Estado = o.State,
+                    Creado = o.CreatedAt,
+                    
                 });
-
+              
                 SupplierDgv.ItemsSource = result;
+                
             }
             catch (Exception ex)
             {
@@ -62,23 +65,5 @@ namespace CuentasPorPagar.Views.Report
             }
         }
        
-
-
-        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
-        }
     }
 }

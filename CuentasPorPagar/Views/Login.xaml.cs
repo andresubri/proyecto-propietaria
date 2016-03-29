@@ -28,9 +28,9 @@ namespace CuentasPorPagar.Views
                 window.Show();
                 Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Usuario o contraseña son erroneos");
+                MessageBox.Show($"Usuario o contraseña son erroneos \n{ex.ToString()}");
                 LoginButton.IsEnabled = true;
                 LoginButton.Content = "Iniciar sesión";
             }

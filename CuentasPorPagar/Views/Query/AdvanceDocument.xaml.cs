@@ -27,7 +27,7 @@ namespace CuentasPorPagar.Views.Query
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos", "Reporte de documentos " + DateTime.Now.Date);
+            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos" + DateTime.Now.Date, "Reporte de documentos ");
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -35,14 +35,14 @@ namespace CuentasPorPagar.Views.Query
             var state = ((ComboBoxItem)StateComboBox.SelectedItem).Content.ToString();
 
             var query = new ParseQuery<Models.DocumentEntry>();
-            if (!string.IsNullOrEmpty(ConceptTextBox.Text)) ;
-            query = query.WhereEqualTo("concept", ConceptTextBox.Text);
+            if (!string.IsNullOrEmpty(ConceptTextBox.Text)) 
+                query = query.WhereMatches("concept", ConceptTextBox.Text);
 
             if (!string.IsNullOrEmpty(SupplierTextBox.Text))
                 query = query.WhereEqualTo("supplier", SupplierTextBox.Text);
 
             if (!string.IsNullOrEmpty(BalanceTextBox.Text))
-                query = query.WhereGreaterThanOrEqualTo("total_payment", BalanceTextBox.Text);
+                query = query.WhereGreaterThanOrEqualTo("total_payment", int.Parse(BalanceTextBox.Text));
 
             if (StateComboBox.SelectedIndex > 0)
                 query = query.WhereEqualTo("status", state);
@@ -55,12 +55,12 @@ namespace CuentasPorPagar.Views.Query
                 Id = p.ObjectId,
                 Recibo = p.ReceiptNumber,
                 Concepto = p.Concept,
-                Total = p.TotalAmount,
-                Monto = Utilities.ToDopCurrencyFormat(p.Amount),
+                Total = Utilities.ToDopCurrencyFormat(p.TotalAmount),
+                ABonado = Utilities.ToDopCurrencyFormat(p.Amount),
                 Suplidor = p.Supplier,
                 Estatus = p.Status,
                 Fecha = p.CreatedAt
-            }); ;
+            });
         }
     }
 }

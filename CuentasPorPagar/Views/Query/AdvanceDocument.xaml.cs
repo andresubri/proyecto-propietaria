@@ -56,7 +56,7 @@ namespace CuentasPorPagar.Views.Query
                 Recibo = p.ReceiptNumber,
                 Concepto = p.Concept,
                 Total = Utilities.ToDopCurrencyFormat(p.TotalAmount),
-                ABonado = Utilities.ToDopCurrencyFormat(p.Amount),
+                Abonado = Utilities.ToDopCurrencyFormat(p.Amount),
                 Suplidor = p.Supplier,
                 Estatus = p.Status,
                 Fecha = p.CreatedAt

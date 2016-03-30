@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:CuentasPorPagar.Views.CRUD"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Usuarios"
-        Width="490"
+        Width="558.2"
         Height="411.4"
         Loaded="Window_Loaded"
          WindowStartupLocation="CenterScreen"
@@ -20,9 +20,9 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="UserDgv"
                   Grid.ColumnSpan="2"
-                  Width="440"
-                  Height="140"
-                  Margin="20,165,0,0"
+                  Width="525"
+                  Height="130"
+                  Margin="20,175,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top" >
             <DataGrid.ItemContainerStyle>
@@ -54,32 +54,32 @@
         <Button x:Name="DeleteUserBtn"
                 Grid.Column="1"
                 Width="54"
-                Margin="90.2,310,0,0"
+                Margin="90.6,319,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="DeleteUserBtn_Click"
                 IsEnabled="False" Height="45" >
             <Canvas Width="24" Height="24">
-                <Path Data="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8.46,11.88L9.87,10.47L12,12.59L14.12,10.47L15.53,11.88L13.41,14L15.53,16.12L14.12,17.53L12,15.41L9.88,17.53L8.47,16.12L10.59,14L8.46,11.88M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" Fill="White" Height="39.7" Canvas.Left="-8.8" Stretch="Fill" Canvas.Top="-7.85" Width="40" />
+                <Path Data="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8.46,11.88L9.87,10.47L12,12.59L14.12,10.47L15.53,11.88L13.41,14L15.53,16.12L14.12,17.53L12,15.41L9.88,17.53L8.47,16.12L10.59,14L8.46,11.88M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" Fill="White" Height="35.2" Canvas.Left="-10.8" Stretch="Fill" Width="45.075" Canvas.Top="-4.8" />
             </Canvas>
         </Button>
         <Button x:Name="CreateUserBtn"
                 Width="55"
-                Margin="55,310,0,0"
+                Margin="18.6,319,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="CreateUserBtn_Click"
                 
-                RenderTransformOrigin="2.4,0" Grid.ColumnSpan="2" Height="45">
+                RenderTransformOrigin="2.4,0" Height="45" Grid.Column="1">
             <Canvas Width="24" Height="24">
-                <Path Data="M17,7V3H7V7H17M14,17A3,3 0 0,0 17,14A3,3 0 0,0 14,11A3,3 0 0,0 11,14A3,3 0 0,0 14,17M19,1L23,5V17A2,2 0 0,1 21,19H7C5.89,19 5,18.1 5,17V3A2,2 0 0,1 7,1H19M1,7H3V21H17V23H3A2,2 0 0,1 1,21V7Z" Fill="white" Height="45" Canvas.Left="-11.2" Stretch="Fill" Width="44.8" Canvas.Top="-11.2" />
+                <Path Data="M17,7V3H7V7H17M14,17A3,3 0 0,0 17,14A3,3 0 0,0 14,11A3,3 0 0,0 11,14A3,3 0 0,0 14,17M19,1L23,5V17A2,2 0 0,1 21,19H7C5.89,19 5,18.1 5,17V3A2,2 0 0,1 7,1H19M1,7H3V21H17V23H3A2,2 0 0,1 1,21V7Z" Fill="white" Height="35.1" Canvas.Left="-5.417" Stretch="Fill" Width="35.1" Canvas.Top="-4.75" />
             </Canvas>
 
         </Button>
         <Button x:Name="ExitUserBtn"
                 Grid.Column="1"
                 Width="85"
-                Margin="305,320,0,0"
+                Margin="304.6,327,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="Salir" />
@@ -141,12 +141,12 @@
         <Button x:Name="clearBtn"
                     Width="55"
                     Height="45"
-                    Margin="175.2,310,0,0"
+                    Margin="175.6,318,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Click="ClearBtn_OnClick" Grid.Column="1"  >
             <Canvas Width="24" Height="24">
-                <Path Data="M5,13H19V11H5M3,17H17V15H3M7,7V9H21V7" Fill="White" Height="39.388" Canvas.Left="-6.2" Stretch="Fill" Width="40.2" Canvas.Top="-9.1" />
+                <Path Data="M6,5V5.18L8.82,8H11.22L10.5,9.68L12.6,11.78L14.21,8H20V5H6M3.27,5L2,6.27L8.97,13.24L6.5,19H9.5L11.07,15.34L16.73,21L18,19.73L3.55,5.27L3.27,5Z" Fill="White" Height="37.4" Stretch="Fill" Canvas.Top="-3.8" Width="40.1" Canvas.Left="-10.4" />
             </Canvas>
         </Button>
     </Grid>

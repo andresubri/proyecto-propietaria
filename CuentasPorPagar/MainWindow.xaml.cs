@@ -93,7 +93,7 @@ namespace CuentasPorPagar
                     Factura = p.ReceiptNumber,
                     Total = Utilities.ToDopCurrencyFormat(p.TotalAmount),
                     Restante = Utilities.ToDopCurrencyFormat(p.Amount),
-                    Fecha = p.CreatedAt,
+                    Creado = p.CreatedAt,
                     Ultimo = p.UpdatedAt
                 });
 
@@ -102,7 +102,7 @@ namespace CuentasPorPagar
 
                 TotalLbl.Content = Utilities.ToDopCurrencyFormat(total);
                 dataGrid.ItemsSource = list;
-                dataGrid.Columns[6].Header = "Última abonación";
+                dataGrid.Columns[7].Header = "Última abonación";
             }
             catch (Exception)
             {
@@ -152,6 +152,12 @@ namespace CuentasPorPagar
         {
             var window = new AdvanceDocument();
             window.Show();
+        }
+
+        private void ExportToPdfButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var str = TotalLbl.Content.ToString();
+            Utilities.ExportToPdf(this.dataGrid, "Documentos Pendientes", "Documentos Pendientes", str );
         }
     }
 }

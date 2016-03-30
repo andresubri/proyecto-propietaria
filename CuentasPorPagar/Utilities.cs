@@ -70,7 +70,7 @@ namespace CuentasPorPagar
 
         public static string ToDopCurrencyFormat(int value) => (value.Equals(0)) ? "SIN MONTO" : $"{value:RD$#,##0.00;($#,##0.00);''}";
 
-        public static void ExportToPdf(DataGrid grid, string name, string title)
+        public static void ExportToPdf(DataGrid grid, string name, string title, string sum)
         {
             var table = new PdfPTable(grid.Columns.Count);
 
@@ -107,14 +107,13 @@ namespace CuentasPorPagar
                                 var cell = (DataGridCell) presenter.ItemContainerGenerator.ContainerFromIndex(i);
                                 var txt = cell.Content as TextBlock;
                                 if (txt != null)
-                                {
-                                    table.AddCell(new Phrase(txt.Text, robotoFontLightSmall));
-                                }
+                                    table.AddCell(new Phrase(txt.Text, robotoFontLightSmall));  
                             }
                         }
 
                         try
                         {
+                            
                             
                             logo.Alignment = Element.ALIGN_MIDDLE;
                             doc.Add(logo);
@@ -122,6 +121,7 @@ namespace CuentasPorPagar
                             doc.Add(new Paragraph($"{title}", robotoFontBlack) {Alignment = Element.ALIGN_CENTER });
                             doc.Add(Chunk.NEWLINE);
                             doc.Add(table);
+                            doc.Add((string.IsNullOrEmpty(sum)) ? new Paragraph("") : new Paragraph(sum));
                             doc.Close();
 
                         }

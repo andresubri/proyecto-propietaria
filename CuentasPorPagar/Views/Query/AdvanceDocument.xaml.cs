@@ -27,7 +27,7 @@ namespace CuentasPorPagar.Views.Query
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos" + DateTime.Now.Date, "Reporte de documentos ");
+            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos" + DateTime.Now.Date, "Reporte de documentos ", "");
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -61,6 +61,11 @@ namespace CuentasPorPagar.Views.Query
                 Estatus = p.Status,
                 Fecha = p.CreatedAt
             });
+        }
+
+        private void CleanButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utilities.Clear(this);
         }
     }
 }

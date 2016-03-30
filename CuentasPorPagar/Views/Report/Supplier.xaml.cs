@@ -37,7 +37,7 @@ namespace CuentasPorPagar.Views.Report
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-           Utilities.ExportToPdf(this.SupplierDgv, "Reporte de suplidores", "Reporte de suplidores");
+           Utilities.ExportToPdf(this.SupplierDgv, "Reporte de suplidores", "Reporte de suplidores", "");
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)

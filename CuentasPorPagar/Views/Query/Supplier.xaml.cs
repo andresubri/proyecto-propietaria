@@ -1,23 +1,12 @@
 ﻿using Parse;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CuentasPorPagar.Views.Query
 {
-    /// <summary>
-    /// Interaction logic for Supplier.xaml
-    /// </summary>
+
     public partial class Supplier : Window
     {
         private ParseQuery<Models.Supplier> Query = new ParseQuery<Models.Supplier>();
@@ -42,7 +31,7 @@ namespace CuentasPorPagar.Views.Query
                     query = query.WhereMatches("name", nameTxt.Text);
               
                if (string.IsNullOrEmpty(documentTxt.Text))
-                    query = query.WhereMatches("identification", documentTxt.Text);
+                    query = query.WhereContains("identification", documentTxt.Text);
                 
                 if (state.Equals("Activo") || state.Equals("Inactivo"))
                     query = query.WhereContains("state", state);
@@ -56,16 +45,17 @@ namespace CuentasPorPagar.Views.Query
                 if (!string.IsNullOrEmpty(amountTxt2.Text))
                      query = query.WhereLessThanOrEqualTo("balance", int.Parse(amountTxt2.Text));
 
-                
-                /*if (date1 != null)
+                if (date1 != null)
                 {
-                    Query.WhereGreaterThanOrEqualTo("createdAt", date1);
+                    query = query.WhereGreaterThanOrEqualTo("createdAt", dateFrom);
                 }
+              
                 if (date2 != null)
                 {
-                    Query.WhereLessThanOrEqualTo("createdAt", date2);
-                }*/
+                    query = query.WhereLessThanOrEqualTo("createdAt", dateTo);
+                }
                 
+
                 var result = await query.FindAsync();
                 dataGrid.ItemsSource = result.Select(o => new
                 {

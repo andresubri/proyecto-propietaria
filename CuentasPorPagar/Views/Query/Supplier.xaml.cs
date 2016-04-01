@@ -46,14 +46,10 @@ namespace CuentasPorPagar.Views.Query
                      query = query.WhereLessThanOrEqualTo("balance", int.Parse(amountTxt2.Text));
 
                 if (date1 != null)
-                {
                     query = query.WhereGreaterThanOrEqualTo("createdAt", dateFrom);
-                }
-              
+                
                 if (date2 != null)
-                {
                     query = query.WhereLessThanOrEqualTo("createdAt", dateTo);
-                }
                 
 
                 var result = await query.FindAsync();

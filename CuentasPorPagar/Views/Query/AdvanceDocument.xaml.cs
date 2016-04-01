@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Parse;
+using CuentasPorPagar.Models;
 
 namespace CuentasPorPagar.Views.Query
 {
@@ -32,6 +33,9 @@ namespace CuentasPorPagar.Views.Query
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            DateTime? dateFrom = this.dateFrom.SelectedDate;
+            DateTime? dateTo = this.dateTo.SelectedDate;
+
             var state = ((ComboBoxItem)StateComboBox.SelectedItem).Content.ToString();
 
             var query = new ParseQuery<Models.DocumentEntry>();
@@ -47,7 +51,13 @@ namespace CuentasPorPagar.Views.Query
             if (StateComboBox.SelectedIndex > 0)
                 query = query.WhereEqualTo("status", state);
 
-           var result = await query.FindAsync();
+            if (dateFrom != null)
+                query = query.WhereGreaterThanOrEqualTo("createdAt", dateFrom);
+
+            if (dateTo != null)
+                query = query.WhereLessThanOrEqualTo("createdAt", dateTo);
+
+            var result = await query.FindAsync();
            
 
             DocumentDataGrid.ItemsSource = result.Select(p => new
@@ -66,6 +76,34 @@ namespace CuentasPorPagar.Views.Query
         private void CleanButton_OnClick(object sender, RoutedEventArgs e)
         {
             Utilities.Clear(this);
+        }
+        public async void PopulateWindow()
+        {
+            try
+            {
+                var query = new ParseQuery<Models.DocumentEntry>();
+                var result = await query.FindAsync();
+                DocumentDataGrid.ItemsSource = result.Select(p => new
+                {
+                    Id = p.ObjectId,
+                    Recibo = p.ReceiptNumber,
+                    Concepto = p.Concept,
+                    Total = Utilities.ToDopCurrencyFormat(p.TotalAmount),
+                    Abonado = Utilities.ToDopCurrencyFormat(p.Amount),
+                    Suplidor = p.Supplier,
+                    Estatus = p.Status,
+                    Fecha = p.CreatedAt
+                });
+            }
+            catch (Exception)
+            {
+                DocumentDataGrid.Visibility = 0;
+            }
+        }
+
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            PopulateWindow();
         }
     }
 }

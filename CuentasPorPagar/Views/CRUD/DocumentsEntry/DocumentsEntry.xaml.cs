@@ -204,6 +204,8 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         {
             if (bool.Parse(Application.Current.Properties["IsAdmin"].ToString()))
                 DeleteDocumentBtn.IsEnabled = true;
+            PopulateGrid();
+            
         }
 
         private void loadSupplierBtn_Click(object sender, RoutedEventArgs e)

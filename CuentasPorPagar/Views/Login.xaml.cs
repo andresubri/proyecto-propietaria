@@ -16,13 +16,11 @@ namespace CuentasPorPagar.Views
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var userName = UserField.Text;
-            var password = PasswordField.Password;
             LoginButton.Content = "Cargando...";
             LoginButton.IsEnabled = false;
             try
             {
-                var user = await ParseUser.LogInAsync(userName, password);
+                var user = await ParseUser.LogInAsync(UserField.Text, PasswordField.Password);
                 
                 var window = new MainWindow();
                 window.Show();

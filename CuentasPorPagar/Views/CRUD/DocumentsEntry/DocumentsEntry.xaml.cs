@@ -18,7 +18,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
         {
             InitializeComponent();
         }
-
         private async void CreateDocumentBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -32,12 +31,10 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                             .Where(o => o.Name.Equals(supplierTxt.Text)).FirstAsync();
 
                     if (query.State.Equals("Inactivo"))
-                    {
-                        query.State = "Activo";
-                        await query.SaveAsync();
-                    }
+                        query.State =  "Activo";
 
-
+                    await query.SaveAsync();
+                    
                 }
                
                 else
@@ -48,7 +45,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                 MessageBox.Show(ex.ToString());
             }
            
-
         }
 
         private async void PopulateGrid()
@@ -56,19 +52,18 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             try
             {
                 var query = await new ParseQuery<DocumentEntry>().FindAsync();
-
-                var list = query.Select(p => new
+                
+                DocumentDgv.ItemsSource = query.Select(p => new
                 {
                     Id = p.ObjectId,
                     Recibo = p.ReceiptNumber,
                     Concepto = p.Concept,
                     Total = p.TotalAmount,
-                    Monto = Utilities.ToDopCurrencyFormat(p.Amount), 
+                    Monto = Utilities.ToDopCurrencyFormat(p.Amount),
                     Suplidor = p.Supplier,
-                    Estatus = p.Status,
+                    Estado = p.Status,
                     Fecha = p.CreatedAt
-                });
-                DocumentDgv.ItemsSource = list;
+                }); 
 
 
             }

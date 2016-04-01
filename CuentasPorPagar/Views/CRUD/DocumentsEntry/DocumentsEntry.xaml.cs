@@ -3,9 +3,13 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using CuentasPorPagar.Models;
 using Parse;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
 {
@@ -64,8 +68,6 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     Estado = p.Status,
                     Fecha = p.CreatedAt
                 }); 
-
-
             }
             catch (Exception ex)
             {
@@ -101,6 +103,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                         ReceiptNumber = int.Parse(numberTxt.Text),
                                         Status = "pendiente"
                                     };
+                                    
                                     var updateSupplierAmount = await new ParseQuery<Models.Supplier>()
                                         .Where(s => s.Name.Equals(supplierTxt.Text)).FirstAsync();
                                         updateSupplierAmount.Balance += int.Parse(amountTxt.Text);
@@ -139,11 +142,9 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                         {
                             try
                             {
-                                var deleteQuery = new ParseQuery<DocumentEntry>()
-                                    .Where(o => o.ObjectId.Equals(list.ElementAt(id).Id));
-
-                                await deleteQuery.FirstAsync().Result.DeleteAsync();
-
+                                await new ParseQuery<DocumentEntry>().Where(o => o.ObjectId.Equals(list.ElementAt(id).Id))
+                                .FirstAsync().Result.DeleteAsync();
+                                
                                 try
                                 {
                                     var updateState = await new ParseQuery<Models.Supplier>()
@@ -156,20 +157,20 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                         await updateState.SaveAsync();
                                     }
                                 }
-                                catch (Exception ex)
+                                catch (ParseException ex)
                                 {
-                                    MessageBox.Show("No se pudo actualizar el estado");
+                                    MessageBox.Show($"No se pudo actualizar el estado en el proovedor. \n{ex}", "UPS!", MessageBoxButton.OK);
                                 }
                                
                                 PopulateGrid();
                             }
-                            catch (Exception ex)
+                            catch (ParseException ex)
                             {
-                                MessageBox.Show($"Error eliminando documento\n{ex}");
+                                MessageBox.Show($"Error eliminando documento\n{ex}", "UPS!", MessageBoxButton.OK);
                             }
                         }
                         else
-                            MessageBox.Show("Favor seleccionar un elemento de la lista.");
+                            MessageBox.Show("Primero se debe seleccionar un elemento de la lista.", "HEY!", MessageBoxButton.OK);
 
                         break;
 
@@ -180,23 +181,18 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-            }
-           
+                MessageBox.Show($"Error desconocido.\n{ex}", "UPS!", MessageBoxButton.OK);
+            }  
         }
 
         private async void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var id = DocumentDgv.SelectedIndex;
             var query = await new ParseQuery<DocumentEntry>().FindAsync();
             var list = query.Select(p => new {Id = p.ObjectId});
-
-            var element = list.ElementAt(id).Id;
-            var editQuery = from aux in new ParseQuery<DocumentEntry>()
-                where aux.ObjectId.Equals(element)
-                select aux;
-
-           
+            
+            var element = list.ElementAt(DocumentDgv.SelectedIndex).Id;
+            var editQuery = new ParseQuery<DocumentEntry>().Where(aux => aux.ObjectId.Equals(element));
+            
             var editElements = await editQuery.FirstAsync();
             conceptTxt.Text = editElements.Concept;
             amountTxt.Text = editElements.Amount.ToString();
@@ -204,38 +200,19 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
             supplierTxt.Text = editElements.Supplier;
             objectIdTxt.Text = editElements.ObjectId;
         }
-
-        private void DeleteDocumentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Crud("delete");
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
             if (bool.Parse(Application.Current.Properties["IsAdmin"].ToString()))
                 DeleteDocumentBtn.IsEnabled = true;
-
-            PopulateGrid();
-        }
-
-        private void ExitDocumentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void clearBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Utilities.Clear(this);
         }
 
         private void loadSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
             var findSupplier = new FindSupplier();
             findSupplier.ShowDialog();
-            this.supplierTxt.Text = findSupplier.supplier;
+            supplierTxt.Text = findSupplier.supplier;
         }
-
+        
         private async void getNumberBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -266,10 +243,11 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     balance.SelectionLength = 0;
                 }
             }
-            catch (Exception)
-            {
-                //No need to implement
-            }
+            catch (Exception){ }
         }
+
+        private void DeleteDocumentBtn_Click(object sender, RoutedEventArgs e) => Crud("delete");
+        private void ExitDocumentBtn_Click(object sender, RoutedEventArgs e) => Close();
+        private void clearBtn_Click(object sender, RoutedEventArgs e) => Utilities.Clear(this);
     }
 }

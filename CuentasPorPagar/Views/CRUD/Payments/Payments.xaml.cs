@@ -20,18 +20,16 @@ namespace CuentasPorPagar.Views.CRUD
         {
             try
             {
-
                 var query = await new ParseQuery<Payment>().FindAsync();
-                var list = query.Select(p => new
+
+                PaymentDgv.ItemsSource = query.Select(p => new
                 {
                     Id = p.ObjectId,
                     Concepto = p.Concept,
                     Monto = p.Amount,
                     Proveedor = p.Supplier,
                     Estado = p.State
-                });
-
-                PaymentDgv.ItemsSource = list;
+                }); 
             }
             catch (Exception ex)
             {
@@ -43,13 +41,10 @@ namespace CuentasPorPagar.Views.CRUD
         {
             try
             {
-               PopulateWindow();
-
                 if (bool.Parse(Application.Current.Properties["IsAdmin"].ToString()))
-                {
-                    EditPaymentConceptBtn.IsEnabled = true;
                     DeletePaymentConceptBtn.IsEnabled = true;
-                }
+                
+                PopulateWindow();
             }
             catch (Exception ex)
             {
@@ -68,10 +63,11 @@ namespace CuentasPorPagar.Views.CRUD
                 var element = list.ElementAt(ID).Id;
                 var getObject = new ParseQuery<Payment>().Where(a => a.Id.Equals(element));
                 await getObject.FirstAsync().Result.DeleteAsync();
+                PopulateWindow();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Error al eliminar el pago. \n{ex}", "UPS!", MessageBoxButton.OK);
             }
         }
 

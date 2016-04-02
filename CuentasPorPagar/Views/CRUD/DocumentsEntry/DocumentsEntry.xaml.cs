@@ -37,8 +37,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                     if (query.State.Equals("Inactivo"))
                         query.State =  "Activo";
 
-                    await query.SaveAsync();
-                    
+                    await query.SaveAsync();      
                 }
                
                 else
@@ -125,6 +124,7 @@ namespace CuentasPorPagar.Views.CRUD.DocumentsEntry
                                     };
                                     await document.SaveAsync();
                                     MessageBox.Show("Documento actualizado");
+                                    PopulateGrid();
                                 }
                                 PopulateGrid();
                                 Utilities.Clear(this);

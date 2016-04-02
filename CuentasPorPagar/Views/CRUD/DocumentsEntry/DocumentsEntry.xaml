@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:CuentasPorPagar.Views.CRUD.DocumentsEntry"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Documentos"
-        Width="868.2"
+        Width="909"
         Height="571.4"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
@@ -15,7 +15,7 @@
         mc:Ignorable="d">
     <Grid>
         <DataGrid x:Name="DocumentDgv"
-                      Width="850"
+                      Width="892"
                       Height="325"
                       Margin="5,120,0,0"
                       HorizontalAlignment="Left"
@@ -27,28 +27,28 @@
             </DataGrid.ItemContainerStyle>
         </DataGrid>
         <Label x:Name="label"
-                   Width="101"
+                   Width="65"
                    Height="28"
-                   Margin="15,77,0,0"
+                   Margin="18,77,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Content="Concepto" FontWeight="Bold" />
         <Label x:Name="label1"
                    Width="78"
-                   Margin="340,0,0,436.6"
+                   Margin="346,0,0,439"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"
                    Content="Monto" Height="24" FontWeight="Bold" />
         <Label x:Name="label2"
-                   Margin="340,29,0,0"
+                   Margin="344,19,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Content="Suplidor" Height="24" Width="59" FontWeight="Bold" />
         <Label x:Name="label3"
-                   Margin="18,37,0,0"
+                   Margin="20,47,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Content="No." Height="24" Width="29" FontWeight="Bold" />
+                   Content="No." Height="24" Width="30" FontWeight="Bold" />
         <TextBox x:Name="numberTxt"
                      Width="125"
                      Height="23"
@@ -67,23 +67,23 @@
         <TextBox x:Name="amountTxt"
                      Width="130"
                      Height="23"
-                     Margin="410,75,0,0"
+                     Margin="406,73,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      TextWrapping="Wrap" TextChanged="amountTxt_TextChanged" />
         <TextBox x:Name="supplierTxt"
                      Width="120"
                      Height="23"
-                     Margin="410,27,0,0"
+                     Margin="414,17,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      IsEnabled="False"
                      TextWrapping="Wrap"  />
         <Label x:Name="label4"
-                   Margin="19,11,0,0"
+                   Margin="20,19,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Content="ID" Height="24" Width="22" FontWeight="Bold" />
+                   Content="ID" Height="24" Width="25" FontWeight="Bold" />
         <TextBox x:Name="objectIdTxt"
                      Width="125"
                      Height="23"
@@ -100,7 +100,7 @@
                     VerticalAlignment="Top"
                     Click="clearBtn_Click"  >
             <Canvas Width="24" Height="24">
-                <Path Data="M6,5V5.18L8.82,8H11.22L10.5,9.68L12.6,11.78L14.21,8H20V5H6M3.27,5L2,6.27L8.97,13.24L6.5,19H9.5L11.07,15.34L16.73,21L18,19.73L3.55,5.27L3.27,5Z" Fill="White" Height="37.4" Stretch="Fill" Canvas.Top="-5.2" Width="40.1" Canvas.Left="-8.8" />
+                <Path Data="M6,5V5.18L8.82,8H11.22L10.5,9.68L12.6,11.78L14.21,8H20V5H6M3.27,5L2,6.27L8.97,13.24L6.5,19H9.5L11.07,15.34L16.73,21L18,19.73L3.55,5.27L3.27,5Z" Fill="White" Height="41.4" Stretch="Fill" Canvas.Top="-9" Width="40.1" Canvas.Left="-9" />
             </Canvas>
 
         </Button>
@@ -108,7 +108,7 @@
         <Button x:Name="loadSupplierBtn"
                     Width="21"
                     Height="21"
-                    Margin="529,29,0,0"
+                    Margin="536,19,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Click="loadSupplierBtn_Click" >
@@ -144,14 +144,14 @@
         <Button x:Name="ExitDocumentBtn"
                     Width="64"
                     Height="55"
-                    Margin="706,465,0,0"
+                    Margin="795,468,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Click="ExitDocumentBtn_Click"
                     Content="Salir" />
-        <Button x:Name="Numberbutton" HorizontalAlignment="Left" Click="getNumberBtn_Click" VerticalAlignment="Top" Width="21" Margin="230,45,0,0" Height="21">
+        <Button x:Name="Numberbutton" HorizontalAlignment="Left" Click="getNumberBtn_Click" VerticalAlignment="Top" Width="21" Margin="227,42,0,0" Height="21">
             <Canvas Width="24" Height="24">
-                <Path Data="M7,13H21V11H7M7,19H21V17H7M7,7H21V5H7M2,11H3.8L2,13.1V14H5V13H3.2L5,10.9V10H2M3,8H4V4H2V5H3M2,17H4V17.5H3V18.5H4V19H2V20H5V16H2V17Z" Fill="White" Canvas.Left="-12.6" Canvas.Top="-2.85" Height="17.933" Stretch="Fill" Width="15.6" />
+                <Path Data="M7,13H21V11H7M7,19H21V17H7M7,7H21V5H7M2,11H3.8L2,13.1V14H5V13H3.2L5,10.9V10H2M3,8H4V4H2V5H3M2,17H4V17.5H3V18.5H4V19H2V20H5V16H2V17Z" Fill="White" Canvas.Left="-12.8" Canvas.Top="-1.987" Height="16.807" Stretch="Fill" Width="15.6" />
             </Canvas>
 
         </Button>

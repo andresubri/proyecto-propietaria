@@ -82,7 +82,7 @@
                 Margin="304.6,327,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Salir" />
+                Content="Salir" Click="ExitUserBtn_Click" />
         <TextBox x:Name="NicknameTxt"
                  Grid.Column="1"
                  Width="120"

@@ -94,7 +94,10 @@ namespace CuentasPorPagar.Views.Query
 
         }
 
-
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
 

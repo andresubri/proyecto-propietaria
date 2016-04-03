@@ -51,6 +51,6 @@
                 Margin="505,288,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Salir" Height="47" />
+                Content="Salir" Height="47" Click="ExitPaymentConceptBtn_Click" />
     </Grid>
 </Window>

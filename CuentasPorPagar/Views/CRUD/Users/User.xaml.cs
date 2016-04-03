@@ -235,5 +235,10 @@ namespace CuentasPorPagar.Views.CRUD
         {
             Utilities.Clear(this);
         }
+
+        private void ExitUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

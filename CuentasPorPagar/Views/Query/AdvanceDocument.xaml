@@ -45,6 +45,6 @@
         <DatePicker Name="dateFrom" HorizontalAlignment="Left" Margin="106,99,0,0" VerticalAlignment="Top" Width="103"/>
         <DatePicker Name="dateTo" HorizontalAlignment="Left" Margin="291,99,0,0" VerticalAlignment="Top" Width="103"/>
         <Label x:Name="label4" Content="Hasta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="231,101,0,0"/>
-
+        <Button x:Name="exitBtn" Content="Salir" Margin="425,0,44,25" Height="29" VerticalAlignment="Bottom" Click="exitBtn_Click" />
     </Grid>
 </Window>

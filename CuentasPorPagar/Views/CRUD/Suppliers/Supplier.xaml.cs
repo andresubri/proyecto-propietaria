@@ -72,30 +72,6 @@ namespace CuentasPorPagar.Views.CRUD
             
         }
 
-        public static bool validaCedula(string pCedula)
-        {
-            int vnTotal = 0;
-            string vcCedula = pCedula.Replace("-", "");
-            int pLongCed = vcCedula.Trim().Length;
-            int[] digitoMult = new int[11] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1 };
-
-            if (pLongCed < 11 || pLongCed > 11)
-                return false;
-
-            for (int vDig = 1; vDig <= pLongCed; vDig++)
-            {
-                int vCalculo = Int32.Parse(vcCedula.Substring(vDig - 1, 1)) * digitoMult[vDig - 1];
-                if (vCalculo < 10)
-                    vnTotal += vCalculo;
-                else
-                    vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
-            }
-
-            if (vnTotal % 10 == 0)
-                return true;
-            else
-                return false;
-        }
         private async void Crud(string option)
         {
             var ID = SupplierDgv.SelectedIndex;
@@ -113,7 +89,7 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 //TODO: Identification validation. Returns false
                 case "save":
-                    if (validaCedula(IdentificationTxt.Text))
+                    if (Utilities.ValidateRnc(IdentificationTxt.Text))
                     {
                         if (string.IsNullOrEmpty(NameTxt.Text).Equals(false) && string.IsNullOrEmpty(IdentificationTxt.Text).Equals(false))
                         {
@@ -162,7 +138,7 @@ namespace CuentasPorPagar.Views.CRUD
                         }
                     } else
                     {
-                        MessageBox.Show("Cedula invalida");
+                        MessageBox.Show("Cedula/RNC invalida");
                         break;
                     }
                     break;

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Usuarios"
         Width="558.2"
-        Height="411.4"
+        Height="548.533"
         Loaded="Window_Loaded"
          WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignPaper}"
@@ -21,7 +21,7 @@
         <DataGrid x:Name="UserDgv"
                   Grid.ColumnSpan="2"
                   Width="525"
-                  Height="130"
+                  Height="249"
                   Margin="20,175,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top" >
@@ -54,7 +54,7 @@
         <Button x:Name="DeleteUserBtn"
                 Grid.Column="1"
                 Width="54"
-                Margin="90.6,319,0,0"
+                Margin="92.5,447,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="DeleteUserBtn_Click"
@@ -65,7 +65,7 @@
         </Button>
         <Button x:Name="CreateUserBtn"
                 Width="55"
-                Margin="18.6,319,0,0"
+                Margin="20.5,447,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="CreateUserBtn_Click"
@@ -79,7 +79,7 @@
         <Button x:Name="ExitUserBtn"
                 Grid.Column="1"
                 Width="85"
-                Margin="304.6,327,0,0"
+                Margin="306.5,455,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Content="Salir" Click="ExitUserBtn_Click" />
@@ -141,7 +141,7 @@
         <Button x:Name="clearBtn"
                     Width="55"
                     Height="45"
-                    Margin="175.6,318,0,0"
+                    Margin="177.5,446,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Click="ClearBtn_OnClick" Grid.Column="1"  >

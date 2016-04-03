@@ -159,5 +159,10 @@ namespace CuentasPorPagar
             var str = TotalLbl.Content.ToString();
             Utilities.ExportToPdf(this.dataGrid, "Documentos Pendientes", "Documentos Pendientes", str );
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Reportes de Documentos no disponible por el momento");
+        }
     }
 }

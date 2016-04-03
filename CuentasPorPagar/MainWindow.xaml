@@ -43,7 +43,7 @@
                 <MenuItem Header="Documentos" Click="ConsultMenuItem_OnClick"/>
             </MenuItem>
             <MenuItem Header="&#xD;&#xA;Reporteria">
-                <MenuItem Header="Documentos" />
+                <MenuItem Header="Documentos" Click="MenuItem_Click" />
                 <MenuItem Click="MenuItem_Click_3" Header="Proveedores" />
                 <MenuItem Header="Cierre" />
             </MenuItem>

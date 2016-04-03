@@ -98,6 +98,11 @@ namespace CuentasPorPagar.Views.Query
         {
             Close();
         }
+
+        private void exportBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

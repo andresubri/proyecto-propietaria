@@ -162,7 +162,12 @@ namespace CuentasPorPagar
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Reportes de Documentos no disponible por el momento");
+            MessageBox.Show("Reportes de Documentos no disponibles actualmente");
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Reportes de Cierre no disponibles actualmente");
         }
     }
 }

@@ -40,6 +40,29 @@ namespace CuentasPorPagar
 
         public static bool ValidatePassword(string password) => password.Length >= 6;
 
+        public static bool NotEmpty(string elem)
+        {
+            if (String.IsNullOrEmpty(elem))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public static bool IsEmpty(string elem)
+        {
+            if (String.IsNullOrEmpty(elem))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static bool ValidateEmail(string email)
         {
             var pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
@@ -88,6 +111,7 @@ namespace CuentasPorPagar
                     var robotoFontLightSmall = new Font(BaseFont.CreateFont(parentPath + "/Resources/roboto/Roboto-Light.ttf",
                                                         BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 9f);
 
+                    
                     doc.Open();
                     foreach (var t in grid.Columns)
                     {
@@ -123,6 +147,13 @@ namespace CuentasPorPagar
                             doc.Add(table);
                             doc.Add((string.IsNullOrEmpty(sum)) ? new Paragraph("") : new Paragraph(sum));
                             doc.Close();
+
+                            var docPath = parentPath + "\\bin\\Debug\\" +name+".pdf";
+                            if (MessageBox.Show("Desea ir al archivo generado?", "Documento exportado satisfactoriamente", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                System.Diagnostics.Process.Start("explorer.exe", "/select, "+docPath);
+                            }
+                            
 
                         }
                         catch (Exception ex)

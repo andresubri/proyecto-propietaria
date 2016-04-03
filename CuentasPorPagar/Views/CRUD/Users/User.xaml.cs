@@ -67,7 +67,7 @@ namespace CuentasPorPagar.Views.CRUD
                 {
                     case "create":
                         if (Utilities.ValidatePassword(passwordBox.Password) &&
-                            Utilities.ValidateEmail(EmailTxt.Text))
+                            Utilities.ValidateEmail(EmailTxt.Text) && Utilities.NotEmpty(NicknameTxt.Text))
                         {
 
                             try
@@ -111,8 +111,9 @@ namespace CuentasPorPagar.Views.CRUD
                                 MessageBox.Show(ex.ToString());
                             }
                         }
+                       
                         else
-                            MessageBox.Show("El campo Email o contraseña no son validos");
+                            MessageBox.Show("El campo Email, Contraseña o Nombre de usuario no son validos");
 
                         break;
 

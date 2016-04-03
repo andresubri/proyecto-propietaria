@@ -136,7 +136,8 @@ namespace CuentasPorPagar.Views.CRUD
                                 MessageBox.Show(ex.ToString());
                             }
                         }
-                    } else
+                    } 
+                    else
                     {
                         MessageBox.Show("Cedula/RNC invalida");
                         break;

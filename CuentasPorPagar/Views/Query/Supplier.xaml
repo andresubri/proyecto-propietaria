@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CuentasPorPagar.Views.Query"
         mc:Ignorable="d"
-        Title="Supplier" Height="596.4" Width="690" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Title="Busqueda Avanzada de Proveedores" Height="596.4" Width="690" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="exitBtn" Content="Salir" Margin="527,0,43.2,7.2" Height="29" VerticalAlignment="Bottom" Click="exitBtn_Click" />
         <Button x:Name="exportBtn" Content="Exportar" Margin="20,0,560,10" VerticalAlignment="Bottom" />

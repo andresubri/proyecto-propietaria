@@ -7,11 +7,19 @@
         xmlns:local="clr-namespace:CuentasPorPagar.Views.Report"
         mc:Ignorable="d"
         
-        Title="Supplier" Height="386.4" Width="728.2" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Title="Reportes de Suplidores" Height="386.4" Width="728.2" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
         <DataGrid x:Name="SupplierDgv" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="165" Width="700" RenderTransformOrigin="0.5,0.5"/>
         <Button x:Name="button" Content="Exportar" HorizontalAlignment="Left" Margin="5,310,0,0" VerticalAlignment="Top" Width="95" Click="button_Click"/>
-
+        <Button x:Name="ExitBTN"
+                Width="74"
+                Height="32"
+                Margin="636,310,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="SALIR"
+                FontWeight="Bold"
+                RenderTransformOrigin="0.405,2.25" Click="ExitBTN_Click" />
 
     </Grid>
 </Window>

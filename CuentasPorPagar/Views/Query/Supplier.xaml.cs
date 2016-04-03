@@ -101,7 +101,7 @@ namespace CuentasPorPagar.Views.Query
 
         private void exportBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            Utilities.ExportToPdf(this.dataGrid, "Lista exportada de Proveedores", "Lista exportada de Proveedores ", "");
         }
     }
 }

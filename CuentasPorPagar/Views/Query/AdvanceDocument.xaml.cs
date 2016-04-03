@@ -28,7 +28,7 @@ namespace CuentasPorPagar.Views.Query
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos " + DateTime.Now.Date.ToString().Replace(":","_").Replace("/","_").Replace(" ","-"), "Reporte de documentos ", "");
+            Utilities.ExportToPdf(this.DocumentDataGrid, "Reporte de documentos " + DateTime.Now.ToString().Replace(":","_").Replace("/","_").Replace(" ","-"), "Reporte de documentos ", "");
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)

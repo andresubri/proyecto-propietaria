@@ -45,10 +45,10 @@ namespace CuentasPorPagar.Views.Query
                 if (!string.IsNullOrEmpty(amountTxt2.Text))
                      query = query.WhereLessThanOrEqualTo("balance", int.Parse(amountTxt2.Text));
 
-                if (date1 != null)
+                if (!string.IsNullOrEmpty(date1.SelectedDate.ToString()) )
                     query = query.WhereGreaterThanOrEqualTo("createdAt", dateFrom);
                 
-                if (date2 != null)
+                if (!string.IsNullOrEmpty(date2.SelectedDate.ToString()) )
                     query = query.WhereLessThanOrEqualTo("createdAt", dateTo);
                 
 
@@ -94,7 +94,15 @@ namespace CuentasPorPagar.Views.Query
 
         }
 
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
+        private void exportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Utilities.ExportToPdf(this.dataGrid, "Lista exportada de Proveedores", "Lista exportada de Proveedores ", "");
+        }
     }
 }
 

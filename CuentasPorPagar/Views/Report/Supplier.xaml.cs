@@ -64,6 +64,10 @@ namespace CuentasPorPagar.Views.Report
                 MessageBox.Show("Error al popular \n{0}", ex.ToString());
             }
         }
-       
+
+        private void ExitBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

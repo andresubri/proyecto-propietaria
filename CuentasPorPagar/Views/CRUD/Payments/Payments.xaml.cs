@@ -71,6 +71,9 @@ namespace CuentasPorPagar.Views.CRUD
             }
         }
 
-       
+        private void ExitPaymentConceptBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

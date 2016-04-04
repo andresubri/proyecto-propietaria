@@ -72,7 +72,6 @@ namespace CuentasPorPagar.Views.CRUD
             
         }
 
-
         private async void Crud(string option)
         {
             var ID = SupplierDgv.SelectedIndex;
@@ -90,52 +89,59 @@ namespace CuentasPorPagar.Views.CRUD
             {
                 //TODO: Identification validation. Returns false
                 case "save":
-                    if (string.IsNullOrEmpty(NameTxt.Text).Equals(false) && string.IsNullOrEmpty(IdentificationTxt.Text).Equals(false))
+                    if (Utilities.ValidateRnc(IdentificationTxt.Text))
                     {
-                        try
+                        if (string.IsNullOrEmpty(NameTxt.Text).Equals(false) && string.IsNullOrEmpty(IdentificationTxt.Text).Equals(false))
                         {
+                            try
+                            {
 
-                            //Cuando se crea un suplidor, este debe de tener un balance de RD$0. La razón es que existe una relación balance-documentos
-                            //donde el balance es la suma de todos sus documentos pendientes. Por ende, tampoco se podrá editar el balance de un suplidor directamente.
-                            //De igual forma, el estado al crearlo será inactivo por default, porque el estado de un suplidor se maneja por medio del balance.
-                            //Dejaré que se permita modificar el estado de un suplidor ya existente, debido a que puede que pase un tiempo y este, si se desea,
-                            //pase a inactivo y tenga documentos pendientes.
-                            
-                            Models.Supplier supplier;
-                            if (!(IdTxt.Text.Length > 2))
-                            {
-                                supplier = new Models.Supplier
+                                //Cuando se crea un suplidor, este debe de tener un balance de RD$0. La razón es que existe una relación balance-documentos
+                                //donde el balance es la suma de todos sus documentos pendientes. Por ende, tampoco se podrá editar el balance de un suplidor directamente.
+                                //De igual forma, el estado al crearlo será inactivo por default, porque el estado de un suplidor se maneja por medio del balance.
+                                //Dejaré que se permita modificar el estado de un suplidor ya existente, debido a que puede que pase un tiempo y este, si se desea,
+                                //pase a inactivo y tenga documentos pendientes.
+
+                                Models.Supplier supplier;
+                                if (!(IdTxt.Text.Length > 2))
                                 {
-                                    Name = NameTxt.Text,
-                                    Balance = 0,
-                                    Identification = IdentificationTxt.Text,
-                                    State = "Inactivo",
-                                    Type = ((ComboBoxItem) TypeCbx.SelectedItem).Content.ToString()
-                                };
-                                await supplier.SaveAsync();
-                                MessageBox.Show("Suplidor creado");
-                            }
-                            else
-                            {
-                                supplier = new Models.Supplier
+                                    supplier = new Models.Supplier
+                                    {
+                                        Name = NameTxt.Text,
+                                        Balance = 0,
+                                        Identification = IdentificationTxt.Text,
+                                        State = "Inactivo",
+                                        Type = ((ComboBoxItem)TypeCbx.SelectedItem).Content.ToString()
+                                    };
+                                    await supplier.SaveAsync();
+                                    MessageBox.Show("Suplidor creado");
+                                }
+                                else
                                 {
-                                    ObjectId = IdTxt.Text,
-                                    Name = NameTxt.Text,
-                                    Identification = IdentificationTxt.Text,
-                                    State = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString(),
-                                    Type = ((ComboBoxItem) StateCbx.SelectedItem).Content.ToString()
-                                };
-                                await supplier.SaveAsync();
-                                MessageBox.Show("Suplidor actualizado");
+                                    supplier = new Models.Supplier
+                                    {
+                                        ObjectId = IdTxt.Text,
+                                        Name = NameTxt.Text,
+                                        Identification = IdentificationTxt.Text,
+                                        State = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString(),
+                                        Type = ((ComboBoxItem)StateCbx.SelectedItem).Content.ToString()
+                                    };
+                                    await supplier.SaveAsync();
+                                    MessageBox.Show("Suplidor actualizado");
+                                }
+                                PopulateGrid();
                             }
-                            PopulateGrid();
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString());
-                        }
+                    } 
+                    else
+                    {
+                        MessageBox.Show("Cedula/RNC invalida");
+                        break;
                     }
-
                     break;
                 case "delete":
                     try

@@ -38,10 +38,9 @@ namespace Web_API.Controllers
         public void Put(int id, [FromBody]string value)
         {
         }
-
-        // DELETE: api/Supplier/5
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            new ParseQuery<Supplier>().WhereEqualTo("identification", id).FirstAsync().Result.DeleteAsync();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace CuentasPorPagar.Views.CRUD
             
         }
 
-        private async void Crud(string option)
+        public async void Crud(string option)
         {
             var ID = SupplierDgv.SelectedIndex;
             var query = await new ParseQuery<Models.Supplier>().FindAsync();

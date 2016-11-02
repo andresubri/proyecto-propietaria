@@ -5,7 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using CuentasPorPagar.Views.CRUD;
+using cruds = CuentasPorPagar.Views.CRUD;
+using CuentasPorPagar.Models;
 using Parse;
 
 namespace Web_API.Controllers
@@ -14,7 +15,7 @@ namespace Web_API.Controllers
 
     public class SupplierController : ApiController
     {
-        private Supplier supplier;
+        private cruds.Supplier supplier;
 
         // GET: api/Supplier
         public async Task<IEnumerable<CuentasPorPagar.Models.Supplier>> Get()
@@ -23,9 +24,9 @@ namespace Web_API.Controllers
         }
 
         // GET: api/Supplier/5
-        public string Get(int id)
+        public Task<Supplier> Get(string id)
         {
-            return "value";
+            return new ParseQuery<Supplier>().WhereEqualTo("identification", id).FirstAsync();
         }
 
         // POST: api/Supplier
